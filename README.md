@@ -93,6 +93,9 @@ public class MyExample {
         return gson.fromJson(gson.toJsonTree(obj).getAsJsonObject(), KruiseAppsV1alpha1StatefulSet.class);
     }
 
+    /*
+    Note that currently ClientJava can only support merge-patch+json
+    */
     public void patchStatefulSet(String namespace, String name, String patchBody) throws ApiException {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         customObjectsApi.patchNamespacedCustomObject(
@@ -101,8 +104,44 @@ public class MyExample {
                 namespace,
                 KruiseAppsV1alpha1StatefulSet.plural,
                 name,
-                patchBody
+                patchpatchBody.getBytes()ody
         );
+    }
+
+    public boolean updateStatefulSet(String namespace, String name, String image, int partition, int maxUnavailable) throws ApiException {
+        CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
+        boolean updateSuccess = false;
+        // a loop to handle update conflicts
+        for (int i=0; i<5; i++) {
+            KruiseAppsV1alpha1StatefulSet statefulSet = this.getStatefulSet(namespace, name);
+
+            // update image in first container
+            statefulSet.getSpec().getTemplate().getSpec().getContainers().get(0).setImage(image);
+            // update partition
+            statefulSet.getSpec().getUpdateStrategy().getRollingUpdate().setPartition(partition);
+            // update maxUnavailable
+            statefulSet.getSpec().getUpdateStrategy().getRollingUpdate().setMaxUnavailable(new IntOrString(maxUnavailable));
+
+            try {
+                customObjectsApi.replaceNamespacedCustomObject(
+                        KruiseAppsV1alpha1StatefulSet.group,
+                        KruiseAppsV1alpha1StatefulSet.version,
+                        namespace,
+                        KruiseAppsV1alpha1StatefulSet.plural,
+                        name,
+                        statefulSet
+                );
+                updateSuccess = true;
+                break;
+            } catch (ApiException e) {
+                logger.error(e.getResponseBody());
+                // 409 means conflict, just retry to update
+                if (e.getCode() != 409) {
+                    break;
+                }
+            }
+        }
+        return updateSuccess;
     }
 }
 
