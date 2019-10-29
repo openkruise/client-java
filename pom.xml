@@ -4,7 +4,7 @@
     <artifactId>client-java</artifactId>
     <packaging>jar</packaging>
     <name>client-java</name>
-    <version>0.1.1</version>
+    <version>0.1.1-SNAPHOST</version>
     <url>https://github.com/openkruise/client-java</url>
     <description>Jave Client For OpenKruise</description>
 
@@ -13,10 +13,9 @@
     </prerequisites>
 
     <scm>
-        <connection>scm:git:git://github.com/openkruise/client-java.git</connection>
-        <developerConnection>scm:git:ssh://github.com/openkruise/client-java.git</developerConnection>
-        <url>http://github.com/openkruise/client-java/tree/master</url>
-      <tag>client-java-0.1.1</tag>
+        <connection>https://github.com/openkruise/client-java.git.git</connection>
+        <developerConnection>https://github.com/openkruise/client-java</developerConnection>
+        <url>https://github.com/openkruise/client-java</url>
   </scm>
 
     <licenses>
