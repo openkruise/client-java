@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.openkruise</groupId>
     <artifactId>client-java</artifactId>
     <packaging>jar</packaging>
     <name>client-java</name>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
     <url>https://github.com/openkruise/client-java</url>
     <description>Jave Client For OpenKruise</description>
 
@@ -17,7 +16,8 @@
         <connection>scm:git:git://github.com/openkruise/client-java.git</connection>
         <developerConnection>scm:git:ssh://github.com:openkruise/client-java.git</developerConnection>
         <url>http://github.com/openkruise/client-java/tree/master</url>
-    </scm>
+      <tag>client-java-0.1.1</tag>
+  </scm>
 
     <licenses>
         <license>
