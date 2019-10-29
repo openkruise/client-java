@@ -14,7 +14,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/openkruise/client-java.git</connection>
-        <developerConnection>scm:git:ssh://github.com:openkruise/client-java.git</developerConnection>
+        <developerConnection>scm:git:ssh://github.com/openkruise/client-java.git</developerConnection>
         <url>http://github.com/openkruise/client-java/tree/master</url>
       <tag>client-java-0.1.1</tag>
   </scm>
