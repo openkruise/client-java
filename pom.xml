@@ -5,7 +5,7 @@
     <artifactId>client-java</artifactId>
     <packaging>jar</packaging>
     <name>client-java</name>
-    <version>0.1.1</version>
+    <version>0.1.1-SNAPSHOT</version>
     <url>https://github.com/openkruise/client-java</url>
     <description>Jave Client For OpenKruise</description>
 
@@ -35,6 +35,17 @@
             <organizationUrl>http://openkruise.io</organizationUrl>
         </developer>
     </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
