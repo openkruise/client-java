@@ -13,10 +13,10 @@
     </prerequisites>
 
     <scm>
-        <connection>https://github.com/openkruise/client-java.git.git</connection>
-        <developerConnection>https://github.com/openkruise/client-java</developerConnection>
+        <connection>scm:git:https://github.com/openkruise/client-java.git.git</connection>
+        <developerConnection>scm:git:https://github.com/openkruise/client-java.git</developerConnection>
         <url>https://github.com/openkruise/client-java</url>
-  </scm>
+    </scm>
 
     <licenses>
         <license>
