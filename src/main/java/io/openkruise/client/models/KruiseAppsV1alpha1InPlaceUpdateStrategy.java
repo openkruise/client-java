@@ -19,36 +19,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SidecarContainer defines the container of Sidecar
+ * InPlaceUpdateStrategy defines the strategies for in-place update.
  */
-@ApiModel(description = "SidecarContainer defines the container of Sidecar")
+@ApiModel(description = "InPlaceUpdateStrategy defines the strategies for in-place update.")
 
-public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+public class KruiseAppsV1alpha1InPlaceUpdateStrategy {
+  @SerializedName("gracePeriodSeconds")
+  private Integer gracePeriodSeconds = null;
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  public KruiseAppsV1alpha1InPlaceUpdateStrategy gracePeriodSeconds(Integer gracePeriodSeconds) {
+    this.gracePeriodSeconds = gracePeriodSeconds;
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * GracePeriodSeconds is the timespan between set Pod status to not-ready and update images in Pod spec when in-place update a Pod.
+   * @return gracePeriodSeconds
   **/
-  @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  @ApiModelProperty(value = "GracePeriodSeconds is the timespan between set Pod status to not-ready and update images in Pod spec when in-place update a Pod.")
+  public Integer getGracePeriodSeconds() {
+    return gracePeriodSeconds;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setGracePeriodSeconds(Integer gracePeriodSeconds) {
+    this.gracePeriodSeconds = gracePeriodSeconds;
   }
 
 
@@ -60,22 +59,22 @@ public class KruiseAppsV1alpha1SidecarContainer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    KruiseAppsV1alpha1InPlaceUpdateStrategy kruiseAppsV1alpha1InPlaceUpdateStrategy = (KruiseAppsV1alpha1InPlaceUpdateStrategy) o;
+    return Objects.equals(this.gracePeriodSeconds, kruiseAppsV1alpha1InPlaceUpdateStrategy.gracePeriodSeconds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(gracePeriodSeconds);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
+    sb.append("class KruiseAppsV1alpha1InPlaceUpdateStrategy {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    gracePeriodSeconds: ").append(toIndentedString(gracePeriodSeconds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

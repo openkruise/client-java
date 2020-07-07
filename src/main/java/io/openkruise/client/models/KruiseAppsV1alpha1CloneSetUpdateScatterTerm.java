@@ -19,36 +19,55 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SidecarContainer defines the container of Sidecar
+ * KruiseAppsV1alpha1CloneSetUpdateScatterTerm
  */
-@ApiModel(description = "SidecarContainer defines the container of Sidecar")
 
-public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+public class KruiseAppsV1alpha1CloneSetUpdateScatterTerm {
+  @SerializedName("key")
+  private String key = null;
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  @SerializedName("value")
+  private String value = null;
+
+  public KruiseAppsV1alpha1CloneSetUpdateScatterTerm key(String key) {
+    this.key = key;
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * Get key
+   * @return key
   **/
   @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  public String getKey() {
+    return key;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public KruiseAppsV1alpha1CloneSetUpdateScatterTerm value(String value) {
+    this.value = value;
+    return this;
+  }
+
+   /**
+   * Get value
+   * @return value
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
   }
 
 
@@ -60,22 +79,24 @@ public class KruiseAppsV1alpha1SidecarContainer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    KruiseAppsV1alpha1CloneSetUpdateScatterTerm kruiseAppsV1alpha1CloneSetUpdateScatterTerm = (KruiseAppsV1alpha1CloneSetUpdateScatterTerm) o;
+    return Objects.equals(this.key, kruiseAppsV1alpha1CloneSetUpdateScatterTerm.key) &&
+        Objects.equals(this.value, kruiseAppsV1alpha1CloneSetUpdateScatterTerm.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(key, value);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
+    sb.append("class KruiseAppsV1alpha1CloneSetUpdateScatterTerm {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    key: ").append(toIndentedString(key)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }

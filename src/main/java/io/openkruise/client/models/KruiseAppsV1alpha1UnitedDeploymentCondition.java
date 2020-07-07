@@ -26,14 +26,11 @@ import org.joda.time.DateTime;
 import java.io.IOException;
 
 /**
- * JobCondition describes current state of a job.
+ * UnitedDeploymentCondition describes current state of a UnitedDeployment.
  */
-@ApiModel(description = "JobCondition describes current state of a job.")
+@ApiModel(description = "UnitedDeploymentCondition describes current state of a UnitedDeployment.")
 
-public class KruiseAppsV1alpha1JobCondition {
-  @SerializedName("lastProbeTime")
-  private DateTime lastProbeTime = null;
-
+public class KruiseAppsV1alpha1UnitedDeploymentCondition {
   @SerializedName("lastTransitionTime")
   private DateTime lastTransitionTime = null;
 
@@ -49,34 +46,16 @@ public class KruiseAppsV1alpha1JobCondition {
   @SerializedName("type")
   private String type = null;
 
-  public KruiseAppsV1alpha1JobCondition lastProbeTime(DateTime lastProbeTime) {
-    this.lastProbeTime = lastProbeTime;
-    return this;
-  }
-
-   /**
-   * Last time the condition was checked.
-   * @return lastProbeTime
-  **/
-  @ApiModelProperty(value = "Last time the condition was checked.")
-  public DateTime getLastProbeTime() {
-    return lastProbeTime;
-  }
-
-  public void setLastProbeTime(DateTime lastProbeTime) {
-    this.lastProbeTime = lastProbeTime;
-  }
-
-  public KruiseAppsV1alpha1JobCondition lastTransitionTime(DateTime lastTransitionTime) {
+  public KruiseAppsV1alpha1UnitedDeploymentCondition lastTransitionTime(DateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
     return this;
   }
 
    /**
-   * Last time the condition transit from one status to another.
+   * Last time the condition transitioned from one status to another.
    * @return lastTransitionTime
   **/
-  @ApiModelProperty(value = "Last time the condition transit from one status to another.")
+  @ApiModelProperty(value = "Last time the condition transitioned from one status to another.")
   public DateTime getLastTransitionTime() {
     return lastTransitionTime;
   }
@@ -85,16 +64,16 @@ public class KruiseAppsV1alpha1JobCondition {
     this.lastTransitionTime = lastTransitionTime;
   }
 
-  public KruiseAppsV1alpha1JobCondition message(String message) {
+  public KruiseAppsV1alpha1UnitedDeploymentCondition message(String message) {
     this.message = message;
     return this;
   }
 
    /**
-   * Human readable message indicating details about last transition.
+   * A human readable message indicating details about the transition.
    * @return message
   **/
-  @ApiModelProperty(value = "Human readable message indicating details about last transition.")
+  @ApiModelProperty(value = "A human readable message indicating details about the transition.")
   public String getMessage() {
     return message;
   }
@@ -103,16 +82,16 @@ public class KruiseAppsV1alpha1JobCondition {
     this.message = message;
   }
 
-  public KruiseAppsV1alpha1JobCondition reason(String reason) {
+  public KruiseAppsV1alpha1UnitedDeploymentCondition reason(String reason) {
     this.reason = reason;
     return this;
   }
 
    /**
-   * (brief) reason for the condition&#39;s last transition.
+   * The reason for the condition&#39;s last transition.
    * @return reason
   **/
-  @ApiModelProperty(value = "(brief) reason for the condition's last transition.")
+  @ApiModelProperty(value = "The reason for the condition's last transition.")
   public String getReason() {
     return reason;
   }
@@ -121,7 +100,7 @@ public class KruiseAppsV1alpha1JobCondition {
     this.reason = reason;
   }
 
-  public KruiseAppsV1alpha1JobCondition status(String status) {
+  public KruiseAppsV1alpha1UnitedDeploymentCondition status(String status) {
     this.status = status;
     return this;
   }
@@ -130,7 +109,7 @@ public class KruiseAppsV1alpha1JobCondition {
    * Status of the condition, one of True, False, Unknown.
    * @return status
   **/
-  @ApiModelProperty(required = true, value = "Status of the condition, one of True, False, Unknown.")
+  @ApiModelProperty(value = "Status of the condition, one of True, False, Unknown.")
   public String getStatus() {
     return status;
   }
@@ -139,16 +118,16 @@ public class KruiseAppsV1alpha1JobCondition {
     this.status = status;
   }
 
-  public KruiseAppsV1alpha1JobCondition type(String type) {
+  public KruiseAppsV1alpha1UnitedDeploymentCondition type(String type) {
     this.type = type;
     return this;
   }
 
    /**
-   * Type of job condition, Complete or Failed.
+   * Type of in place set condition.
    * @return type
   **/
-  @ApiModelProperty(required = true, value = "Type of job condition, Complete or Failed.")
+  @ApiModelProperty(value = "Type of in place set condition.")
   public String getType() {
     return type;
   }
@@ -166,27 +145,25 @@ public class KruiseAppsV1alpha1JobCondition {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1JobCondition kruiseAppsV1alpha1JobCondition = (KruiseAppsV1alpha1JobCondition) o;
-    return Objects.equals(this.lastProbeTime, kruiseAppsV1alpha1JobCondition.lastProbeTime) &&
-        Objects.equals(this.lastTransitionTime, kruiseAppsV1alpha1JobCondition.lastTransitionTime) &&
-        Objects.equals(this.message, kruiseAppsV1alpha1JobCondition.message) &&
-        Objects.equals(this.reason, kruiseAppsV1alpha1JobCondition.reason) &&
-        Objects.equals(this.status, kruiseAppsV1alpha1JobCondition.status) &&
-        Objects.equals(this.type, kruiseAppsV1alpha1JobCondition.type);
+    KruiseAppsV1alpha1UnitedDeploymentCondition kruiseAppsV1alpha1UnitedDeploymentCondition = (KruiseAppsV1alpha1UnitedDeploymentCondition) o;
+    return Objects.equals(this.lastTransitionTime, kruiseAppsV1alpha1UnitedDeploymentCondition.lastTransitionTime) &&
+        Objects.equals(this.message, kruiseAppsV1alpha1UnitedDeploymentCondition.message) &&
+        Objects.equals(this.reason, kruiseAppsV1alpha1UnitedDeploymentCondition.reason) &&
+        Objects.equals(this.status, kruiseAppsV1alpha1UnitedDeploymentCondition.status) &&
+        Objects.equals(this.type, kruiseAppsV1alpha1UnitedDeploymentCondition.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastProbeTime, lastTransitionTime, message, reason, status, type);
+    return Objects.hash(lastTransitionTime, message, reason, status, type);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1JobCondition {\n");
+    sb.append("class KruiseAppsV1alpha1UnitedDeploymentCondition {\n");
     
-    sb.append("    lastProbeTime: ").append(toIndentedString(lastProbeTime)).append("\n");
     sb.append("    lastTransitionTime: ").append(toIndentedString(lastTransitionTime)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    reason: ").append(toIndentedString(reason)).append("\n");

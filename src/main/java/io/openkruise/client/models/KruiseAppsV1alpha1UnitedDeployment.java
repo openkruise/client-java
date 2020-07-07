@@ -19,33 +19,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1ListMeta;
-import io.openkruise.client.models.KruiseAppsV1alpha1BroadcastJob;
+import io.kubernetes.client.models.V1ObjectMeta;
+import io.openkruise.client.models.KruiseAppsV1alpha1UnitedDeploymentSpec;
+import io.openkruise.client.models.KruiseAppsV1alpha1UnitedDeploymentStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * BroadcastJobList contains a list of BroadcastJob
+ * UnitedDeployment is the Schema for the uniteddeployments API
  */
-@ApiModel(description = "BroadcastJobList contains a list of BroadcastJob")
+@ApiModel(description = "UnitedDeployment is the Schema for the uniteddeployments API")
 
-public class KruiseAppsV1alpha1BroadcastJobList {
+public class KruiseAppsV1alpha1UnitedDeployment {
   @SerializedName("apiVersion")
   private String apiVersion = null;
-
-  @SerializedName("items")
-  private List<KruiseAppsV1alpha1BroadcastJob> items = new ArrayList<KruiseAppsV1alpha1BroadcastJob>();
 
   @SerializedName("kind")
   private String kind = null;
 
   @SerializedName("metadata")
-  private V1ListMeta metadata = null;
+  private V1ObjectMeta metadata = null;
 
-  public KruiseAppsV1alpha1BroadcastJobList apiVersion(String apiVersion) {
+  @SerializedName("spec")
+  private KruiseAppsV1alpha1UnitedDeploymentSpec spec = null;
+
+  @SerializedName("status")
+  private KruiseAppsV1alpha1UnitedDeploymentStatus status = null;
+
+  public KruiseAppsV1alpha1UnitedDeployment apiVersion(String apiVersion) {
     this.apiVersion = apiVersion;
     return this;
   }
@@ -63,30 +65,7 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     this.apiVersion = apiVersion;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList items(List<KruiseAppsV1alpha1BroadcastJob> items) {
-    this.items = items;
-    return this;
-  }
-
-  public KruiseAppsV1alpha1BroadcastJobList addItemsItem(KruiseAppsV1alpha1BroadcastJob itemsItem) {
-    this.items.add(itemsItem);
-    return this;
-  }
-
-   /**
-   * Get items
-   * @return items
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public List<KruiseAppsV1alpha1BroadcastJob> getItems() {
-    return items;
-  }
-
-  public void setItems(List<KruiseAppsV1alpha1BroadcastJob> items) {
-    this.items = items;
-  }
-
-  public KruiseAppsV1alpha1BroadcastJobList kind(String kind) {
+  public KruiseAppsV1alpha1UnitedDeployment kind(String kind) {
     this.kind = kind;
     return this;
   }
@@ -104,7 +83,7 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     this.kind = kind;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList metadata(V1ListMeta metadata) {
+  public KruiseAppsV1alpha1UnitedDeployment metadata(V1ObjectMeta metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -114,12 +93,48 @@ public class KruiseAppsV1alpha1BroadcastJobList {
    * @return metadata
   **/
   @ApiModelProperty(value = "")
-  public V1ListMeta getMetadata() {
+  public V1ObjectMeta getMetadata() {
     return metadata;
   }
 
-  public void setMetadata(V1ListMeta metadata) {
+  public void setMetadata(V1ObjectMeta metadata) {
     this.metadata = metadata;
+  }
+
+  public KruiseAppsV1alpha1UnitedDeployment spec(KruiseAppsV1alpha1UnitedDeploymentSpec spec) {
+    this.spec = spec;
+    return this;
+  }
+
+   /**
+   * Get spec
+   * @return spec
+  **/
+  @ApiModelProperty(value = "")
+  public KruiseAppsV1alpha1UnitedDeploymentSpec getSpec() {
+    return spec;
+  }
+
+  public void setSpec(KruiseAppsV1alpha1UnitedDeploymentSpec spec) {
+    this.spec = spec;
+  }
+
+  public KruiseAppsV1alpha1UnitedDeployment status(KruiseAppsV1alpha1UnitedDeploymentStatus status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @ApiModelProperty(value = "")
+  public KruiseAppsV1alpha1UnitedDeploymentStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(KruiseAppsV1alpha1UnitedDeploymentStatus status) {
+    this.status = status;
   }
 
 
@@ -131,28 +146,30 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1BroadcastJobList kruiseAppsV1alpha1BroadcastJobList = (KruiseAppsV1alpha1BroadcastJobList) o;
-    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1BroadcastJobList.apiVersion) &&
-        Objects.equals(this.items, kruiseAppsV1alpha1BroadcastJobList.items) &&
-        Objects.equals(this.kind, kruiseAppsV1alpha1BroadcastJobList.kind) &&
-        Objects.equals(this.metadata, kruiseAppsV1alpha1BroadcastJobList.metadata);
+    KruiseAppsV1alpha1UnitedDeployment kruiseAppsV1alpha1UnitedDeployment = (KruiseAppsV1alpha1UnitedDeployment) o;
+    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1UnitedDeployment.apiVersion) &&
+        Objects.equals(this.kind, kruiseAppsV1alpha1UnitedDeployment.kind) &&
+        Objects.equals(this.metadata, kruiseAppsV1alpha1UnitedDeployment.metadata) &&
+        Objects.equals(this.spec, kruiseAppsV1alpha1UnitedDeployment.spec) &&
+        Objects.equals(this.status, kruiseAppsV1alpha1UnitedDeployment.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiVersion, items, kind, metadata);
+    return Objects.hash(apiVersion, kind, metadata, spec, status);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1BroadcastJobList {\n");
+    sb.append("class KruiseAppsV1alpha1UnitedDeployment {\n");
     
     sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
-    sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    spec: ").append(toIndentedString(spec)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

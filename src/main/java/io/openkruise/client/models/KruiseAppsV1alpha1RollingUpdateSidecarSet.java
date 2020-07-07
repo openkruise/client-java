@@ -19,36 +19,36 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
+import io.kubernetes.client.custom.IntOrString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SidecarContainer defines the container of Sidecar
+ * RollingUpdateSidecarSet is used to communicate parameter
  */
-@ApiModel(description = "SidecarContainer defines the container of Sidecar")
+@ApiModel(description = "RollingUpdateSidecarSet is used to communicate parameter")
 
-public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+public class KruiseAppsV1alpha1RollingUpdateSidecarSet {
+  @SerializedName("maxUnavailable")
+  private IntOrString maxUnavailable = null;
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  public KruiseAppsV1alpha1RollingUpdateSidecarSet maxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * Get maxUnavailable
+   * @return maxUnavailable
   **/
-  @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  @ApiModelProperty(value = "")
+  public IntOrString getMaxUnavailable() {
+    return maxUnavailable;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setMaxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
   }
 
 
@@ -60,22 +60,22 @@ public class KruiseAppsV1alpha1SidecarContainer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    KruiseAppsV1alpha1RollingUpdateSidecarSet kruiseAppsV1alpha1RollingUpdateSidecarSet = (KruiseAppsV1alpha1RollingUpdateSidecarSet) o;
+    return Objects.equals(this.maxUnavailable, kruiseAppsV1alpha1RollingUpdateSidecarSet.maxUnavailable);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(maxUnavailable);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
+    sb.append("class KruiseAppsV1alpha1RollingUpdateSidecarSet {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    maxUnavailable: ").append(toIndentedString(maxUnavailable)).append("\n");
     sb.append("}");
     return sb.toString();
   }

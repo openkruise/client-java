@@ -19,36 +19,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SidecarContainer defines the container of Sidecar
+ * UpdatePriorityOrder defines order priority.
  */
-@ApiModel(description = "SidecarContainer defines the container of Sidecar")
+@ApiModel(description = "UpdatePriorityOrder defines order priority.")
 
-public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+public class KruiseAppsV1alpha1UpdatePriorityOrderTerm {
+  @SerializedName("orderedKey")
+  private String orderedKey = null;
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  public KruiseAppsV1alpha1UpdatePriorityOrderTerm orderedKey(String orderedKey) {
+    this.orderedKey = orderedKey;
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * Calculate priority by value of this key. Values of this key, will be sorted by GetInt(val). GetInt method will find the last int in value, such as getting 5 in value &#39;5&#39;, getting 10 in value &#39;sts-10&#39;.
+   * @return orderedKey
   **/
-  @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  @ApiModelProperty(required = true, value = "Calculate priority by value of this key. Values of this key, will be sorted by GetInt(val). GetInt method will find the last int in value, such as getting 5 in value '5', getting 10 in value 'sts-10'.")
+  public String getOrderedKey() {
+    return orderedKey;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setOrderedKey(String orderedKey) {
+    this.orderedKey = orderedKey;
   }
 
 
@@ -60,22 +59,22 @@ public class KruiseAppsV1alpha1SidecarContainer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    KruiseAppsV1alpha1UpdatePriorityOrderTerm kruiseAppsV1alpha1UpdatePriorityOrderTerm = (KruiseAppsV1alpha1UpdatePriorityOrderTerm) o;
+    return Objects.equals(this.orderedKey, kruiseAppsV1alpha1UpdatePriorityOrderTerm.orderedKey);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(orderedKey);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
+    sb.append("class KruiseAppsV1alpha1UpdatePriorityOrderTerm {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    orderedKey: ").append(toIndentedString(orderedKey)).append("\n");
     sb.append("}");
     return sb.toString();
   }

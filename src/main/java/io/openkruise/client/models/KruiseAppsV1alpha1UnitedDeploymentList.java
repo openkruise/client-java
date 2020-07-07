@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.kubernetes.client.models.V1ListMeta;
-import io.openkruise.client.models.KruiseAppsV1alpha1BroadcastJob;
+import io.openkruise.client.models.KruiseAppsV1alpha1UnitedDeployment;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -28,16 +28,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * BroadcastJobList contains a list of BroadcastJob
+ * UnitedDeploymentList contains a list of UnitedDeployment.
  */
-@ApiModel(description = "BroadcastJobList contains a list of BroadcastJob")
+@ApiModel(description = "UnitedDeploymentList contains a list of UnitedDeployment.")
 
-public class KruiseAppsV1alpha1BroadcastJobList {
+public class KruiseAppsV1alpha1UnitedDeploymentList {
   @SerializedName("apiVersion")
   private String apiVersion = null;
 
   @SerializedName("items")
-  private List<KruiseAppsV1alpha1BroadcastJob> items = new ArrayList<KruiseAppsV1alpha1BroadcastJob>();
+  private List<KruiseAppsV1alpha1UnitedDeployment> items = new ArrayList<KruiseAppsV1alpha1UnitedDeployment>();
 
   @SerializedName("kind")
   private String kind = null;
@@ -45,7 +45,7 @@ public class KruiseAppsV1alpha1BroadcastJobList {
   @SerializedName("metadata")
   private V1ListMeta metadata = null;
 
-  public KruiseAppsV1alpha1BroadcastJobList apiVersion(String apiVersion) {
+  public KruiseAppsV1alpha1UnitedDeploymentList apiVersion(String apiVersion) {
     this.apiVersion = apiVersion;
     return this;
   }
@@ -63,12 +63,12 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     this.apiVersion = apiVersion;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList items(List<KruiseAppsV1alpha1BroadcastJob> items) {
+  public KruiseAppsV1alpha1UnitedDeploymentList items(List<KruiseAppsV1alpha1UnitedDeployment> items) {
     this.items = items;
     return this;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList addItemsItem(KruiseAppsV1alpha1BroadcastJob itemsItem) {
+  public KruiseAppsV1alpha1UnitedDeploymentList addItemsItem(KruiseAppsV1alpha1UnitedDeployment itemsItem) {
     this.items.add(itemsItem);
     return this;
   }
@@ -78,15 +78,15 @@ public class KruiseAppsV1alpha1BroadcastJobList {
    * @return items
   **/
   @ApiModelProperty(required = true, value = "")
-  public List<KruiseAppsV1alpha1BroadcastJob> getItems() {
+  public List<KruiseAppsV1alpha1UnitedDeployment> getItems() {
     return items;
   }
 
-  public void setItems(List<KruiseAppsV1alpha1BroadcastJob> items) {
+  public void setItems(List<KruiseAppsV1alpha1UnitedDeployment> items) {
     this.items = items;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList kind(String kind) {
+  public KruiseAppsV1alpha1UnitedDeploymentList kind(String kind) {
     this.kind = kind;
     return this;
   }
@@ -104,7 +104,7 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     this.kind = kind;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobList metadata(V1ListMeta metadata) {
+  public KruiseAppsV1alpha1UnitedDeploymentList metadata(V1ListMeta metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -131,11 +131,11 @@ public class KruiseAppsV1alpha1BroadcastJobList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1BroadcastJobList kruiseAppsV1alpha1BroadcastJobList = (KruiseAppsV1alpha1BroadcastJobList) o;
-    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1BroadcastJobList.apiVersion) &&
-        Objects.equals(this.items, kruiseAppsV1alpha1BroadcastJobList.items) &&
-        Objects.equals(this.kind, kruiseAppsV1alpha1BroadcastJobList.kind) &&
-        Objects.equals(this.metadata, kruiseAppsV1alpha1BroadcastJobList.metadata);
+    KruiseAppsV1alpha1UnitedDeploymentList kruiseAppsV1alpha1UnitedDeploymentList = (KruiseAppsV1alpha1UnitedDeploymentList) o;
+    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1UnitedDeploymentList.apiVersion) &&
+        Objects.equals(this.items, kruiseAppsV1alpha1UnitedDeploymentList.items) &&
+        Objects.equals(this.kind, kruiseAppsV1alpha1UnitedDeploymentList.kind) &&
+        Objects.equals(this.metadata, kruiseAppsV1alpha1UnitedDeploymentList.metadata);
   }
 
   @Override
@@ -147,7 +147,7 @@ public class KruiseAppsV1alpha1BroadcastJobList {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1BroadcastJobList {\n");
+    sb.append("class KruiseAppsV1alpha1UnitedDeploymentList {\n");
     
     sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");

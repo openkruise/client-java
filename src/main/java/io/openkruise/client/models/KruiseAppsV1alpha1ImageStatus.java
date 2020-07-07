@@ -19,36 +19,43 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
+import io.openkruise.client.models.KruiseAppsV1alpha1ImageTagStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * SidecarContainer defines the container of Sidecar
+ * ImageStatus defines the pulling status of an image
  */
-@ApiModel(description = "SidecarContainer defines the container of Sidecar")
+@ApiModel(description = "ImageStatus defines the pulling status of an image")
 
-public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+public class KruiseAppsV1alpha1ImageStatus {
+  @SerializedName("tags")
+  private List<KruiseAppsV1alpha1ImageTagStatus> tags = new ArrayList<KruiseAppsV1alpha1ImageTagStatus>();
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  public KruiseAppsV1alpha1ImageStatus tags(List<KruiseAppsV1alpha1ImageTagStatus> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1ImageStatus addTagsItem(KruiseAppsV1alpha1ImageTagStatus tagsItem) {
+    this.tags.add(tagsItem);
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * Represents statuses of pulling tasks on this node
+   * @return tags
   **/
-  @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  @ApiModelProperty(required = true, value = "Represents statuses of pulling tasks on this node")
+  public List<KruiseAppsV1alpha1ImageTagStatus> getTags() {
+    return tags;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setTags(List<KruiseAppsV1alpha1ImageTagStatus> tags) {
+    this.tags = tags;
   }
 
 
@@ -60,22 +67,22 @@ public class KruiseAppsV1alpha1SidecarContainer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    KruiseAppsV1alpha1ImageStatus kruiseAppsV1alpha1ImageStatus = (KruiseAppsV1alpha1ImageStatus) o;
+    return Objects.equals(this.tags, kruiseAppsV1alpha1ImageStatus.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(tags);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
+    sb.append("class KruiseAppsV1alpha1ImageStatus {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }
