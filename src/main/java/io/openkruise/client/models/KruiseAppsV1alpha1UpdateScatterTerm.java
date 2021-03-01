@@ -24,30 +24,50 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * InPlaceUpdateContainerStatus records the statuses of the container that are mainly used to determine whether the InPlaceUpdate is completed.
+ * KruiseAppsV1alpha1UpdateScatterTerm
  */
-@ApiModel(description = "InPlaceUpdateContainerStatus records the statuses of the container that are mainly used to determine whether the InPlaceUpdate is completed.")
 
-public class KruiseAppsV1alpha1InPlaceUpdateContainerStatus {
-  @SerializedName("imageID")
-  private String imageID = null;
+public class KruiseAppsV1alpha1UpdateScatterTerm {
+  @SerializedName("key")
+  private String key = null;
 
-  public KruiseAppsV1alpha1InPlaceUpdateContainerStatus imageID(String imageID) {
-    this.imageID = imageID;
+  @SerializedName("value")
+  private String value = null;
+
+  public KruiseAppsV1alpha1UpdateScatterTerm key(String key) {
+    this.key = key;
     return this;
   }
 
    /**
-   * Get imageID
-   * @return imageID
+   * Get key
+   * @return key
   **/
-  @ApiModelProperty(value = "")
-  public String getImageID() {
-    return imageID;
+  @ApiModelProperty(required = true, value = "")
+  public String getKey() {
+    return key;
   }
 
-  public void setImageID(String imageID) {
-    this.imageID = imageID;
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public KruiseAppsV1alpha1UpdateScatterTerm value(String value) {
+    this.value = value;
+    return this;
+  }
+
+   /**
+   * Get value
+   * @return value
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
   }
 
 
@@ -59,22 +79,24 @@ public class KruiseAppsV1alpha1InPlaceUpdateContainerStatus {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1InPlaceUpdateContainerStatus kruiseAppsV1alpha1InPlaceUpdateContainerStatus = (KruiseAppsV1alpha1InPlaceUpdateContainerStatus) o;
-    return Objects.equals(this.imageID, kruiseAppsV1alpha1InPlaceUpdateContainerStatus.imageID);
+    KruiseAppsV1alpha1UpdateScatterTerm kruiseAppsV1alpha1UpdateScatterTerm = (KruiseAppsV1alpha1UpdateScatterTerm) o;
+    return Objects.equals(this.key, kruiseAppsV1alpha1UpdateScatterTerm.key) &&
+        Objects.equals(this.value, kruiseAppsV1alpha1UpdateScatterTerm.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(imageID);
+    return Objects.hash(key, value);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1InPlaceUpdateContainerStatus {\n");
+    sb.append("class KruiseAppsV1alpha1UpdateScatterTerm {\n");
     
-    sb.append("    imageID: ").append(toIndentedString(imageID)).append("\n");
+    sb.append("    key: ").append(toIndentedString(key)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1PodTemplateSpec;
+import io.kubernetes.client.openapi.models.V1PodTemplateSpec;
 import io.kubernetes.client.custom.IntOrString;
 import io.openkruise.client.models.KruiseAppsV1alpha1CompletionPolicy;
 import io.openkruise.client.models.KruiseAppsV1alpha1FailurePolicy;

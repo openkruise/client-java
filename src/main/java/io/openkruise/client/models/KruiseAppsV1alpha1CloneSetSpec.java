@@ -19,9 +19,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1PersistentVolumeClaim;
-import io.kubernetes.client.models.V1PodTemplateSpec;
-import io.kubernetes.client.models.V1LabelSelector;
+import io.kubernetes.client.openapi.models.V1PersistentVolumeClaim;
+import io.kubernetes.client.openapi.models.V1PodTemplateSpec;
+import io.kubernetes.client.openapi.models.V1LabelSelector;
+import io.openkruise.client.models.KruiseAppsPubLifecycle;
 import io.openkruise.client.models.KruiseAppsV1alpha1CloneSetScaleStrategy;
 import io.openkruise.client.models.KruiseAppsV1alpha1CloneSetUpdateStrategy;
 import io.swagger.annotations.ApiModel;
@@ -36,6 +37,9 @@ import java.util.List;
 @ApiModel(description = "CloneSetSpec defines the desired state of CloneSet")
 
 public class KruiseAppsV1alpha1CloneSetSpec {
+  @SerializedName("lifecycle")
+  private KruiseAppsPubLifecycle lifecycle = null;
+
   @SerializedName("minReadySeconds")
   private Integer minReadySeconds = null;
 
@@ -59,6 +63,24 @@ public class KruiseAppsV1alpha1CloneSetSpec {
 
   @SerializedName("volumeClaimTemplates")
   private List<V1PersistentVolumeClaim> volumeClaimTemplates = null;
+
+  public KruiseAppsV1alpha1CloneSetSpec lifecycle(KruiseAppsPubLifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+    return this;
+  }
+
+   /**
+   * Lifecycle defines the lifecycle hooks for Pods pre-delete, in-place update.
+   * @return lifecycle
+  **/
+  @ApiModelProperty(value = "Lifecycle defines the lifecycle hooks for Pods pre-delete, in-place update.")
+  public KruiseAppsPubLifecycle getLifecycle() {
+    return lifecycle;
+  }
+
+  public void setLifecycle(KruiseAppsPubLifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+  }
 
   public KruiseAppsV1alpha1CloneSetSpec minReadySeconds(Integer minReadySeconds) {
     this.minReadySeconds = minReadySeconds;
@@ -87,7 +109,7 @@ public class KruiseAppsV1alpha1CloneSetSpec {
    * Replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template. If unspecified, defaults to 1.
    * @return replicas
   **/
-  @ApiModelProperty(required = true, value = "Replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template. If unspecified, defaults to 1.")
+  @ApiModelProperty(value = "Replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template. If unspecified, defaults to 1.")
   public Integer getReplicas() {
     return replicas;
   }
@@ -222,7 +244,8 @@ public class KruiseAppsV1alpha1CloneSetSpec {
       return false;
     }
     KruiseAppsV1alpha1CloneSetSpec kruiseAppsV1alpha1CloneSetSpec = (KruiseAppsV1alpha1CloneSetSpec) o;
-    return Objects.equals(this.minReadySeconds, kruiseAppsV1alpha1CloneSetSpec.minReadySeconds) &&
+    return Objects.equals(this.lifecycle, kruiseAppsV1alpha1CloneSetSpec.lifecycle) &&
+        Objects.equals(this.minReadySeconds, kruiseAppsV1alpha1CloneSetSpec.minReadySeconds) &&
         Objects.equals(this.replicas, kruiseAppsV1alpha1CloneSetSpec.replicas) &&
         Objects.equals(this.revisionHistoryLimit, kruiseAppsV1alpha1CloneSetSpec.revisionHistoryLimit) &&
         Objects.equals(this.scaleStrategy, kruiseAppsV1alpha1CloneSetSpec.scaleStrategy) &&
@@ -234,7 +257,7 @@ public class KruiseAppsV1alpha1CloneSetSpec {
 
   @Override
   public int hashCode() {
-    return Objects.hash(minReadySeconds, replicas, revisionHistoryLimit, scaleStrategy, selector, template, updateStrategy, volumeClaimTemplates);
+    return Objects.hash(lifecycle, minReadySeconds, replicas, revisionHistoryLimit, scaleStrategy, selector, template, updateStrategy, volumeClaimTemplates);
   }
 
 
@@ -243,6 +266,7 @@ public class KruiseAppsV1alpha1CloneSetSpec {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1CloneSetSpec {\n");
     
+    sb.append("    lifecycle: ").append(toIndentedString(lifecycle)).append("\n");
     sb.append("    minReadySeconds: ").append(toIndentedString(minReadySeconds)).append("\n");
     sb.append("    replicas: ").append(toIndentedString(replicas)).append("\n");
     sb.append("    revisionHistoryLimit: ").append(toIndentedString(revisionHistoryLimit)).append("\n");

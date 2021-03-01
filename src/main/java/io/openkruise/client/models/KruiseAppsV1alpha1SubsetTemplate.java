@@ -20,6 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.openkruise.client.models.KruiseAppsV1alpha1AdvancedStatefulSetTemplateSpec;
+import io.openkruise.client.models.KruiseAppsV1alpha1CloneSetTemplateSpec;
+import io.openkruise.client.models.KruiseAppsV1alpha1DeploymentTemplateSpec;
 import io.openkruise.client.models.KruiseAppsV1alpha1StatefulSetTemplateSpec;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,6 +35,12 @@ import java.io.IOException;
 public class KruiseAppsV1alpha1SubsetTemplate {
   @SerializedName("advancedStatefulSetTemplate")
   private KruiseAppsV1alpha1AdvancedStatefulSetTemplateSpec advancedStatefulSetTemplate = null;
+
+  @SerializedName("cloneSetTemplate")
+  private KruiseAppsV1alpha1CloneSetTemplateSpec cloneSetTemplate = null;
+
+  @SerializedName("deploymentTemplate")
+  private KruiseAppsV1alpha1DeploymentTemplateSpec deploymentTemplate = null;
 
   @SerializedName("statefulSetTemplate")
   private KruiseAppsV1alpha1StatefulSetTemplateSpec statefulSetTemplate = null;
@@ -53,6 +61,42 @@ public class KruiseAppsV1alpha1SubsetTemplate {
 
   public void setAdvancedStatefulSetTemplate(KruiseAppsV1alpha1AdvancedStatefulSetTemplateSpec advancedStatefulSetTemplate) {
     this.advancedStatefulSetTemplate = advancedStatefulSetTemplate;
+  }
+
+  public KruiseAppsV1alpha1SubsetTemplate cloneSetTemplate(KruiseAppsV1alpha1CloneSetTemplateSpec cloneSetTemplate) {
+    this.cloneSetTemplate = cloneSetTemplate;
+    return this;
+  }
+
+   /**
+   * CloneSet template
+   * @return cloneSetTemplate
+  **/
+  @ApiModelProperty(value = "CloneSet template")
+  public KruiseAppsV1alpha1CloneSetTemplateSpec getCloneSetTemplate() {
+    return cloneSetTemplate;
+  }
+
+  public void setCloneSetTemplate(KruiseAppsV1alpha1CloneSetTemplateSpec cloneSetTemplate) {
+    this.cloneSetTemplate = cloneSetTemplate;
+  }
+
+  public KruiseAppsV1alpha1SubsetTemplate deploymentTemplate(KruiseAppsV1alpha1DeploymentTemplateSpec deploymentTemplate) {
+    this.deploymentTemplate = deploymentTemplate;
+    return this;
+  }
+
+   /**
+   * Deployment template
+   * @return deploymentTemplate
+  **/
+  @ApiModelProperty(value = "Deployment template")
+  public KruiseAppsV1alpha1DeploymentTemplateSpec getDeploymentTemplate() {
+    return deploymentTemplate;
+  }
+
+  public void setDeploymentTemplate(KruiseAppsV1alpha1DeploymentTemplateSpec deploymentTemplate) {
+    this.deploymentTemplate = deploymentTemplate;
   }
 
   public KruiseAppsV1alpha1SubsetTemplate statefulSetTemplate(KruiseAppsV1alpha1StatefulSetTemplateSpec statefulSetTemplate) {
@@ -84,12 +128,14 @@ public class KruiseAppsV1alpha1SubsetTemplate {
     }
     KruiseAppsV1alpha1SubsetTemplate kruiseAppsV1alpha1SubsetTemplate = (KruiseAppsV1alpha1SubsetTemplate) o;
     return Objects.equals(this.advancedStatefulSetTemplate, kruiseAppsV1alpha1SubsetTemplate.advancedStatefulSetTemplate) &&
+        Objects.equals(this.cloneSetTemplate, kruiseAppsV1alpha1SubsetTemplate.cloneSetTemplate) &&
+        Objects.equals(this.deploymentTemplate, kruiseAppsV1alpha1SubsetTemplate.deploymentTemplate) &&
         Objects.equals(this.statefulSetTemplate, kruiseAppsV1alpha1SubsetTemplate.statefulSetTemplate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(advancedStatefulSetTemplate, statefulSetTemplate);
+    return Objects.hash(advancedStatefulSetTemplate, cloneSetTemplate, deploymentTemplate, statefulSetTemplate);
   }
 
 
@@ -99,6 +145,8 @@ public class KruiseAppsV1alpha1SubsetTemplate {
     sb.append("class KruiseAppsV1alpha1SubsetTemplate {\n");
     
     sb.append("    advancedStatefulSetTemplate: ").append(toIndentedString(advancedStatefulSetTemplate)).append("\n");
+    sb.append("    cloneSetTemplate: ").append(toIndentedString(cloneSetTemplate)).append("\n");
+    sb.append("    deploymentTemplate: ").append(toIndentedString(deploymentTemplate)).append("\n");
     sb.append("    statefulSetTemplate: ").append(toIndentedString(statefulSetTemplate)).append("\n");
     sb.append("}");
     return sb.toString();

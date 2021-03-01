@@ -41,6 +41,9 @@ public class KruiseAppsV1alpha1CloneSetStatus {
   @SerializedName("conditions")
   private List<KruiseAppsV1alpha1CloneSetCondition> conditions = null;
 
+  @SerializedName("currentRevision")
+  private String currentRevision = null;
+
   @SerializedName("labelSelector")
   private String labelSelector = null;
 
@@ -122,6 +125,24 @@ public class KruiseAppsV1alpha1CloneSetStatus {
 
   public void setConditions(List<KruiseAppsV1alpha1CloneSetCondition> conditions) {
     this.conditions = conditions;
+  }
+
+  public KruiseAppsV1alpha1CloneSetStatus currentRevision(String currentRevision) {
+    this.currentRevision = currentRevision;
+    return this;
+  }
+
+   /**
+   * currentRevision, if not empty, indicates the current revision version of the CloneSet.
+   * @return currentRevision
+  **/
+  @ApiModelProperty(value = "currentRevision, if not empty, indicates the current revision version of the CloneSet.")
+  public String getCurrentRevision() {
+    return currentRevision;
+  }
+
+  public void setCurrentRevision(String currentRevision) {
+    this.currentRevision = currentRevision;
   }
 
   public KruiseAppsV1alpha1CloneSetStatus labelSelector(String labelSelector) {
@@ -263,6 +284,7 @@ public class KruiseAppsV1alpha1CloneSetStatus {
     return Objects.equals(this.availableReplicas, kruiseAppsV1alpha1CloneSetStatus.availableReplicas) &&
         Objects.equals(this.collisionCount, kruiseAppsV1alpha1CloneSetStatus.collisionCount) &&
         Objects.equals(this.conditions, kruiseAppsV1alpha1CloneSetStatus.conditions) &&
+        Objects.equals(this.currentRevision, kruiseAppsV1alpha1CloneSetStatus.currentRevision) &&
         Objects.equals(this.labelSelector, kruiseAppsV1alpha1CloneSetStatus.labelSelector) &&
         Objects.equals(this.observedGeneration, kruiseAppsV1alpha1CloneSetStatus.observedGeneration) &&
         Objects.equals(this.readyReplicas, kruiseAppsV1alpha1CloneSetStatus.readyReplicas) &&
@@ -274,7 +296,7 @@ public class KruiseAppsV1alpha1CloneSetStatus {
 
   @Override
   public int hashCode() {
-    return Objects.hash(availableReplicas, collisionCount, conditions, labelSelector, observedGeneration, readyReplicas, replicas, updateRevision, updatedReadyReplicas, updatedReplicas);
+    return Objects.hash(availableReplicas, collisionCount, conditions, currentRevision, labelSelector, observedGeneration, readyReplicas, replicas, updateRevision, updatedReadyReplicas, updatedReplicas);
   }
 
 
@@ -286,6 +308,7 @@ public class KruiseAppsV1alpha1CloneSetStatus {
     sb.append("    availableReplicas: ").append(toIndentedString(availableReplicas)).append("\n");
     sb.append("    collisionCount: ").append(toIndentedString(collisionCount)).append("\n");
     sb.append("    conditions: ").append(toIndentedString(conditions)).append("\n");
+    sb.append("    currentRevision: ").append(toIndentedString(currentRevision)).append("\n");
     sb.append("    labelSelector: ").append(toIndentedString(labelSelector)).append("\n");
     sb.append("    observedGeneration: ").append(toIndentedString(observedGeneration)).append("\n");
     sb.append("    readyReplicas: ").append(toIndentedString(readyReplicas)).append("\n");

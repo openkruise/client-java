@@ -2,52 +2,52 @@
   "swagger": "2.0",
   "info": {
     "title": "Kruise",
-    "version": "v1alpha1"
+    "version": "v0.1.0"
   },
   "paths": {},
   "definitions": {
-    "io.openkruise.apps.v1alpha1.BroadcastJob": {
-      "description": "BroadcastJob is the Schema for the broadcastjobs API",
+    "kruise.apps.v1alpha1.AdvancedCronJob": {
+      "description": "AdvancedCronJob is the Schema for the advancedcronjobs API",
       "type": "object",
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
         },
         "spec": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.BroadcastJobSpec"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.AdvancedCronJobSpec"
         },
         "status": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.BroadcastJobStatus"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.AdvancedCronJobStatus"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.BroadcastJobList": {
-      "description": "BroadcastJobList contains a list of BroadcastJob",
+    "kruise.apps.v1alpha1.AdvancedCronJobList": {
+      "description": "AdvancedCronJobList contains a list of AdvancedCronJob",
       "type": "object",
       "required": [
         "items"
       ],
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.BroadcastJob"
+            "$ref": "#/definitions/kruise.apps.v1alpha1.AdvancedCronJob"
           }
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
@@ -55,7 +55,132 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.BroadcastJobSpec": {
+    "kruise.apps.v1alpha1.AdvancedCronJobSpec": {
+      "description": "AdvancedCronJobSpec defines the desired state of AdvancedCronJob",
+      "type": "object",
+      "required": [
+        "schedule",
+        "template"
+      ],
+      "properties": {
+        "concurrencyPolicy": {
+          "description": "Specifies how to treat concurrent executions of a Job. Valid values are: - \"Allow\" (default): allows CronJobs to run concurrently; - \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - \"Replace\": cancels currently running job and replaces it with a new one",
+          "type": "string"
+        },
+        "failedJobsHistoryLimit": {
+          "description": "The number of failed finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "paused": {
+          "description": "Paused will pause the cron job.",
+          "type": "boolean"
+        },
+        "schedule": {
+          "description": "The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.",
+          "type": "string"
+        },
+        "startingDeadlineSeconds": {
+          "description": "Optional deadline in seconds for starting the job if it misses scheduled time for any reason.  Missed jobs executions will be counted as failed ones.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "successfulJobsHistoryLimit": {
+          "description": "The number of successful finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "template": {
+          "description": "Specifies the job that will be created when executing a CronJob.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CronJobTemplate"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.AdvancedCronJobStatus": {
+      "description": "AdvancedCronJobStatus defines the observed state of AdvancedCronJob",
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "A list of pointers to currently running jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference"
+          }
+        },
+        "lastScheduleTime": {
+          "description": "Information when was the last time the job was successfully scheduled.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.AdvancedStatefulSetTemplateSpec": {
+      "description": "AdvancedStatefulSetTemplateSpec defines the subset template of AdvancedStatefulSet.",
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSetSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.BroadcastJob": {
+      "description": "BroadcastJob is the Schema for the broadcastjobs API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.BroadcastJobSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.BroadcastJobStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.BroadcastJobList": {
+      "description": "BroadcastJobList contains a list of BroadcastJob",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.BroadcastJob"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.BroadcastJobSpec": {
       "description": "BroadcastJobSpec defines the desired state of BroadcastJob",
       "type": "object",
       "required": [
@@ -64,20 +189,27 @@
       "properties": {
         "completionPolicy": {
           "description": "CompletionPolicy indicates the completion policy of the job. Default is Always CompletionPolicyType",
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.CompletionPolicy"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CompletionPolicy"
+        },
+        "failurePolicy": {
+          "description": "FailurePolicy indicates the behavior of the job, when failed pod is found.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.FailurePolicy"
         },
         "parallelism": {
-          "description": "Specifies the maximum desired number of pods the job should run at any given time. The actual number of pods running in steady state will be less than this number when the work left to do is less than max parallelism. Not setting this value means no limit.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Parallelism specifies the maximum desired number of pods the job should run at any given time. The actual number of pods running in steady state will be less than this number when the work left to do is less than max parallelism. Not setting this value means no limit.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "paused": {
+          "description": "Paused will pause the job.",
+          "type": "boolean"
         },
         "template": {
-          "description": "Describes the pod that will be created when executing a job.",
+          "description": "Template describes the pod that will be created when executing a job.",
           "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.BroadcastJobStatus": {
+    "kruise.apps.v1alpha1.BroadcastJobStatus": {
       "description": "BroadcastJobStatus defines the observed state of BroadcastJob",
       "type": "object",
       "properties": {
@@ -94,7 +226,7 @@
           "description": "The latest available observations of an object's current state.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.JobCondition"
+            "$ref": "#/definitions/kruise.apps.v1alpha1.JobCondition"
           },
           "x-kubernetes-patch-merge-key": "type",
           "x-kubernetes-patch-strategy": "merge"
@@ -109,6 +241,10 @@
           "type": "integer",
           "format": "int32"
         },
+        "phase": {
+          "description": "The phase of the job.",
+          "type": "string"
+        },
         "startTime": {
           "description": "Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
@@ -120,19 +256,295 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.CompletionPolicy": {
+    "kruise.apps.v1alpha1.BroadcastJobTemplateSpec": {
+      "description": "JobTemplateSpec describes the data a Job should have when created from a template",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Standard object's metadata of the jobs created from this template.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "description": "Specification of the desired behavior of the broadcastjob.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.BroadcastJobSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSet": {
+      "description": "CloneSet is the Schema for the clonesets API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetCondition": {
+      "description": "CloneSetCondition describes the state of a CloneSet at a certain point.",
+      "type": "object",
+      "required": [
+        "type",
+        "status"
+      ],
+      "properties": {
+        "lastTransitionTime": {
+          "description": "Last time the condition transitioned from one status to another.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "message": {
+          "description": "A human readable message indicating details about the transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the condition, one of True, False, Unknown.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of CloneSet condition.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetList": {
+      "description": "CloneSetList contains a list of CloneSet",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSet"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetScaleStrategy": {
+      "description": "CloneSetScaleStrategy defines strategies for pods scale.",
+      "type": "object",
+      "properties": {
+        "podsToDelete": {
+          "description": "PodsToDelete is the names of Pod should be deleted. Note that this list will be truncated for non-existing pod names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetSpec": {
+      "description": "CloneSetSpec defines the desired state of CloneSet",
+      "type": "object",
+      "required": [
+        "selector",
+        "template"
+      ],
+      "properties": {
+        "lifecycle": {
+          "description": "Lifecycle defines the lifecycle hooks for Pods pre-delete, in-place update.",
+          "$ref": "#/definitions/kruise.apps.pub.Lifecycle"
+        },
+        "minReadySeconds": {
+          "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)",
+          "type": "integer",
+          "format": "int32"
+        },
+        "replicas": {
+          "description": "Replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template. If unspecified, defaults to 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "revisionHistoryLimit": {
+          "description": "RevisionHistoryLimit is the maximum number of revisions that will be maintained in the CloneSet's revision history. The revision history consists of all revisions not represented by a currently applied CloneSetSpec version. The default value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "scaleStrategy": {
+          "description": "ScaleStrategy indicates the ScaleStrategy that will be employed to create and delete Pods in the CloneSet.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetScaleStrategy"
+        },
+        "selector": {
+          "description": "Selector is a label query over pods that should match the replica count. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "template": {
+          "description": "Template describes the pods that will be created.",
+          "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
+        },
+        "updateStrategy": {
+          "description": "UpdateStrategy indicates the UpdateStrategy that will be employed to update Pods in the CloneSet when a revision is made to Template.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetUpdateStrategy"
+        },
+        "volumeClaimTemplates": {
+          "description": "VolumeClaimTemplates is a list of claims that pods are allowed to reference. Note that PVC will be deleted when its pod has been deleted.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.PersistentVolumeClaim"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetStatus": {
+      "description": "CloneSetStatus defines the observed state of CloneSet",
+      "type": "object",
+      "required": [
+        "replicas",
+        "readyReplicas",
+        "availableReplicas",
+        "updatedReplicas",
+        "updatedReadyReplicas"
+      ],
+      "properties": {
+        "availableReplicas": {
+          "description": "AvailableReplicas is the number of Pods created by the CloneSet controller that have a Ready Condition for at least minReadySeconds.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "collisionCount": {
+          "description": "CollisionCount is the count of hash collisions for the CloneSet. The CloneSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "conditions": {
+          "description": "Conditions represents the latest available observations of a CloneSet's current state.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetCondition"
+          }
+        },
+        "currentRevision": {
+          "description": "currentRevision, if not empty, indicates the current revision version of the CloneSet.",
+          "type": "string"
+        },
+        "labelSelector": {
+          "description": "LabelSelector is label selectors for query over pods that should match the replica count used by HPA.",
+          "type": "string"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the most recent generation observed for this CloneSet. It corresponds to the CloneSet's generation, which is updated on mutation by the API Server.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "readyReplicas": {
+          "description": "ReadyReplicas is the number of Pods created by the CloneSet controller that have a Ready Condition.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "replicas": {
+          "description": "Replicas is the number of Pods created by the CloneSet controller.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateRevision": {
+          "description": "UpdateRevision, if not empty, indicates the latest revision of the CloneSet.",
+          "type": "string"
+        },
+        "updatedReadyReplicas": {
+          "description": "UpdatedReadyReplicas is the number of Pods created by the CloneSet controller from the CloneSet version indicated by updateRevision and have a Ready Condition.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "updatedReplicas": {
+          "description": "UpdatedReplicas is the number of Pods created by the CloneSet controller from the CloneSet version indicated by updateRevision.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetTemplateSpec": {
+      "description": "CloneSetTemplateSpec defines the subset template of CloneSet.",
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CloneSetUpdateStrategy": {
+      "description": "CloneSetUpdateStrategy defines strategies for pods update.",
+      "type": "object",
+      "properties": {
+        "inPlaceUpdateStrategy": {
+          "description": "InPlaceUpdateStrategy contains strategies for in-place update.",
+          "$ref": "#/definitions/kruise.apps.pub.InPlaceUpdateStrategy"
+        },
+        "maxSurge": {
+          "description": "The maximum number of pods that can be scheduled above the desired replicas during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 0.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "maxUnavailable": {
+          "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge > 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "partition": {
+          "description": "Partition is the desired number of pods in old revisions. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. It means when partition is set during pods updating, (replicas - partition value) number of pods will be updated. Default value is 0.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "paused": {
+          "description": "Paused indicates that the CloneSet is paused. Default value is false",
+          "type": "boolean"
+        },
+        "priorityStrategy": {
+          "description": "Priorities are the rules for calculating the priority of updating pods. Each pod to be updated, will pass through these terms and get a sum of weights.",
+          "$ref": "#/definitions/kruise.apps.pub.UpdatePriorityStrategy"
+        },
+        "scatterStrategy": {
+          "description": "ScatterStrategy defines the scatter rules to make pods been scattered when update. This will avoid pods with the same key-value to be updated in one batch. - Note that pods will be scattered after priority sort. So, although priority strategy and scatter strategy can be applied together, we suggest to use either one of them. - If scatterStrategy is used, we suggest to just use one term. Otherwise, the update order can be hard to understand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.UpdateScatterTerm"
+          }
+        },
+        "type": {
+          "description": "Type indicates the type of the CloneSetUpdateStrategy. Default is ReCreate.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.CompletionPolicy": {
       "description": "CompletionPolicy indicates the completion policy for the job",
       "type": "object",
       "properties": {
         "activeDeadlineSeconds": {
-          "description": "Specifies the duration in seconds relative to the startTime that the job may be active before the system tries to terminate it; value must be positive integer. Only works for Always type",
+          "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the job may be active before the system tries to terminate it; value must be positive integer. Only works for Always type.",
           "type": "integer",
           "format": "int64"
-        },
-        "backoffLimit": {
-          "description": "Specifies the number of retries before marking this job failed. Not setting value means no limit. Only works for Always type",
-          "type": "integer",
-          "format": "int32"
         },
         "ttlSecondsAfterFinished": {
           "description": "ttlSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won't be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes. This field is alpha-level and is only honored by servers that enable the TTLAfterFinished feature. Only works for Always type",
@@ -145,39 +557,527 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.InPlaceUpdateContainerStatus": {
-      "description": "InPlaceUpdateContainerStatus records container status in current pod.",
+    "kruise.apps.v1alpha1.CronJobTemplate": {
       "type": "object",
       "properties": {
-        "imageID": {
-          "type": "string"
+        "broadcastJobTemplate": {
+          "description": "Specifies the broadcastjob that will be created when executing a BroadcastCronJob.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.BroadcastJobTemplateSpec"
+        },
+        "jobTemplate": {
+          "description": "Specifies the job that will be created when executing a CronJob.",
+          "$ref": "#/definitions/io.k8s.api.batch.v1beta1.JobTemplateSpec"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.InPlaceUpdateState": {
-      "description": "InPlaceUpdateState records latest inplace-update state, including old statuses of containers.",
+    "kruise.apps.v1alpha1.DaemonSet": {
+      "description": "DaemonSet is the Schema for the daemonsets API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.DaemonSetSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.DaemonSetStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.DaemonSetCondition": {
+      "description": "DaemonSetCondition describes the state of a DaemonSet at a certain point.",
       "type": "object",
       "required": [
-        "revision",
-        "updateTimestamp",
-        "lastContainerStatuses"
+        "type",
+        "status"
       ],
       "properties": {
-        "lastContainerStatuses": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.InPlaceUpdateContainerStatus"
-          }
+        "lastTransitionTime": {
+          "description": "Last time the condition transitioned from one status to another.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
         },
-        "revision": {
+        "message": {
+          "description": "A human readable message indicating details about the transition.",
           "type": "string"
         },
-        "updateTimestamp": {
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        "reason": {
+          "description": "The reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the condition, one of True, False, Unknown.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of DaemonSet condition.",
+          "type": "string"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.JobCondition": {
+    "kruise.apps.v1alpha1.DaemonSetList": {
+      "description": "DaemonSetList contains a list of DaemonSet",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.DaemonSet"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.DaemonSetSpec": {
+      "description": "DaemonSetSpec defines the desired state of DaemonSet",
+      "type": "object",
+      "required": [
+        "selector",
+        "template"
+      ],
+      "properties": {
+        "burstReplicas": {
+          "description": "BurstReplicas is a rate limiter for booting pods on a lot of pods. The default value is 250",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "minReadySeconds": {
+          "description": "The minimum number of seconds for which a newly created DaemonSet pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready).",
+          "type": "integer",
+          "format": "int32"
+        },
+        "revisionHistoryLimit": {
+          "description": "The number of old history to retain to allow rollback. This is a pointer to distinguish between explicit zero and not specified. Defaults to 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "selector": {
+          "description": "A label query over pods that are managed by the daemon set. Must match in order to be controlled. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "template": {
+          "description": "An object that describes the pod that will be created. The DaemonSet will create exactly one copy of this pod on every node that matches the template's node selector (or on every node if no node selector is specified). More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template",
+          "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
+        },
+        "updateStrategy": {
+          "description": "An update strategy to replace existing DaemonSet pods with new pods.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.DaemonSetUpdateStrategy"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.DaemonSetStatus": {
+      "description": "DaemonSetStatus defines the observed state of DaemonSet",
+      "type": "object",
+      "required": [
+        "currentNumberScheduled",
+        "numberMisscheduled",
+        "desiredNumberScheduled",
+        "numberReady",
+        "updatedNumberScheduled",
+        "daemonSetHash"
+      ],
+      "properties": {
+        "collisionCount": {
+          "description": "Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "conditions": {
+          "description": "Represents the latest available observations of a DaemonSet's current state.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.DaemonSetCondition"
+          },
+          "x-kubernetes-patch-merge-key": "type",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "currentNumberScheduled": {
+          "description": "The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/",
+          "type": "integer",
+          "format": "int32"
+        },
+        "daemonSetHash": {
+          "description": "DaemonSetHash is the controller-revision-hash, which represents the latest version of the DaemonSet.",
+          "type": "string"
+        },
+        "desiredNumberScheduled": {
+          "description": "The total number of nodes that should be running the daemon pod (including nodes correctly running the daemon pod). More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/",
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberAvailable": {
+          "description": "The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and available (ready for at least spec.minReadySeconds)",
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberMisscheduled": {
+          "description": "The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/",
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberReady": {
+          "description": "The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberUnavailable": {
+          "description": "The number of nodes that should be running the daemon pod and have none of the daemon pod running and available (ready for at least spec.minReadySeconds)",
+          "type": "integer",
+          "format": "int32"
+        },
+        "observedGeneration": {
+          "description": "The most recent generation observed by the daemon set controller.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "updatedNumberScheduled": {
+          "description": "The total number of nodes that are running updated daemon pod",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.DaemonSetUpdateStrategy": {
+      "description": "DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.",
+      "type": "object",
+      "properties": {
+        "rollingUpdate": {
+          "description": "Rolling update config params. Present only if type = \"RollingUpdate\".",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.RollingUpdateDaemonSet"
+        },
+        "type": {
+          "description": "Type of daemon set update. Can be \"RollingUpdate\" or \"OnDelete\". Default is RollingUpdate.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.DeploymentTemplateSpec": {
+      "description": "DeploymentTemplateSpec defines the subset template of Deployment.",
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/io.k8s.api.apps.v1.DeploymentSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.FailurePolicy": {
+      "description": "FailurePolicy indicates the behavior of the job, when failed pod is found.",
+      "type": "object",
+      "properties": {
+        "restartLimit": {
+          "description": "RestartLimit specifies the number of retries before marking the pod failed.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "description": "Type indicates the type of FailurePolicyType.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImagePullJob": {
+      "description": "ImagePullJob is the Schema for the imagepulljobs API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.ImagePullJobSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.ImagePullJobStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImagePullJobList": {
+      "description": "ImagePullJobList contains a list of ImagePullJob",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ImagePullJob"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImagePullJobSpec": {
+      "description": "ImagePullJobSpec defines the desired state of ImagePullJob",
+      "type": "object",
+      "required": [
+        "image",
+        "completionPolicy"
+      ],
+      "properties": {
+        "completionPolicy": {
+          "description": "CompletionPolicy indicates the completion policy of the job. Default is Always CompletionPolicyType.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CompletionPolicy"
+        },
+        "image": {
+          "description": "Image is the image to be pulled by the job",
+          "type": "string"
+        },
+        "parallelism": {
+          "description": "Parallelism is the requested parallelism, it can be set to any non-negative value. If it is unspecified, it defaults to 1. If it is specified as 0, then the Job is effectively paused until it is increased.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "pullPolicy": {
+          "description": "PullPolicy is an optional field to set parameters of the pulling task. If not specified, the system will use the default values.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.PullPolicy"
+        },
+        "pullSecrets": {
+          "description": "ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling the image. If specified, these secrets will be passed to individual puller implementations for them to use.  For example, in the case of docker, only DockerConfig type secrets are honored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selector": {
+          "description": "Selector is a query over nodes that should match the job. nil to match all nodes.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.NodeSelector"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImagePullJobStatus": {
+      "description": "ImagePullJobStatus defines the observed state of ImagePullJob",
+      "type": "object",
+      "required": [
+        "desired"
+      ],
+      "properties": {
+        "active": {
+          "description": "The number of actively running pulling tasks.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "completionTime": {
+          "description": "Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "desired": {
+          "description": "The desired number of pulling tasks, this is typically equal to the number of nodes satisfied.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "failed": {
+          "description": "The number of pulling tasks  which reached phase Failed.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedNodes": {
+          "description": "The nodes that failed to pull the image.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "description": "The text prompt for job running status.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "succeeded": {
+          "description": "The number of pulling tasks which reached phase Succeeded.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImageSpec": {
+      "description": "ImageSpec defines the pulling spec of an image",
+      "type": "object",
+      "required": [
+        "tags"
+      ],
+      "properties": {
+        "pullSecrets": {
+          "description": "PullSecrets is an optional list of references to secrets in the same namespace to use for pulling the image. If specified, these secrets will be passed to individual puller implementations for them to use.  For example, in the case of docker, only DockerConfig type secrets are honored.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ReferenceObject"
+          }
+        },
+        "tags": {
+          "description": "Tags is a list of versions of this image",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ImageTagSpec"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImageStatus": {
+      "description": "ImageStatus defines the pulling status of an image",
+      "type": "object",
+      "required": [
+        "tags"
+      ],
+      "properties": {
+        "tags": {
+          "description": "Represents statuses of pulling tasks on this node",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ImageTagStatus"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImageTagPullPolicy": {
+      "description": "ImageTagPullPolicy defines the policy of the pulling task",
+      "type": "object",
+      "properties": {
+        "activeDeadlineSeconds": {
+          "description": "ActiveDeadlineSeconds specifies the duration in seconds relative to the startTime that the task may be active before the system tries to terminate it; value must be positive integer. if not specified, the system will never terminate it.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "backoffLimit": {
+          "description": "Specifies the number of retries before marking the pulling task failed. Defaults to 3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutSeconds": {
+          "description": "Specifies the timeout of the pulling task. Defaults to 600",
+          "type": "integer",
+          "format": "int32"
+        },
+        "ttlSecondsAfterFinished": {
+          "description": "TTLSecondsAfterFinished limits the lifetime of a pulling task that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the task finishes, it is eligible to be automatically deleted. If this field is unset, the task won't be automatically deleted. If this field is set to zero, the task becomes eligible to be deleted immediately after it finishes.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImageTagSpec": {
+      "description": "ImageTagSpec defines the pulling spec of an image tag",
+      "type": "object",
+      "required": [
+        "tag"
+      ],
+      "properties": {
+        "createdAt": {
+          "description": "Specifies the create time of this tag",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "ownerReferences": {
+          "description": "List of objects depended by this object. If this image is managed by a controller, then an entry in this list will point to this controller.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.ObjectReference"
+          }
+        },
+        "pullPolicy": {
+          "description": "PullPolicy is an optional field to set parameters of the pulling task. If not specified, the system will use the default values.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.ImageTagPullPolicy"
+        },
+        "tag": {
+          "description": "Specifies the image tag",
+          "type": "string"
+        },
+        "version": {
+          "description": "An opaque value that represents the internal version of this tag that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server.\n\nPopulated by the system. Read-only. Value must be treated as opaque by clients and .",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ImageTagStatus": {
+      "description": "ImageTagStatus defines the pulling status of an image tag",
+      "type": "object",
+      "required": [
+        "tag",
+        "phase"
+      ],
+      "properties": {
+        "completionTime": {
+          "description": "Represents time when the pulling task was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "imageID": {
+          "description": "Represents the ID of this image.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Represents the summary informations of this node",
+          "type": "string"
+        },
+        "phase": {
+          "description": "Represents the image pulling task phase.",
+          "type": "string"
+        },
+        "progress": {
+          "description": "Represents the pulling progress of this tag, which is beetween 0-100. There is no guarantee of monotonic consistency, and it may be a rollback due to retry during pulling.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "startTime": {
+          "description": "Represents time when the pulling task was acknowledged by the image puller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "tag": {
+          "description": "Represents the image tag.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Represents the internal version of this tag that the daemon handled.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.JobCondition": {
       "description": "JobCondition describes current state of a job.",
       "type": "object",
       "required": [
@@ -211,78 +1111,62 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.RollingUpdateStatefulSetStrategy": {
-      "description": "RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.",
+    "kruise.apps.v1alpha1.ManualUpdate": {
+      "description": "ManualUpdate is a update strategy which allows users to control the update progress by providing the partition of each subset.",
       "type": "object",
       "properties": {
-        "maxUnavailable": {
-          "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. Also, maxUnavailable can just be allowed to work with Parallel podManagementPolicy. Defaults to 1.",
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
-        },
-        "partition": {
-          "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned. Default value is 0.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "podUpdatePolicy": {
-          "description": "PodUpdatePolicy indicates how pods should be updated Default value is \"ReCreate\"",
-          "type": "string"
+        "partitions": {
+          "description": "Indicates number of subset partition.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.SidecarContainer": {
-      "type": "object",
-      "required": [
-        "Container"
-      ],
-      "properties": {
-        "Container": {
-          "$ref": "#/definitions/io.k8s.api.core.v1.Container"
-        }
-      }
-    },
-    "io.openkruise.apps.v1alpha1.SidecarSet": {
-      "description": "SidecarSet is the Schema for the sidecarsets API",
+    "kruise.apps.v1alpha1.NodeImage": {
+      "description": "NodeImage is the Schema for the nodeimages API",
       "type": "object",
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
         },
         "spec": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.SidecarSetSpec"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.NodeImageSpec"
         },
         "status": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.SidecarSetStatus"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.NodeImageStatus"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.SidecarSetList": {
-      "description": "SidecarSetList contains a list of SidecarSet",
+    "kruise.apps.v1alpha1.NodeImageList": {
+      "description": "NodeImageList contains a list of NodeImage",
       "type": "object",
       "required": [
         "items"
       ],
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.SidecarSet"
+            "$ref": "#/definitions/kruise.apps.v1alpha1.NodeImage"
           }
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
@@ -290,24 +1174,436 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.SidecarSetSpec": {
-      "description": "SidecarSetSpec defines the desired state of SidecarSet",
+    "kruise.apps.v1alpha1.NodeImageSpec": {
+      "description": "NodeImageSpec defines the desired state of NodeImage",
       "type": "object",
       "properties": {
-        "containers": {
-          "description": "containers contains two pieces of information: 1. normal container info that should be injected into pod 2. custom fields to control insert behavior(currently empty)",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.SidecarContainer"
+        "images": {
+          "description": "Specifies images to be pulled on this node It can not be more than 256 for each NodeImage",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ImageSpec"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.NodeImageStatus": {
+      "description": "NodeImageStatus defines the observed state of NodeImage",
+      "type": "object",
+      "required": [
+        "desired"
+      ],
+      "properties": {
+        "desired": {
+          "description": "The desired number of pulling tasks, this is typically equal to the number of images in spec.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "failed": {
+          "description": "The number of pulling tasks  which reached phase Failed.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstSyncStatus": {
+          "description": "The first of all job has finished on this node. When a node is added to the cluster, we want to know the time when the node's image pulling is completed, and use it to trigger the operation of the upper system.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SyncStatus"
+        },
+        "imageStatuses": {
+          "description": "all statuses of active image pulling tasks",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.ImageStatus"
           }
         },
+        "pulling": {
+          "description": "The number of pulling tasks which are not finished.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "succeeded": {
+          "description": "The number of pulling tasks which reached phase Succeeded.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.NodeSelector": {
+      "description": "NodeSelector is a selector over nodes",
+      "type": "object",
+      "properties": {
+        "matchExpressions": {
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelectorRequirement"
+          }
+        },
+        "matchLabels": {
+          "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "description": "Names specify a set of nodes to execute the job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.PullPolicy": {
+      "description": "PullPolicy defines the policy of the pulling task",
+      "type": "object",
+      "properties": {
+        "backoffLimit": {
+          "description": "Specifies the number of retries before marking the pulling task failed. Defaults to 3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutSeconds": {
+          "description": "Specifies the timeout of the pulling task. Defaults to 600",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ReferenceObject": {
+      "description": "ReferenceObject comprises a resource name, with a mandatory namespace, rendered as \"<namespace>/<name>\".",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.RollingUpdateDaemonSet": {
+      "description": "Spec to control the desired behavior of daemon set rolling update.",
+      "type": "object",
+      "properties": {
+        "maxSurge": {
+          "description": "Only when type=SurgingRollingUpdateType, it works. The maximum number of DaemonSet pods that can be scheduled above the desired number of pods during the update. Value can be an absolute number (ex: 5) or a percentage of the total number of DaemonSet pods at the start of the update (ex: 10%). The absolute number is calculated from the percentage by rounding up. This cannot be 0. The default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have 2 pods running at any given time. The update starts by starting replacements for at most 30% of those DaemonSet pods. Once the new pods are available it then stops the existing pods before proceeding onto other DaemonSet pods, thus ensuring that at most 130% of the desired final number of DaemonSet  pods are running at all times during the update.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "maxUnavailable": {
+          "description": "The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "partition": {
+          "description": "The number of DaemonSet pods remained to be old version. Default value is 0. Maximum value is status.DesiredNumberScheduled, which means no pod will be updated.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "paused": {
+          "description": "Indicates that the daemon set is paused and will not be processed by the daemon set controller.",
+          "type": "boolean"
+        },
+        "rollingUpdateType": {
+          "description": "Type is to specify which kind of rollingUpdate.",
+          "type": "string"
+        },
         "selector": {
-          "description": "selector is a label query over pods that should be injected",
+          "description": "A label query over nodes that are managed by the daemon set RollingUpdate. Must match in order to be controlled. It must match the node's labels.",
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.SidecarSetStatus": {
+    "kruise.apps.v1alpha1.RollingUpdateStatefulSetStrategy": {
+      "description": "RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.",
+      "type": "object",
+      "properties": {
+        "inPlaceUpdateStrategy": {
+          "description": "InPlaceUpdateStrategy contains strategies for in-place update.",
+          "$ref": "#/definitions/kruise.apps.pub.InPlaceUpdateStrategy"
+        },
+        "maxUnavailable": {
+          "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. Also, maxUnavailable can just be allowed to work with Parallel podManagementPolicy. Defaults to 1.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "minReadySeconds": {
+          "description": "MinReadySeconds indicates how long will the pod be considered ready after it's updated. MinReadySeconds works with both OrderedReady and Parallel podManagementPolicy. It affects the pod scale up speed when the podManagementPolicy is set to be OrderedReady. Combined with MaxUnavailable, it affects the pod update speed regardless of podManagementPolicy. Default value is 0, max is 300.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "partition": {
+          "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned by default. But if unorderedUpdate has been set:\n  - Partition indicates the number of pods with non-updated revisions when rolling update.\n  - It means controller will update $(replicas - partition) number of pod.\nDefault value is 0.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "paused": {
+          "description": "Paused indicates that the StatefulSet is paused. Default value is false",
+          "type": "boolean"
+        },
+        "podUpdatePolicy": {
+          "description": "PodUpdatePolicy indicates how pods should be updated Default value is \"ReCreate\"",
+          "type": "string"
+        },
+        "unorderedUpdate": {
+          "description": "UnorderedUpdate contains strategies for non-ordered update. If it is not nil, pods will be updated with non-ordered sequence. Noted that UnorderedUpdate can only be allowed to work with Parallel podManagementPolicy",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.UnorderedUpdateStrategy"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.ShareVolumePolicy": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarContainer": {
+      "description": "SidecarContainer defines the container of Sidecar",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "args": {
+          "description": "Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command": {
+          "description": "Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "List of environment variables to set in the container. Cannot be updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.EnvVar"
+          },
+          "x-kubernetes-patch-merge-key": "name",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "envFrom": {
+          "description": "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.EnvFromSource"
+          }
+        },
+        "image": {
+          "description": "Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.",
+          "type": "string"
+        },
+        "imagePullPolicy": {
+          "description": "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images",
+          "type": "string"
+        },
+        "lifecycle": {
+          "description": "Actions that the management system should take in response to container lifecycle events. Cannot be updated.",
+          "$ref": "#/definitions/io.k8s.api.core.v1.Lifecycle"
+        },
+        "livenessProbe": {
+          "description": "Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
+          "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
+        },
+        "name": {
+          "description": "Name of the container specified as a DNS_LABEL. Each container in a pod must have a unique name (DNS_LABEL). Cannot be updated.",
+          "type": "string"
+        },
+        "podInjectPolicy": {
+          "description": "The rules that injected SidecarContainer into Pod.spec.containers, not takes effect in initContainers If BeforeAppContainer, the SidecarContainer will be injected in front of the pod.spec.containers otherwise it will be injected into the back. default BeforeAppContainerType",
+          "type": "string"
+        },
+        "ports": {
+          "description": "List of ports to expose from the container. Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \"0.0.0.0\" address inside a container will be accessible from the network. Cannot be updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.ContainerPort"
+          },
+          "x-kubernetes-list-map-keys": [
+            "containerPort",
+            "protocol"
+          ],
+          "x-kubernetes-list-type": "map",
+          "x-kubernetes-patch-merge-key": "containerPort",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "readinessProbe": {
+          "description": "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
+          "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
+        },
+        "resources": {
+          "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+        },
+        "securityContext": {
+          "description": "Security options the pod should run with. More info: https://kubernetes.io/docs/concepts/policy/security-context/ More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+          "$ref": "#/definitions/io.k8s.api.core.v1.SecurityContext"
+        },
+        "shareVolumePolicy": {
+          "description": "If ShareVolumePolicy is enabled, the sidecar container will share the other container's VolumeMounts in the pod(don't contains the injected sidecar container).",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.ShareVolumePolicy"
+        },
+        "startupProbe": {
+          "description": "StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. This is an alpha feature enabled by the StartupProbe feature flag. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
+          "$ref": "#/definitions/io.k8s.api.core.v1.Probe"
+        },
+        "stdin": {
+          "description": "Whether this container should allocate a buffer for stdin in the container runtime. If this is not set, reads from stdin in the container will always result in EOF. Default is false.",
+          "type": "boolean"
+        },
+        "stdinOnce": {
+          "description": "Whether the container runtime should close the stdin channel after it has been opened by a single attach. When stdin is true the stdin stream will remain open across multiple attach sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the first client attaches to stdin, and then remains open and accepts data until the client disconnects, at which time stdin is closed and remains closed until the container is restarted. If this flag is false, a container processes that reads from stdin will never receive an EOF. Default is false",
+          "type": "boolean"
+        },
+        "terminationMessagePath": {
+          "description": "Optional: Path at which the file to which the container's termination message will be written is mounted into the container's filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated.",
+          "type": "string"
+        },
+        "terminationMessagePolicy": {
+          "description": "Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.",
+          "type": "string"
+        },
+        "transferEnv": {
+          "description": "TransferEnv will transfer env info from other container SourceContainerName is pod.spec.container[x].name; EnvName is pod.spec.container[x].Env.name",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.TransferEnvVar"
+          }
+        },
+        "tty": {
+          "description": "Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. Default is false.",
+          "type": "boolean"
+        },
+        "upgradeStrategy": {
+          "description": "sidecarContainer upgrade strategy, include: ColdUpgrade, HotUpgrade",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarContainerUpgradeStrategy"
+        },
+        "volumeDevices": {
+          "description": "volumeDevices is the list of block devices to be used by the container. This is a beta feature.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.VolumeDevice"
+          },
+          "x-kubernetes-patch-merge-key": "devicePath",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "volumeMounts": {
+          "description": "Pod volumes to mount into the container's filesystem. Cannot be updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.VolumeMount"
+          },
+          "x-kubernetes-patch-merge-key": "mountPath",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "workingDir": {
+          "description": "Container's working directory. If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarContainerUpgradeStrategy": {
+      "type": "object",
+      "properties": {
+        "upgradeType": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarSet": {
+      "description": "SidecarSet is the Schema for the sidecarsets API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarSetSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarSetStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarSetList": {
+      "description": "SidecarSetList contains a list of SidecarSet",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarSet"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarSetSpec": {
+      "description": "SidecarSetSpec defines the desired state of SidecarSet",
+      "type": "object",
+      "properties": {
+        "containers": {
+          "description": "Containers is the list of sidecar containers to be injected into the selected pod",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarContainer"
+          }
+        },
+        "initContainers": {
+          "description": "Containers is the list of init containers to be injected into the selected pod We will inject those containers by their name in ascending order We only inject init containers when a new pod is created, it does not apply to any existing pod",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarContainer"
+          }
+        },
+        "namespace": {
+          "description": "Namespace sidecarSet will only match the pods in the namespace otherwise, match pods in all namespaces(in cluster)",
+          "type": "string"
+        },
+        "selector": {
+          "description": "selector is a label query over pods that should be injected",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "updateStrategy": {
+          "description": "The sidecarset strategy to use to replace existing pods with new ones.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SidecarSetUpdateStrategy"
+        },
+        "volumes": {
+          "description": "List of volumes that can be mounted by sidecar containers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.Volume"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SidecarSetStatus": {
       "description": "SidecarSetStatus defines the observed state of SidecarSet",
       "type": "object",
       "required": [
@@ -317,7 +1613,7 @@
       ],
       "properties": {
         "matchedPods": {
-          "description": "matchedPods is the number of Pods whose labels are matched with this SidecarSet's selector",
+          "description": "matchedPods is the number of Pods whose labels are matched with this SidecarSet's selector and are created after sidecarset creates",
           "type": "integer",
           "format": "int32"
         },
@@ -335,33 +1631,71 @@
           "description": "updatedPods is the number of matched Pods that are injected with the latest SidecarSet's containers",
           "type": "integer",
           "format": "int32"
+        },
+        "updatedReadyPods": {
+          "description": "updatedReadyPods is the number of matched pods that updated and ready",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.StatefulSet": {
+    "kruise.apps.v1alpha1.SidecarSetUpdateStrategy": {
+      "description": "SidecarSetUpdateStrategy indicates the strategy that the SidecarSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.",
+      "type": "object",
+      "properties": {
+        "maxUnavailable": {
+          "description": "The maximum number of SidecarSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of SidecarSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "partition": {
+          "description": "Partition is the desired number of pods in old revisions. It means when partition is set during pods updating, (replicas - partition) number of pods will be updated. Default value is 0.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "paused": {
+          "description": "Paused indicates that the SidecarSet is paused to update the injected pods, but it don't affect the webhook inject sidecar container into the newly created pods. default is false",
+          "type": "boolean"
+        },
+        "scatterStrategy": {
+          "description": "ScatterStrategy defines the scatter rules to make pods been scattered when update. This will avoid pods with the same key-value to be updated in one batch. - Note that pods will be scattered after priority sort. So, although priority strategy and scatter strategy can be applied together, we suggest to use either one of them. - If scatterStrategy is used, we suggest to just use one term. Otherwise, the update order can be hard to understand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.UpdateScatterTerm"
+          }
+        },
+        "selector": {
+          "description": "If selector is not nil, this upgrade will only update the selected pods.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "type": {
+          "description": "Type is NotUpdate, the SidecarSet don't update the injected pods, it will only inject sidecar container into the newly created pods. Type is RollingUpdate, the SidecarSet will update the injected pods to the latest version on RollingUpdate Strategy. default is RollingUpdate",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.StatefulSet": {
       "description": "StatefulSet is the Schema for the statefulsets API",
       "type": "object",
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
         },
         "spec": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.StatefulSetSpec"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSetSpec"
         },
         "status": {
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.StatefulSetStatus"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSetStatus"
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.StatefulSetList": {
+    "kruise.apps.v1alpha1.StatefulSetList": {
       "description": "StatefulSetList contains a list of StatefulSet",
       "type": "object",
       "required": [
@@ -369,17 +1703,17 @@
       ],
       "properties": {
         "apiVersion": {
-          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
           "type": "string"
         },
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/io.openkruise.apps.v1alpha1.StatefulSet"
+            "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSet"
           }
         },
         "kind": {
-          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
           "type": "string"
         },
         "metadata": {
@@ -387,7 +1721,7 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.StatefulSetSpec": {
+    "kruise.apps.v1alpha1.StatefulSetSpec": {
       "description": "StatefulSetSpec defines the desired state of StatefulSet",
       "type": "object",
       "required": [
@@ -423,7 +1757,7 @@
         },
         "updateStrategy": {
           "description": "updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods in the StatefulSet when a revision is made to Template.",
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.StatefulSetUpdateStrategy"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSetUpdateStrategy"
         },
         "volumeClaimTemplates": {
           "description": "volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.",
@@ -434,16 +1768,22 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.StatefulSetStatus": {
+    "kruise.apps.v1alpha1.StatefulSetStatus": {
       "description": "StatefulSetStatus defines the observed state of StatefulSet",
       "type": "object",
       "required": [
         "replicas",
         "readyReplicas",
+        "availableReplicas",
         "currentReplicas",
         "updatedReplicas"
       ],
       "properties": {
+        "availableReplicas": {
+          "description": "AvailableReplicas is the number of Pods created by the StatefulSet controller that have been ready for minReadySeconds.",
+          "type": "integer",
+          "format": "int32"
+        },
         "collisionCount": {
           "description": "collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.",
           "type": "integer",
@@ -465,6 +1805,10 @@
         },
         "currentRevision": {
           "description": "currentRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [0,currentReplicas).",
+          "type": "string"
+        },
+        "labelSelector": {
+          "description": "LabelSelector is label selectors for query over pods that should match the replica count used by HPA.",
           "type": "string"
         },
         "observedGeneration": {
@@ -493,17 +1837,589 @@
         }
       }
     },
-    "io.openkruise.apps.v1alpha1.StatefulSetUpdateStrategy": {
+    "kruise.apps.v1alpha1.StatefulSetTemplateSpec": {
+      "description": "StatefulSetTemplateSpec defines the subset template of StatefulSet.",
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/io.k8s.api.apps.v1.StatefulSetSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.StatefulSetUpdateStrategy": {
       "description": "StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.",
       "type": "object",
       "properties": {
         "rollingUpdate": {
           "description": "RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType.",
-          "$ref": "#/definitions/io.openkruise.apps.v1alpha1.RollingUpdateStatefulSetStrategy"
+          "$ref": "#/definitions/kruise.apps.v1alpha1.RollingUpdateStatefulSetStrategy"
         },
         "type": {
           "description": "Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.",
           "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.Subset": {
+      "description": "Subset defines the detail of a subset.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Indicates subset name as a DNS_LABEL, which will be used to generate subset workload name prefix in the format '<deployment-name>-<subset-name>-'. Name should be unique between all of the subsets under one UnitedDeployment.",
+          "type": "string"
+        },
+        "nodeSelectorTerm": {
+          "description": "Indicates the node selector to form the subset. Depending on the node selector, pods provisioned could be distributed across multiple groups of nodes. A subset's nodeSelectorTerm is not allowed to be updated.",
+          "$ref": "#/definitions/io.k8s.api.core.v1.NodeSelectorTerm"
+        },
+        "replicas": {
+          "description": "Indicates the number of the pod to be created under this subset. Replicas could also be percentage like '10%', which means 10% of UnitedDeployment replicas of pods will be distributed under this subset. If nil, the number of replicas in this subset is determined by controller. Controller will try to keep all the subsets with nil replicas have average pods.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "tolerations": {
+          "description": "Indicates the tolerations the pods under this subset have. A subset's tolerations is not allowed to be updated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.Toleration"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SubsetTemplate": {
+      "description": "SubsetTemplate defines the subset template under the UnitedDeployment. UnitedDeployment will provision every subset based on one workload templates in SubsetTemplate.",
+      "type": "object",
+      "properties": {
+        "advancedStatefulSetTemplate": {
+          "description": "AdvancedStatefulSet template",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.AdvancedStatefulSetTemplateSpec"
+        },
+        "cloneSetTemplate": {
+          "description": "CloneSet template",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.CloneSetTemplateSpec"
+        },
+        "deploymentTemplate": {
+          "description": "Deployment template",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.DeploymentTemplateSpec"
+        },
+        "statefulSetTemplate": {
+          "description": "StatefulSet template",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.StatefulSetTemplateSpec"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.SyncStatus": {
+      "description": "SyncStatus is summary of the status of all images pulling tasks on the node.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "syncAt": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.Topology": {
+      "description": "Topology defines the spread detail of each subset under UnitedDeployment. A UnitedDeployment manages multiple homogeneous workloads which are called subset. Each of subsets under the UnitedDeployment is described in Topology.",
+      "type": "object",
+      "properties": {
+        "subsets": {
+          "description": "Contains the details of each subset. Each element in this array represents one subset which will be provisioned and managed by UnitedDeployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.Subset"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.TransferEnvVar": {
+      "type": "object",
+      "properties": {
+        "envName": {
+          "type": "string"
+        },
+        "sourceContainerName": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeployment": {
+      "description": "UnitedDeployment is the Schema for the uniteddeployments API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.UnitedDeploymentSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1alpha1.UnitedDeploymentStatus"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeploymentCondition": {
+      "description": "UnitedDeploymentCondition describes current state of a UnitedDeployment.",
+      "type": "object",
+      "properties": {
+        "lastTransitionTime": {
+          "description": "Last time the condition transitioned from one status to another.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        },
+        "message": {
+          "description": "A human readable message indicating details about the transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the condition, one of True, False, Unknown.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of in place set condition.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeploymentList": {
+      "description": "UnitedDeploymentList contains a list of UnitedDeployment",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.UnitedDeployment"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeploymentSpec": {
+      "description": "UnitedDeploymentSpec defines the desired state of UnitedDeployment.",
+      "type": "object",
+      "required": [
+        "selector"
+      ],
+      "properties": {
+        "replicas": {
+          "description": "Replicas is the total desired replicas of all the subsets. If unspecified, defaults to 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "revisionHistoryLimit": {
+          "description": "Indicates the number of histories to be conserved. If unspecified, defaults to 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "selector": {
+          "description": "Selector is a label query over pods that should match the replica count. It must match the pod template's labels.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "template": {
+          "description": "Template describes the subset that will be created.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.SubsetTemplate"
+        },
+        "topology": {
+          "description": "Topology describes the pods distribution detail between each of subsets.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.Topology"
+        },
+        "updateStrategy": {
+          "description": "UpdateStrategy indicates the strategy the UnitedDeployment use to preform the update, when template is changed.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.UnitedDeploymentUpdateStrategy"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeploymentStatus": {
+      "description": "UnitedDeploymentStatus defines the observed state of UnitedDeployment.",
+      "type": "object",
+      "required": [
+        "replicas",
+        "updatedReplicas",
+        "currentRevision"
+      ],
+      "properties": {
+        "collisionCount": {
+          "description": "Count of hash collisions for the UnitedDeployment. The UnitedDeployment controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "conditions": {
+          "description": "Represents the latest available observations of a UnitedDeployment's current state.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1alpha1.UnitedDeploymentCondition"
+          }
+        },
+        "currentRevision": {
+          "description": "CurrentRevision, if not empty, indicates the current version of the UnitedDeployment.",
+          "type": "string"
+        },
+        "observedGeneration": {
+          "description": "ObservedGeneration is the most recent generation observed for this UnitedDeployment. It corresponds to the UnitedDeployment's generation, which is updated on mutation by the API Server.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "readyReplicas": {
+          "description": "The number of ready replicas.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "replicas": {
+          "description": "Replicas is the most recently observed number of replicas.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "subsetReplicas": {
+          "description": "Records the topology detail information of the replicas of each subset.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "updateStatus": {
+          "description": "Records the information of update progress.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.UpdateStatus"
+        },
+        "updatedReadyReplicas": {
+          "description": "The number of ready current revision replicas for this UnitedDeployment.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "updatedReplicas": {
+          "description": "The number of pods in current version.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnitedDeploymentUpdateStrategy": {
+      "description": "UnitedDeploymentUpdateStrategy defines the update performance when template of UnitedDeployment is changed.",
+      "type": "object",
+      "properties": {
+        "manualUpdate": {
+          "description": "Includes all of the parameters a Manual update strategy needs.",
+          "$ref": "#/definitions/kruise.apps.v1alpha1.ManualUpdate"
+        },
+        "type": {
+          "description": "Type of UnitedDeployment update strategy. Default is Manual.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UnorderedUpdateStrategy": {
+      "description": "UnorderedUpdateStrategy defines strategies for non-ordered update.",
+      "type": "object",
+      "properties": {
+        "priorityStrategy": {
+          "description": "Priorities are the rules for calculating the priority of updating pods. Each pod to be updated, will pass through these terms and get a sum of weights.",
+          "$ref": "#/definitions/kruise.apps.pub.UpdatePriorityStrategy"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UpdateScatterTerm": {
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1alpha1.UpdateStatus": {
+      "description": "UpdateStatus defines the observed update state of UnitedDeployment.",
+      "type": "object",
+      "properties": {
+        "currentPartitions": {
+          "description": "Records the current partition.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "updatedRevision": {
+          "description": "Records the latest revision.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.RollingUpdateStatefulSetStrategy": {
+      "description": "RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.",
+      "type": "object",
+      "properties": {
+        "inPlaceUpdateStrategy": {
+          "description": "InPlaceUpdateStrategy contains strategies for in-place update.",
+          "$ref": "#/definitions/kruise.apps.pub.InPlaceUpdateStrategy"
+        },
+        "maxUnavailable": {
+          "description": "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. Also, maxUnavailable can just be allowed to work with Parallel podManagementPolicy. Defaults to 1.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "minReadySeconds": {
+          "description": "MinReadySeconds indicates how long will the pod be considered ready after it's updated. MinReadySeconds works with both OrderedReady and Parallel podManagementPolicy. It affects the pod scale up speed when the podManagementPolicy is set to be OrderedReady. Combined with MaxUnavailable, it affects the pod update speed regardless of podManagementPolicy. Default value is 0, max is 300.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "partition": {
+          "description": "Partition indicates the ordinal at which the StatefulSet should be partitioned by default. But if unorderedUpdate has been set:\n  - Partition indicates the number of pods with non-updated revisions when rolling update.\n  - It means controller will update $(replicas - partition) number of pod.\nDefault value is 0.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "paused": {
+          "description": "Paused indicates that the StatefulSet is paused. Default value is false",
+          "type": "boolean"
+        },
+        "podUpdatePolicy": {
+          "description": "PodUpdatePolicy indicates how pods should be updated Default value is \"ReCreate\"",
+          "type": "string"
+        },
+        "unorderedUpdate": {
+          "description": "UnorderedUpdate contains strategies for non-ordered update. If it is not nil, pods will be updated with non-ordered sequence. Noted that UnorderedUpdate can only be allowed to work with Parallel podManagementPolicy",
+          "$ref": "#/definitions/kruise.apps.v1beta1.UnorderedUpdateStrategy"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.StatefulSet": {
+      "description": "StatefulSet is the Schema for the statefulsets API",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/definitions/kruise.apps.v1beta1.StatefulSetSpec"
+        },
+        "status": {
+          "$ref": "#/definitions/kruise.apps.v1beta1.StatefulSetStatus"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.StatefulSetList": {
+      "description": "StatefulSetList contains a list of StatefulSet",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/kruise.apps.v1beta1.StatefulSet"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.StatefulSetSpec": {
+      "description": "StatefulSetSpec defines the desired state of StatefulSet",
+      "type": "object",
+      "required": [
+        "selector",
+        "template"
+      ],
+      "properties": {
+        "lifecycle": {
+          "description": "Lifecycle defines the lifecycle hooks for Pods pre-delete, in-place update.",
+          "$ref": "#/definitions/kruise.apps.pub.Lifecycle"
+        },
+        "podManagementPolicy": {
+          "description": "podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.",
+          "type": "string"
+        },
+        "replicas": {
+          "description": "replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template, but individual replicas also have a consistent identity. If unspecified, defaults to 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "reserveOrdinals": {
+          "description": "reserveOrdinals controls the ordinal numbers that should be reserved, and the replicas will always be the expectation number of running Pods. For a sts with replicas=3 and its Pods in [0, 1, 2]: - If you want to migrate Pod-1 and reserve this ordinal, just set spec.reserveOrdinal to [1].\n  Then controller will delete Pod-1 and create Pod-3 (existing Pods will be [0, 2, 3])\n- If you just want to delete Pod-1, you should set spec.reserveOrdinal to [1] and spec.replicas to 2.\n  Then controller will delete Pod-1 (existing Pods will be [0, 2])",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "revisionHistoryLimit": {
+          "description": "revisionHistoryLimit is the maximum number of revisions that will be maintained in the StatefulSet's revision history. The revision history consists of all revisions not represented by a currently applied StatefulSetSpec version. The default value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "selector": {
+          "description": "selector is a label query over pods that should match the replica count. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
+        },
+        "serviceName": {
+          "description": "serviceName is the name of the service that governs this StatefulSet. This service must exist before the StatefulSet, and is responsible for the network identity of the set. Pods get DNS/hostnames that follow the pattern: pod-specific-string.serviceName.default.svc.cluster.local where \"pod-specific-string\" is managed by the StatefulSet controller.",
+          "type": "string"
+        },
+        "template": {
+          "description": "template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.",
+          "$ref": "#/definitions/io.k8s.api.core.v1.PodTemplateSpec"
+        },
+        "updateStrategy": {
+          "description": "updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods in the StatefulSet when a revision is made to Template.",
+          "$ref": "#/definitions/kruise.apps.v1beta1.StatefulSetUpdateStrategy"
+        },
+        "volumeClaimTemplates": {
+          "description": "volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.PersistentVolumeClaim"
+          }
+        }
+      }
+    },
+    "kruise.apps.v1beta1.StatefulSetStatus": {
+      "description": "StatefulSetStatus defines the observed state of StatefulSet",
+      "type": "object",
+      "required": [
+        "replicas",
+        "readyReplicas",
+        "availableReplicas",
+        "currentReplicas",
+        "updatedReplicas"
+      ],
+      "properties": {
+        "availableReplicas": {
+          "description": "AvailableReplicas is the number of Pods created by the StatefulSet controller that have been ready for minReadySeconds.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "collisionCount": {
+          "description": "collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "conditions": {
+          "description": "Represents the latest available observations of a statefulset's current state.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.apps.v1.StatefulSetCondition"
+          },
+          "x-kubernetes-patch-merge-key": "type",
+          "x-kubernetes-patch-strategy": "merge"
+        },
+        "currentReplicas": {
+          "description": "currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by currentRevision.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentRevision": {
+          "description": "currentRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [0,currentReplicas).",
+          "type": "string"
+        },
+        "labelSelector": {
+          "description": "LabelSelector is label selectors for query over pods that should match the replica count used by HPA.",
+          "type": "string"
+        },
+        "observedGeneration": {
+          "description": "observedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet's generation, which is updated on mutation by the API Server.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "readyReplicas": {
+          "description": "readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "replicas": {
+          "description": "replicas is the number of Pods created by the StatefulSet controller.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "updateRevision": {
+          "description": "updateRevision, if not empty, indicates the version of the StatefulSet used to generate Pods in the sequence [replicas-updatedReplicas,replicas)",
+          "type": "string"
+        },
+        "updatedReplicas": {
+          "description": "updatedReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by updateRevision.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.StatefulSetUpdateStrategy": {
+      "description": "StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.",
+      "type": "object",
+      "properties": {
+        "rollingUpdate": {
+          "description": "RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType.",
+          "$ref": "#/definitions/kruise.apps.v1beta1.RollingUpdateStatefulSetStrategy"
+        },
+        "type": {
+          "description": "Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.",
+          "type": "string"
+        }
+      }
+    },
+    "kruise.apps.v1beta1.UnorderedUpdateStrategy": {
+      "description": "UnorderedUpdateStrategy defines strategies for non-ordered update.",
+      "type": "object",
+      "properties": {
+        "priorityStrategy": {
+          "description": "Priorities are the rules for calculating the priority of updating pods. Each pod to be updated, will pass through these terms and get a sum of weights.",
+          "$ref": "#/definitions/kruise.apps.pub.UpdatePriorityStrategy"
         }
       }
     }

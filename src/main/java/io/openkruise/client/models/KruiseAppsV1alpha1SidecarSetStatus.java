@@ -41,6 +41,9 @@ public class KruiseAppsV1alpha1SidecarSetStatus {
   @SerializedName("updatedPods")
   private Integer updatedPods = null;
 
+  @SerializedName("updatedReadyPods")
+  private Integer updatedReadyPods = null;
+
   public KruiseAppsV1alpha1SidecarSetStatus matchedPods(Integer matchedPods) {
     this.matchedPods = matchedPods;
     return this;
@@ -113,6 +116,24 @@ public class KruiseAppsV1alpha1SidecarSetStatus {
     this.updatedPods = updatedPods;
   }
 
+  public KruiseAppsV1alpha1SidecarSetStatus updatedReadyPods(Integer updatedReadyPods) {
+    this.updatedReadyPods = updatedReadyPods;
+    return this;
+  }
+
+   /**
+   * updatedReadyPods is the number of matched pods that updated and ready
+   * @return updatedReadyPods
+  **/
+  @ApiModelProperty(value = "updatedReadyPods is the number of matched pods that updated and ready")
+  public Integer getUpdatedReadyPods() {
+    return updatedReadyPods;
+  }
+
+  public void setUpdatedReadyPods(Integer updatedReadyPods) {
+    this.updatedReadyPods = updatedReadyPods;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -126,12 +147,13 @@ public class KruiseAppsV1alpha1SidecarSetStatus {
     return Objects.equals(this.matchedPods, kruiseAppsV1alpha1SidecarSetStatus.matchedPods) &&
         Objects.equals(this.observedGeneration, kruiseAppsV1alpha1SidecarSetStatus.observedGeneration) &&
         Objects.equals(this.readyPods, kruiseAppsV1alpha1SidecarSetStatus.readyPods) &&
-        Objects.equals(this.updatedPods, kruiseAppsV1alpha1SidecarSetStatus.updatedPods);
+        Objects.equals(this.updatedPods, kruiseAppsV1alpha1SidecarSetStatus.updatedPods) &&
+        Objects.equals(this.updatedReadyPods, kruiseAppsV1alpha1SidecarSetStatus.updatedReadyPods);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(matchedPods, observedGeneration, readyPods, updatedPods);
+    return Objects.hash(matchedPods, observedGeneration, readyPods, updatedPods, updatedReadyPods);
   }
 
 
@@ -144,6 +166,7 @@ public class KruiseAppsV1alpha1SidecarSetStatus {
     sb.append("    observedGeneration: ").append(toIndentedString(observedGeneration)).append("\n");
     sb.append("    readyPods: ").append(toIndentedString(readyPods)).append("\n");
     sb.append("    updatedPods: ").append(toIndentedString(updatedPods)).append("\n");
+    sb.append("    updatedReadyPods: ").append(toIndentedString(updatedReadyPods)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1StatefulSetCondition;
+import io.kubernetes.client.openapi.models.V1StatefulSetCondition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -32,6 +32,9 @@ import java.util.List;
 @ApiModel(description = "StatefulSetStatus defines the observed state of StatefulSet")
 
 public class KruiseAppsV1alpha1StatefulSetStatus {
+  @SerializedName("availableReplicas")
+  private Integer availableReplicas = null;
+
   @SerializedName("collisionCount")
   private Integer collisionCount = null;
 
@@ -61,6 +64,24 @@ public class KruiseAppsV1alpha1StatefulSetStatus {
 
   @SerializedName("updatedReplicas")
   private Integer updatedReplicas = null;
+
+  public KruiseAppsV1alpha1StatefulSetStatus availableReplicas(Integer availableReplicas) {
+    this.availableReplicas = availableReplicas;
+    return this;
+  }
+
+   /**
+   * AvailableReplicas is the number of Pods created by the StatefulSet controller that have been ready for minReadySeconds.
+   * @return availableReplicas
+  **/
+  @ApiModelProperty(required = true, value = "AvailableReplicas is the number of Pods created by the StatefulSet controller that have been ready for minReadySeconds.")
+  public Integer getAvailableReplicas() {
+    return availableReplicas;
+  }
+
+  public void setAvailableReplicas(Integer availableReplicas) {
+    this.availableReplicas = availableReplicas;
+  }
 
   public KruiseAppsV1alpha1StatefulSetStatus collisionCount(Integer collisionCount) {
     this.collisionCount = collisionCount;
@@ -260,7 +281,8 @@ public class KruiseAppsV1alpha1StatefulSetStatus {
       return false;
     }
     KruiseAppsV1alpha1StatefulSetStatus kruiseAppsV1alpha1StatefulSetStatus = (KruiseAppsV1alpha1StatefulSetStatus) o;
-    return Objects.equals(this.collisionCount, kruiseAppsV1alpha1StatefulSetStatus.collisionCount) &&
+    return Objects.equals(this.availableReplicas, kruiseAppsV1alpha1StatefulSetStatus.availableReplicas) &&
+        Objects.equals(this.collisionCount, kruiseAppsV1alpha1StatefulSetStatus.collisionCount) &&
         Objects.equals(this.conditions, kruiseAppsV1alpha1StatefulSetStatus.conditions) &&
         Objects.equals(this.currentReplicas, kruiseAppsV1alpha1StatefulSetStatus.currentReplicas) &&
         Objects.equals(this.currentRevision, kruiseAppsV1alpha1StatefulSetStatus.currentRevision) &&
@@ -274,7 +296,7 @@ public class KruiseAppsV1alpha1StatefulSetStatus {
 
   @Override
   public int hashCode() {
-    return Objects.hash(collisionCount, conditions, currentReplicas, currentRevision, labelSelector, observedGeneration, readyReplicas, replicas, updateRevision, updatedReplicas);
+    return Objects.hash(availableReplicas, collisionCount, conditions, currentReplicas, currentRevision, labelSelector, observedGeneration, readyReplicas, replicas, updateRevision, updatedReplicas);
   }
 
 
@@ -283,6 +305,7 @@ public class KruiseAppsV1alpha1StatefulSetStatus {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1StatefulSetStatus {\n");
     
+    sb.append("    availableReplicas: ").append(toIndentedString(availableReplicas)).append("\n");
     sb.append("    collisionCount: ").append(toIndentedString(collisionCount)).append("\n");
     sb.append("    conditions: ").append(toIndentedString(conditions)).append("\n");
     sb.append("    currentReplicas: ").append(toIndentedString(currentReplicas)).append("\n");

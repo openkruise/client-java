@@ -19,10 +19,23 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Container;
+import io.kubernetes.client.openapi.models.V1ContainerPort;
+import io.kubernetes.client.openapi.models.V1EnvFromSource;
+import io.kubernetes.client.openapi.models.V1EnvVar;
+import io.kubernetes.client.openapi.models.V1Lifecycle;
+import io.kubernetes.client.openapi.models.V1Probe;
+import io.kubernetes.client.openapi.models.V1ResourceRequirements;
+import io.kubernetes.client.openapi.models.V1SecurityContext;
+import io.kubernetes.client.openapi.models.V1VolumeDevice;
+import io.kubernetes.client.openapi.models.V1VolumeMount;
+import io.openkruise.client.models.KruiseAppsV1alpha1ShareVolumePolicy;
+import io.openkruise.client.models.KruiseAppsV1alpha1SidecarContainerUpgradeStrategy;
+import io.openkruise.client.models.KruiseAppsV1alpha1TransferEnvVar;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SidecarContainer defines the container of Sidecar
@@ -30,25 +43,614 @@ import java.io.IOException;
 @ApiModel(description = "SidecarContainer defines the container of Sidecar")
 
 public class KruiseAppsV1alpha1SidecarContainer {
-  @SerializedName("Container")
-  private V1Container container = null;
+  @SerializedName("args")
+  private List<String> args = null;
 
-  public KruiseAppsV1alpha1SidecarContainer container(V1Container container) {
-    this.container = container;
+  @SerializedName("command")
+  private List<String> command = null;
+
+  @SerializedName("env")
+  private List<V1EnvVar> env = null;
+
+  @SerializedName("envFrom")
+  private List<V1EnvFromSource> envFrom = null;
+
+  @SerializedName("image")
+  private String image = null;
+
+  @SerializedName("imagePullPolicy")
+  private String imagePullPolicy = null;
+
+  @SerializedName("lifecycle")
+  private V1Lifecycle lifecycle = null;
+
+  @SerializedName("livenessProbe")
+  private V1Probe livenessProbe = null;
+
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("podInjectPolicy")
+  private String podInjectPolicy = null;
+
+  @SerializedName("ports")
+  private List<V1ContainerPort> ports = null;
+
+  @SerializedName("readinessProbe")
+  private V1Probe readinessProbe = null;
+
+  @SerializedName("resources")
+  private V1ResourceRequirements resources = null;
+
+  @SerializedName("securityContext")
+  private V1SecurityContext securityContext = null;
+
+  @SerializedName("shareVolumePolicy")
+  private KruiseAppsV1alpha1ShareVolumePolicy shareVolumePolicy = null;
+
+  @SerializedName("startupProbe")
+  private V1Probe startupProbe = null;
+
+  @SerializedName("stdin")
+  private Boolean stdin = null;
+
+  @SerializedName("stdinOnce")
+  private Boolean stdinOnce = null;
+
+  @SerializedName("terminationMessagePath")
+  private String terminationMessagePath = null;
+
+  @SerializedName("terminationMessagePolicy")
+  private String terminationMessagePolicy = null;
+
+  @SerializedName("transferEnv")
+  private List<KruiseAppsV1alpha1TransferEnvVar> transferEnv = null;
+
+  @SerializedName("tty")
+  private Boolean tty = null;
+
+  @SerializedName("upgradeStrategy")
+  private KruiseAppsV1alpha1SidecarContainerUpgradeStrategy upgradeStrategy = null;
+
+  @SerializedName("volumeDevices")
+  private List<V1VolumeDevice> volumeDevices = null;
+
+  @SerializedName("volumeMounts")
+  private List<V1VolumeMount> volumeMounts = null;
+
+  @SerializedName("workingDir")
+  private String workingDir = null;
+
+  public KruiseAppsV1alpha1SidecarContainer args(List<String> args) {
+    this.args = args;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addArgsItem(String argsItem) {
+    if (this.args == null) {
+      this.args = new ArrayList<String>();
+    }
+    this.args.add(argsItem);
     return this;
   }
 
    /**
-   * Get container
-   * @return container
+   * Arguments to the entrypoint. The docker image&#39;s CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+   * @return args
   **/
-  @ApiModelProperty(required = true, value = "")
-  public V1Container getContainer() {
-    return container;
+  @ApiModelProperty(value = "Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell")
+  public List<String> getArgs() {
+    return args;
   }
 
-  public void setContainer(V1Container container) {
-    this.container = container;
+  public void setArgs(List<String> args) {
+    this.args = args;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer command(List<String> command) {
+    this.command = command;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addCommandItem(String commandItem) {
+    if (this.command == null) {
+      this.command = new ArrayList<String>();
+    }
+    this.command.add(commandItem);
+    return this;
+  }
+
+   /**
+   * Entrypoint array. Not executed within a shell. The docker image&#39;s ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container&#39;s environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+   * @return command
+  **/
+  @ApiModelProperty(value = "Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell")
+  public List<String> getCommand() {
+    return command;
+  }
+
+  public void setCommand(List<String> command) {
+    this.command = command;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer env(List<V1EnvVar> env) {
+    this.env = env;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addEnvItem(V1EnvVar envItem) {
+    if (this.env == null) {
+      this.env = new ArrayList<V1EnvVar>();
+    }
+    this.env.add(envItem);
+    return this;
+  }
+
+   /**
+   * List of environment variables to set in the container. Cannot be updated.
+   * @return env
+  **/
+  @ApiModelProperty(value = "List of environment variables to set in the container. Cannot be updated.")
+  public List<V1EnvVar> getEnv() {
+    return env;
+  }
+
+  public void setEnv(List<V1EnvVar> env) {
+    this.env = env;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer envFrom(List<V1EnvFromSource> envFrom) {
+    this.envFrom = envFrom;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addEnvFromItem(V1EnvFromSource envFromItem) {
+    if (this.envFrom == null) {
+      this.envFrom = new ArrayList<V1EnvFromSource>();
+    }
+    this.envFrom.add(envFromItem);
+    return this;
+  }
+
+   /**
+   * List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.
+   * @return envFrom
+  **/
+  @ApiModelProperty(value = "List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.")
+  public List<V1EnvFromSource> getEnvFrom() {
+    return envFrom;
+  }
+
+  public void setEnvFrom(List<V1EnvFromSource> envFrom) {
+    this.envFrom = envFrom;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer image(String image) {
+    this.image = image;
+    return this;
+  }
+
+   /**
+   * Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.
+   * @return image
+  **/
+  @ApiModelProperty(value = "Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.")
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer imagePullPolicy(String imagePullPolicy) {
+    this.imagePullPolicy = imagePullPolicy;
+    return this;
+  }
+
+   /**
+   * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
+   * @return imagePullPolicy
+  **/
+  @ApiModelProperty(value = "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images")
+  public String getImagePullPolicy() {
+    return imagePullPolicy;
+  }
+
+  public void setImagePullPolicy(String imagePullPolicy) {
+    this.imagePullPolicy = imagePullPolicy;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer lifecycle(V1Lifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+    return this;
+  }
+
+   /**
+   * Actions that the management system should take in response to container lifecycle events. Cannot be updated.
+   * @return lifecycle
+  **/
+  @ApiModelProperty(value = "Actions that the management system should take in response to container lifecycle events. Cannot be updated.")
+  public V1Lifecycle getLifecycle() {
+    return lifecycle;
+  }
+
+  public void setLifecycle(V1Lifecycle lifecycle) {
+    this.lifecycle = lifecycle;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer livenessProbe(V1Probe livenessProbe) {
+    this.livenessProbe = livenessProbe;
+    return this;
+  }
+
+   /**
+   * Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   * @return livenessProbe
+  **/
+  @ApiModelProperty(value = "Periodic probe of container liveness. Container will be restarted if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes")
+  public V1Probe getLivenessProbe() {
+    return livenessProbe;
+  }
+
+  public void setLivenessProbe(V1Probe livenessProbe) {
+    this.livenessProbe = livenessProbe;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Name of the container specified as a DNS_LABEL. Each container in a pod must have a unique name (DNS_LABEL). Cannot be updated.
+   * @return name
+  **/
+  @ApiModelProperty(required = true, value = "Name of the container specified as a DNS_LABEL. Each container in a pod must have a unique name (DNS_LABEL). Cannot be updated.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer podInjectPolicy(String podInjectPolicy) {
+    this.podInjectPolicy = podInjectPolicy;
+    return this;
+  }
+
+   /**
+   * The rules that injected SidecarContainer into Pod.spec.containers, not takes effect in initContainers If BeforeAppContainer, the SidecarContainer will be injected in front of the pod.spec.containers otherwise it will be injected into the back. default BeforeAppContainerType
+   * @return podInjectPolicy
+  **/
+  @ApiModelProperty(value = "The rules that injected SidecarContainer into Pod.spec.containers, not takes effect in initContainers If BeforeAppContainer, the SidecarContainer will be injected in front of the pod.spec.containers otherwise it will be injected into the back. default BeforeAppContainerType")
+  public String getPodInjectPolicy() {
+    return podInjectPolicy;
+  }
+
+  public void setPodInjectPolicy(String podInjectPolicy) {
+    this.podInjectPolicy = podInjectPolicy;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer ports(List<V1ContainerPort> ports) {
+    this.ports = ports;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addPortsItem(V1ContainerPort portsItem) {
+    if (this.ports == null) {
+      this.ports = new ArrayList<V1ContainerPort>();
+    }
+    this.ports.add(portsItem);
+    return this;
+  }
+
+   /**
+   * List of ports to expose from the container. Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \&quot;0.0.0.0\&quot; address inside a container will be accessible from the network. Cannot be updated.
+   * @return ports
+  **/
+  @ApiModelProperty(value = "List of ports to expose from the container. Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default \"0.0.0.0\" address inside a container will be accessible from the network. Cannot be updated.")
+  public List<V1ContainerPort> getPorts() {
+    return ports;
+  }
+
+  public void setPorts(List<V1ContainerPort> ports) {
+    this.ports = ports;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer readinessProbe(V1Probe readinessProbe) {
+    this.readinessProbe = readinessProbe;
+    return this;
+  }
+
+   /**
+   * Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   * @return readinessProbe
+  **/
+  @ApiModelProperty(value = "Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes")
+  public V1Probe getReadinessProbe() {
+    return readinessProbe;
+  }
+
+  public void setReadinessProbe(V1Probe readinessProbe) {
+    this.readinessProbe = readinessProbe;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer resources(V1ResourceRequirements resources) {
+    this.resources = resources;
+    return this;
+  }
+
+   /**
+   * Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+   * @return resources
+  **/
+  @ApiModelProperty(value = "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/")
+  public V1ResourceRequirements getResources() {
+    return resources;
+  }
+
+  public void setResources(V1ResourceRequirements resources) {
+    this.resources = resources;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer securityContext(V1SecurityContext securityContext) {
+    this.securityContext = securityContext;
+    return this;
+  }
+
+   /**
+   * Security options the pod should run with. More info: https://kubernetes.io/docs/concepts/policy/security-context/ More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+   * @return securityContext
+  **/
+  @ApiModelProperty(value = "Security options the pod should run with. More info: https://kubernetes.io/docs/concepts/policy/security-context/ More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/")
+  public V1SecurityContext getSecurityContext() {
+    return securityContext;
+  }
+
+  public void setSecurityContext(V1SecurityContext securityContext) {
+    this.securityContext = securityContext;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer shareVolumePolicy(KruiseAppsV1alpha1ShareVolumePolicy shareVolumePolicy) {
+    this.shareVolumePolicy = shareVolumePolicy;
+    return this;
+  }
+
+   /**
+   * If ShareVolumePolicy is enabled, the sidecar container will share the other container&#39;s VolumeMounts in the pod(don&#39;t contains the injected sidecar container).
+   * @return shareVolumePolicy
+  **/
+  @ApiModelProperty(value = "If ShareVolumePolicy is enabled, the sidecar container will share the other container's VolumeMounts in the pod(don't contains the injected sidecar container).")
+  public KruiseAppsV1alpha1ShareVolumePolicy getShareVolumePolicy() {
+    return shareVolumePolicy;
+  }
+
+  public void setShareVolumePolicy(KruiseAppsV1alpha1ShareVolumePolicy shareVolumePolicy) {
+    this.shareVolumePolicy = shareVolumePolicy;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer startupProbe(V1Probe startupProbe) {
+    this.startupProbe = startupProbe;
+    return this;
+  }
+
+   /**
+   * StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod&#39;s lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. This is an alpha feature enabled by the StartupProbe feature flag. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+   * @return startupProbe
+  **/
+  @ApiModelProperty(value = "StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. This is an alpha feature enabled by the StartupProbe feature flag. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes")
+  public V1Probe getStartupProbe() {
+    return startupProbe;
+  }
+
+  public void setStartupProbe(V1Probe startupProbe) {
+    this.startupProbe = startupProbe;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer stdin(Boolean stdin) {
+    this.stdin = stdin;
+    return this;
+  }
+
+   /**
+   * Whether this container should allocate a buffer for stdin in the container runtime. If this is not set, reads from stdin in the container will always result in EOF. Default is false.
+   * @return stdin
+  **/
+  @ApiModelProperty(value = "Whether this container should allocate a buffer for stdin in the container runtime. If this is not set, reads from stdin in the container will always result in EOF. Default is false.")
+  public Boolean isStdin() {
+    return stdin;
+  }
+
+  public void setStdin(Boolean stdin) {
+    this.stdin = stdin;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer stdinOnce(Boolean stdinOnce) {
+    this.stdinOnce = stdinOnce;
+    return this;
+  }
+
+   /**
+   * Whether the container runtime should close the stdin channel after it has been opened by a single attach. When stdin is true the stdin stream will remain open across multiple attach sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the first client attaches to stdin, and then remains open and accepts data until the client disconnects, at which time stdin is closed and remains closed until the container is restarted. If this flag is false, a container processes that reads from stdin will never receive an EOF. Default is false
+   * @return stdinOnce
+  **/
+  @ApiModelProperty(value = "Whether the container runtime should close the stdin channel after it has been opened by a single attach. When stdin is true the stdin stream will remain open across multiple attach sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the first client attaches to stdin, and then remains open and accepts data until the client disconnects, at which time stdin is closed and remains closed until the container is restarted. If this flag is false, a container processes that reads from stdin will never receive an EOF. Default is false")
+  public Boolean isStdinOnce() {
+    return stdinOnce;
+  }
+
+  public void setStdinOnce(Boolean stdinOnce) {
+    this.stdinOnce = stdinOnce;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer terminationMessagePath(String terminationMessagePath) {
+    this.terminationMessagePath = terminationMessagePath;
+    return this;
+  }
+
+   /**
+   * Optional: Path at which the file to which the container&#39;s termination message will be written is mounted into the container&#39;s filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated.
+   * @return terminationMessagePath
+  **/
+  @ApiModelProperty(value = "Optional: Path at which the file to which the container's termination message will be written is mounted into the container's filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated.")
+  public String getTerminationMessagePath() {
+    return terminationMessagePath;
+  }
+
+  public void setTerminationMessagePath(String terminationMessagePath) {
+    this.terminationMessagePath = terminationMessagePath;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer terminationMessagePolicy(String terminationMessagePolicy) {
+    this.terminationMessagePolicy = terminationMessagePolicy;
+    return this;
+  }
+
+   /**
+   * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
+   * @return terminationMessagePolicy
+  **/
+  @ApiModelProperty(value = "Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.")
+  public String getTerminationMessagePolicy() {
+    return terminationMessagePolicy;
+  }
+
+  public void setTerminationMessagePolicy(String terminationMessagePolicy) {
+    this.terminationMessagePolicy = terminationMessagePolicy;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer transferEnv(List<KruiseAppsV1alpha1TransferEnvVar> transferEnv) {
+    this.transferEnv = transferEnv;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addTransferEnvItem(KruiseAppsV1alpha1TransferEnvVar transferEnvItem) {
+    if (this.transferEnv == null) {
+      this.transferEnv = new ArrayList<KruiseAppsV1alpha1TransferEnvVar>();
+    }
+    this.transferEnv.add(transferEnvItem);
+    return this;
+  }
+
+   /**
+   * TransferEnv will transfer env info from other container SourceContainerName is pod.spec.container[x].name; EnvName is pod.spec.container[x].Env.name
+   * @return transferEnv
+  **/
+  @ApiModelProperty(value = "TransferEnv will transfer env info from other container SourceContainerName is pod.spec.container[x].name; EnvName is pod.spec.container[x].Env.name")
+  public List<KruiseAppsV1alpha1TransferEnvVar> getTransferEnv() {
+    return transferEnv;
+  }
+
+  public void setTransferEnv(List<KruiseAppsV1alpha1TransferEnvVar> transferEnv) {
+    this.transferEnv = transferEnv;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer tty(Boolean tty) {
+    this.tty = tty;
+    return this;
+  }
+
+   /**
+   * Whether this container should allocate a TTY for itself, also requires &#39;stdin&#39; to be true. Default is false.
+   * @return tty
+  **/
+  @ApiModelProperty(value = "Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. Default is false.")
+  public Boolean isTty() {
+    return tty;
+  }
+
+  public void setTty(Boolean tty) {
+    this.tty = tty;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer upgradeStrategy(KruiseAppsV1alpha1SidecarContainerUpgradeStrategy upgradeStrategy) {
+    this.upgradeStrategy = upgradeStrategy;
+    return this;
+  }
+
+   /**
+   * sidecarContainer upgrade strategy, include: ColdUpgrade, HotUpgrade
+   * @return upgradeStrategy
+  **/
+  @ApiModelProperty(value = "sidecarContainer upgrade strategy, include: ColdUpgrade, HotUpgrade")
+  public KruiseAppsV1alpha1SidecarContainerUpgradeStrategy getUpgradeStrategy() {
+    return upgradeStrategy;
+  }
+
+  public void setUpgradeStrategy(KruiseAppsV1alpha1SidecarContainerUpgradeStrategy upgradeStrategy) {
+    this.upgradeStrategy = upgradeStrategy;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer volumeDevices(List<V1VolumeDevice> volumeDevices) {
+    this.volumeDevices = volumeDevices;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addVolumeDevicesItem(V1VolumeDevice volumeDevicesItem) {
+    if (this.volumeDevices == null) {
+      this.volumeDevices = new ArrayList<V1VolumeDevice>();
+    }
+    this.volumeDevices.add(volumeDevicesItem);
+    return this;
+  }
+
+   /**
+   * volumeDevices is the list of block devices to be used by the container. This is a beta feature.
+   * @return volumeDevices
+  **/
+  @ApiModelProperty(value = "volumeDevices is the list of block devices to be used by the container. This is a beta feature.")
+  public List<V1VolumeDevice> getVolumeDevices() {
+    return volumeDevices;
+  }
+
+  public void setVolumeDevices(List<V1VolumeDevice> volumeDevices) {
+    this.volumeDevices = volumeDevices;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer volumeMounts(List<V1VolumeMount> volumeMounts) {
+    this.volumeMounts = volumeMounts;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer addVolumeMountsItem(V1VolumeMount volumeMountsItem) {
+    if (this.volumeMounts == null) {
+      this.volumeMounts = new ArrayList<V1VolumeMount>();
+    }
+    this.volumeMounts.add(volumeMountsItem);
+    return this;
+  }
+
+   /**
+   * Pod volumes to mount into the container&#39;s filesystem. Cannot be updated.
+   * @return volumeMounts
+  **/
+  @ApiModelProperty(value = "Pod volumes to mount into the container's filesystem. Cannot be updated.")
+  public List<V1VolumeMount> getVolumeMounts() {
+    return volumeMounts;
+  }
+
+  public void setVolumeMounts(List<V1VolumeMount> volumeMounts) {
+    this.volumeMounts = volumeMounts;
+  }
+
+  public KruiseAppsV1alpha1SidecarContainer workingDir(String workingDir) {
+    this.workingDir = workingDir;
+    return this;
+  }
+
+   /**
+   * Container&#39;s working directory. If not specified, the container runtime&#39;s default will be used, which might be configured in the container image. Cannot be updated.
+   * @return workingDir
+  **/
+  @ApiModelProperty(value = "Container's working directory. If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated.")
+  public String getWorkingDir() {
+    return workingDir;
+  }
+
+  public void setWorkingDir(String workingDir) {
+    this.workingDir = workingDir;
   }
 
 
@@ -61,12 +663,37 @@ public class KruiseAppsV1alpha1SidecarContainer {
       return false;
     }
     KruiseAppsV1alpha1SidecarContainer kruiseAppsV1alpha1SidecarContainer = (KruiseAppsV1alpha1SidecarContainer) o;
-    return Objects.equals(this.container, kruiseAppsV1alpha1SidecarContainer.container);
+    return Objects.equals(this.args, kruiseAppsV1alpha1SidecarContainer.args) &&
+        Objects.equals(this.command, kruiseAppsV1alpha1SidecarContainer.command) &&
+        Objects.equals(this.env, kruiseAppsV1alpha1SidecarContainer.env) &&
+        Objects.equals(this.envFrom, kruiseAppsV1alpha1SidecarContainer.envFrom) &&
+        Objects.equals(this.image, kruiseAppsV1alpha1SidecarContainer.image) &&
+        Objects.equals(this.imagePullPolicy, kruiseAppsV1alpha1SidecarContainer.imagePullPolicy) &&
+        Objects.equals(this.lifecycle, kruiseAppsV1alpha1SidecarContainer.lifecycle) &&
+        Objects.equals(this.livenessProbe, kruiseAppsV1alpha1SidecarContainer.livenessProbe) &&
+        Objects.equals(this.name, kruiseAppsV1alpha1SidecarContainer.name) &&
+        Objects.equals(this.podInjectPolicy, kruiseAppsV1alpha1SidecarContainer.podInjectPolicy) &&
+        Objects.equals(this.ports, kruiseAppsV1alpha1SidecarContainer.ports) &&
+        Objects.equals(this.readinessProbe, kruiseAppsV1alpha1SidecarContainer.readinessProbe) &&
+        Objects.equals(this.resources, kruiseAppsV1alpha1SidecarContainer.resources) &&
+        Objects.equals(this.securityContext, kruiseAppsV1alpha1SidecarContainer.securityContext) &&
+        Objects.equals(this.shareVolumePolicy, kruiseAppsV1alpha1SidecarContainer.shareVolumePolicy) &&
+        Objects.equals(this.startupProbe, kruiseAppsV1alpha1SidecarContainer.startupProbe) &&
+        Objects.equals(this.stdin, kruiseAppsV1alpha1SidecarContainer.stdin) &&
+        Objects.equals(this.stdinOnce, kruiseAppsV1alpha1SidecarContainer.stdinOnce) &&
+        Objects.equals(this.terminationMessagePath, kruiseAppsV1alpha1SidecarContainer.terminationMessagePath) &&
+        Objects.equals(this.terminationMessagePolicy, kruiseAppsV1alpha1SidecarContainer.terminationMessagePolicy) &&
+        Objects.equals(this.transferEnv, kruiseAppsV1alpha1SidecarContainer.transferEnv) &&
+        Objects.equals(this.tty, kruiseAppsV1alpha1SidecarContainer.tty) &&
+        Objects.equals(this.upgradeStrategy, kruiseAppsV1alpha1SidecarContainer.upgradeStrategy) &&
+        Objects.equals(this.volumeDevices, kruiseAppsV1alpha1SidecarContainer.volumeDevices) &&
+        Objects.equals(this.volumeMounts, kruiseAppsV1alpha1SidecarContainer.volumeMounts) &&
+        Objects.equals(this.workingDir, kruiseAppsV1alpha1SidecarContainer.workingDir);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container);
+    return Objects.hash(args, command, env, envFrom, image, imagePullPolicy, lifecycle, livenessProbe, name, podInjectPolicy, ports, readinessProbe, resources, securityContext, shareVolumePolicy, startupProbe, stdin, stdinOnce, terminationMessagePath, terminationMessagePolicy, transferEnv, tty, upgradeStrategy, volumeDevices, volumeMounts, workingDir);
   }
 
 
@@ -75,7 +702,32 @@ public class KruiseAppsV1alpha1SidecarContainer {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1SidecarContainer {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    args: ").append(toIndentedString(args)).append("\n");
+    sb.append("    command: ").append(toIndentedString(command)).append("\n");
+    sb.append("    env: ").append(toIndentedString(env)).append("\n");
+    sb.append("    envFrom: ").append(toIndentedString(envFrom)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    imagePullPolicy: ").append(toIndentedString(imagePullPolicy)).append("\n");
+    sb.append("    lifecycle: ").append(toIndentedString(lifecycle)).append("\n");
+    sb.append("    livenessProbe: ").append(toIndentedString(livenessProbe)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    podInjectPolicy: ").append(toIndentedString(podInjectPolicy)).append("\n");
+    sb.append("    ports: ").append(toIndentedString(ports)).append("\n");
+    sb.append("    readinessProbe: ").append(toIndentedString(readinessProbe)).append("\n");
+    sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+    sb.append("    securityContext: ").append(toIndentedString(securityContext)).append("\n");
+    sb.append("    shareVolumePolicy: ").append(toIndentedString(shareVolumePolicy)).append("\n");
+    sb.append("    startupProbe: ").append(toIndentedString(startupProbe)).append("\n");
+    sb.append("    stdin: ").append(toIndentedString(stdin)).append("\n");
+    sb.append("    stdinOnce: ").append(toIndentedString(stdinOnce)).append("\n");
+    sb.append("    terminationMessagePath: ").append(toIndentedString(terminationMessagePath)).append("\n");
+    sb.append("    terminationMessagePolicy: ").append(toIndentedString(terminationMessagePolicy)).append("\n");
+    sb.append("    transferEnv: ").append(toIndentedString(transferEnv)).append("\n");
+    sb.append("    tty: ").append(toIndentedString(tty)).append("\n");
+    sb.append("    upgradeStrategy: ").append(toIndentedString(upgradeStrategy)).append("\n");
+    sb.append("    volumeDevices: ").append(toIndentedString(volumeDevices)).append("\n");
+    sb.append("    volumeMounts: ").append(toIndentedString(volumeMounts)).append("\n");
+    sb.append("    workingDir: ").append(toIndentedString(workingDir)).append("\n");
     sb.append("}");
     return sb.toString();
   }

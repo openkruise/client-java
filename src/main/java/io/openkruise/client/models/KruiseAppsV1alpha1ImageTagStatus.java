@@ -19,10 +19,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import org.joda.time.DateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
 import java.io.IOException;
 
 /**
@@ -33,6 +32,9 @@ import java.io.IOException;
 public class KruiseAppsV1alpha1ImageTagStatus {
   @SerializedName("completionTime")
   private DateTime completionTime = null;
+
+  @SerializedName("imageID")
+  private String imageID = null;
 
   @SerializedName("message")
   private String message = null;
@@ -48,6 +50,9 @@ public class KruiseAppsV1alpha1ImageTagStatus {
 
   @SerializedName("tag")
   private String tag = null;
+
+  @SerializedName("version")
+  private Long version = null;
 
   public KruiseAppsV1alpha1ImageTagStatus completionTime(DateTime completionTime) {
     this.completionTime = completionTime;
@@ -65,6 +70,24 @@ public class KruiseAppsV1alpha1ImageTagStatus {
 
   public void setCompletionTime(DateTime completionTime) {
     this.completionTime = completionTime;
+  }
+
+  public KruiseAppsV1alpha1ImageTagStatus imageID(String imageID) {
+    this.imageID = imageID;
+    return this;
+  }
+
+   /**
+   * Represents the ID of this image.
+   * @return imageID
+  **/
+  @ApiModelProperty(value = "Represents the ID of this image.")
+  public String getImageID() {
+    return imageID;
+  }
+
+  public void setImageID(String imageID) {
+    this.imageID = imageID;
   }
 
   public KruiseAppsV1alpha1ImageTagStatus message(String message) {
@@ -157,6 +180,24 @@ public class KruiseAppsV1alpha1ImageTagStatus {
     this.tag = tag;
   }
 
+  public KruiseAppsV1alpha1ImageTagStatus version(Long version) {
+    this.version = version;
+    return this;
+  }
+
+   /**
+   * Represents the internal version of this tag that the daemon handled.
+   * @return version
+  **/
+  @ApiModelProperty(value = "Represents the internal version of this tag that the daemon handled.")
+  public Long getVersion() {
+    return version;
+  }
+
+  public void setVersion(Long version) {
+    this.version = version;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -168,16 +209,18 @@ public class KruiseAppsV1alpha1ImageTagStatus {
     }
     KruiseAppsV1alpha1ImageTagStatus kruiseAppsV1alpha1ImageTagStatus = (KruiseAppsV1alpha1ImageTagStatus) o;
     return Objects.equals(this.completionTime, kruiseAppsV1alpha1ImageTagStatus.completionTime) &&
+        Objects.equals(this.imageID, kruiseAppsV1alpha1ImageTagStatus.imageID) &&
         Objects.equals(this.message, kruiseAppsV1alpha1ImageTagStatus.message) &&
         Objects.equals(this.phase, kruiseAppsV1alpha1ImageTagStatus.phase) &&
         Objects.equals(this.progress, kruiseAppsV1alpha1ImageTagStatus.progress) &&
         Objects.equals(this.startTime, kruiseAppsV1alpha1ImageTagStatus.startTime) &&
-        Objects.equals(this.tag, kruiseAppsV1alpha1ImageTagStatus.tag);
+        Objects.equals(this.tag, kruiseAppsV1alpha1ImageTagStatus.tag) &&
+        Objects.equals(this.version, kruiseAppsV1alpha1ImageTagStatus.version);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(completionTime, message, phase, progress, startTime, tag);
+    return Objects.hash(completionTime, imageID, message, phase, progress, startTime, tag, version);
   }
 
 
@@ -187,11 +230,13 @@ public class KruiseAppsV1alpha1ImageTagStatus {
     sb.append("class KruiseAppsV1alpha1ImageTagStatus {\n");
     
     sb.append("    completionTime: ").append(toIndentedString(completionTime)).append("\n");
+    sb.append("    imageID: ").append(toIndentedString(imageID)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    phase: ").append(toIndentedString(phase)).append("\n");
     sb.append("    progress: ").append(toIndentedString(progress)).append("\n");
     sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
     sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("}");
     return sb.toString();
   }

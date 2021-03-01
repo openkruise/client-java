@@ -28,11 +28,11 @@ import java.io.IOException;
  */
 @ApiModel(description = "InPlaceUpdateStrategy defines the strategies for in-place update.")
 
-public class KruiseAppsV1alpha1InPlaceUpdateStrategy {
+public class KruiseAppsPubInPlaceUpdateStrategy {
   @SerializedName("gracePeriodSeconds")
   private Integer gracePeriodSeconds = null;
 
-  public KruiseAppsV1alpha1InPlaceUpdateStrategy gracePeriodSeconds(Integer gracePeriodSeconds) {
+  public KruiseAppsPubInPlaceUpdateStrategy gracePeriodSeconds(Integer gracePeriodSeconds) {
     this.gracePeriodSeconds = gracePeriodSeconds;
     return this;
   }
@@ -59,8 +59,8 @@ public class KruiseAppsV1alpha1InPlaceUpdateStrategy {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1InPlaceUpdateStrategy kruiseAppsV1alpha1InPlaceUpdateStrategy = (KruiseAppsV1alpha1InPlaceUpdateStrategy) o;
-    return Objects.equals(this.gracePeriodSeconds, kruiseAppsV1alpha1InPlaceUpdateStrategy.gracePeriodSeconds);
+    KruiseAppsPubInPlaceUpdateStrategy kruiseAppsPubInPlaceUpdateStrategy = (KruiseAppsPubInPlaceUpdateStrategy) o;
+    return Objects.equals(this.gracePeriodSeconds, kruiseAppsPubInPlaceUpdateStrategy.gracePeriodSeconds);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class KruiseAppsV1alpha1InPlaceUpdateStrategy {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1InPlaceUpdateStrategy {\n");
+    sb.append("class KruiseAppsPubInPlaceUpdateStrategy {\n");
     
     sb.append("    gracePeriodSeconds: ").append(toIndentedString(gracePeriodSeconds)).append("\n");
     sb.append("}");

@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.openkruise.client.models.KruiseAppsV1alpha1ImageStatus;
+import io.openkruise.client.models.KruiseAppsV1alpha1SyncStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -39,11 +40,11 @@ public class KruiseAppsV1alpha1NodeImageStatus {
   @SerializedName("failed")
   private Integer failed = null;
 
+  @SerializedName("firstSyncStatus")
+  private KruiseAppsV1alpha1SyncStatus firstSyncStatus = null;
+
   @SerializedName("imageStatuses")
   private Map<String, KruiseAppsV1alpha1ImageStatus> imageStatuses = null;
-
-  @SerializedName("observedGeneration")
-  private Long observedGeneration = null;
 
   @SerializedName("pulling")
   private Integer pulling = null;
@@ -87,6 +88,24 @@ public class KruiseAppsV1alpha1NodeImageStatus {
     this.failed = failed;
   }
 
+  public KruiseAppsV1alpha1NodeImageStatus firstSyncStatus(KruiseAppsV1alpha1SyncStatus firstSyncStatus) {
+    this.firstSyncStatus = firstSyncStatus;
+    return this;
+  }
+
+   /**
+   * The first of all job has finished on this node. When a node is added to the cluster, we want to know the time when the node&#39;s image pulling is completed, and use it to trigger the operation of the upper system.
+   * @return firstSyncStatus
+  **/
+  @ApiModelProperty(value = "The first of all job has finished on this node. When a node is added to the cluster, we want to know the time when the node's image pulling is completed, and use it to trigger the operation of the upper system.")
+  public KruiseAppsV1alpha1SyncStatus getFirstSyncStatus() {
+    return firstSyncStatus;
+  }
+
+  public void setFirstSyncStatus(KruiseAppsV1alpha1SyncStatus firstSyncStatus) {
+    this.firstSyncStatus = firstSyncStatus;
+  }
+
   public KruiseAppsV1alpha1NodeImageStatus imageStatuses(Map<String, KruiseAppsV1alpha1ImageStatus> imageStatuses) {
     this.imageStatuses = imageStatuses;
     return this;
@@ -111,24 +130,6 @@ public class KruiseAppsV1alpha1NodeImageStatus {
 
   public void setImageStatuses(Map<String, KruiseAppsV1alpha1ImageStatus> imageStatuses) {
     this.imageStatuses = imageStatuses;
-  }
-
-  public KruiseAppsV1alpha1NodeImageStatus observedGeneration(Long observedGeneration) {
-    this.observedGeneration = observedGeneration;
-    return this;
-  }
-
-   /**
-   * ObservedGeneration is the most recent generation observed for this Node.
-   * @return observedGeneration
-  **/
-  @ApiModelProperty(value = "ObservedGeneration is the most recent generation observed for this Node.")
-  public Long getObservedGeneration() {
-    return observedGeneration;
-  }
-
-  public void setObservedGeneration(Long observedGeneration) {
-    this.observedGeneration = observedGeneration;
   }
 
   public KruiseAppsV1alpha1NodeImageStatus pulling(Integer pulling) {
@@ -179,15 +180,15 @@ public class KruiseAppsV1alpha1NodeImageStatus {
     KruiseAppsV1alpha1NodeImageStatus kruiseAppsV1alpha1NodeImageStatus = (KruiseAppsV1alpha1NodeImageStatus) o;
     return Objects.equals(this.desired, kruiseAppsV1alpha1NodeImageStatus.desired) &&
         Objects.equals(this.failed, kruiseAppsV1alpha1NodeImageStatus.failed) &&
+        Objects.equals(this.firstSyncStatus, kruiseAppsV1alpha1NodeImageStatus.firstSyncStatus) &&
         Objects.equals(this.imageStatuses, kruiseAppsV1alpha1NodeImageStatus.imageStatuses) &&
-        Objects.equals(this.observedGeneration, kruiseAppsV1alpha1NodeImageStatus.observedGeneration) &&
         Objects.equals(this.pulling, kruiseAppsV1alpha1NodeImageStatus.pulling) &&
         Objects.equals(this.succeeded, kruiseAppsV1alpha1NodeImageStatus.succeeded);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(desired, failed, imageStatuses, observedGeneration, pulling, succeeded);
+    return Objects.hash(desired, failed, firstSyncStatus, imageStatuses, pulling, succeeded);
   }
 
 
@@ -198,8 +199,8 @@ public class KruiseAppsV1alpha1NodeImageStatus {
     
     sb.append("    desired: ").append(toIndentedString(desired)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
+    sb.append("    firstSyncStatus: ").append(toIndentedString(firstSyncStatus)).append("\n");
     sb.append("    imageStatuses: ").append(toIndentedString(imageStatuses)).append("\n");
-    sb.append("    observedGeneration: ").append(toIndentedString(observedGeneration)).append("\n");
     sb.append("    pulling: ").append(toIndentedString(pulling)).append("\n");
     sb.append("    succeeded: ").append(toIndentedString(succeeded)).append("\n");
     sb.append("}");

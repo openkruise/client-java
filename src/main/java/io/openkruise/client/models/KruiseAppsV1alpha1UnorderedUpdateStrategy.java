@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.openkruise.client.models.KruiseAppsV1alpha1UpdatePriorityStrategy;
+import io.openkruise.client.models.KruiseAppsPubUpdatePriorityStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,9 +31,9 @@ import java.io.IOException;
 
 public class KruiseAppsV1alpha1UnorderedUpdateStrategy {
   @SerializedName("priorityStrategy")
-  private KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy = null;
+  private KruiseAppsPubUpdatePriorityStrategy priorityStrategy = null;
 
-  public KruiseAppsV1alpha1UnorderedUpdateStrategy priorityStrategy(KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy) {
+  public KruiseAppsV1alpha1UnorderedUpdateStrategy priorityStrategy(KruiseAppsPubUpdatePriorityStrategy priorityStrategy) {
     this.priorityStrategy = priorityStrategy;
     return this;
   }
@@ -43,11 +43,11 @@ public class KruiseAppsV1alpha1UnorderedUpdateStrategy {
    * @return priorityStrategy
   **/
   @ApiModelProperty(value = "Priorities are the rules for calculating the priority of updating pods. Each pod to be updated, will pass through these terms and get a sum of weights.")
-  public KruiseAppsV1alpha1UpdatePriorityStrategy getPriorityStrategy() {
+  public KruiseAppsPubUpdatePriorityStrategy getPriorityStrategy() {
     return priorityStrategy;
   }
 
-  public void setPriorityStrategy(KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy) {
+  public void setPriorityStrategy(KruiseAppsPubUpdatePriorityStrategy priorityStrategy) {
     this.priorityStrategy = priorityStrategy;
   }
 

@@ -50,10 +50,10 @@ public class KruiseAppsV1alpha1NodeImageSpec {
   }
 
    /**
-   * Specifies images to be pulled on this node
+   * Specifies images to be pulled on this node It can not be more than 256 for each NodeImage
    * @return images
   **/
-  @ApiModelProperty(value = "Specifies images to be pulled on this node")
+  @ApiModelProperty(value = "Specifies images to be pulled on this node It can not be more than 256 for each NodeImage")
   public Map<String, KruiseAppsV1alpha1ImageSpec> getImages() {
     return images;
   }
