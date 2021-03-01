@@ -13,7 +13,7 @@
 
 package io.openkruise.client.apis;
 
-import io.kubernetes.client.models.V1DeleteOptions;
+import io.kubernetes.client.openapi.models.V1DeleteOptions;
 import io.kubernetes.client.util.Config;
 import io.kubernetes.client.util.KubeConfig;
 import io.openkruise.client.ApiClient;

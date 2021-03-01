@@ -58,8 +58,8 @@ It is suggested that you should use ApiClient and CustomObjectsApi from `io.kube
 The only thing you should import from `io.openkruise:client-java` is `io.openkruise.client.models.*`.
 
 ```java
-import io.kubernetes.client.ApiClient;
-import io.kubernetes.client.apis.CustomObjectsApi;
+import io.kubernetes.client.openapi.ApiClient;
+import io.kubernetes.client.openapi.apis.CustomObjectsApi;
 
 import io.openkruise.client.models.*;
 
@@ -146,60 +146,3 @@ public class MyExample {
 }
 
 ```
-
-## Documentation for API Endpoints
-
-All URIs are relative to *https://localhost*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*CustomObjectsApi* | [**createClusterCustomObject**](docs/CustomObjectsApi.md#createClusterCustomObject) | **POST** /apis/{group}/{version}/{plural} | 
-*CustomObjectsApi* | [**createNamespacedCustomObject**](docs/CustomObjectsApi.md#createNamespacedCustomObject) | **POST** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
-*CustomObjectsApi* | [**deleteClusterCustomObject**](docs/CustomObjectsApi.md#deleteClusterCustomObject) | **DELETE** /apis/{group}/{version}/{plural}/{name} | 
-*CustomObjectsApi* | [**deleteNamespacedCustomObject**](docs/CustomObjectsApi.md#deleteNamespacedCustomObject) | **DELETE** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
-*CustomObjectsApi* | [**getClusterCustomObject**](docs/CustomObjectsApi.md#getClusterCustomObject) | **GET** /apis/{group}/{version}/{plural}/{name} | 
-*CustomObjectsApi* | [**getNamespacedCustomObject**](docs/CustomObjectsApi.md#getNamespacedCustomObject) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
-*CustomObjectsApi* | [**listClusterCustomObject**](docs/CustomObjectsApi.md#listClusterCustomObject) | **GET** /apis/{group}/{version}/{plural} | 
-*CustomObjectsApi* | [**listNamespacedCustomObject**](docs/CustomObjectsApi.md#listNamespacedCustomObject) | **GET** /apis/{group}/{version}/namespaces/{namespace}/{plural} | 
-*CustomObjectsApi* | [**patchClusterCustomObject**](docs/CustomObjectsApi.md#patchClusterCustomObject) | **PATCH** /apis/{group}/{version}/{plural}/{name} | 
-*CustomObjectsApi* | [**patchNamespacedCustomObject**](docs/CustomObjectsApi.md#patchNamespacedCustomObject) | **PATCH** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
-*CustomObjectsApi* | [**replaceClusterCustomObject**](docs/CustomObjectsApi.md#replaceClusterCustomObject) | **PUT** /apis/{group}/{version}/{plural}/{name} | 
-*CustomObjectsApi* | [**replaceNamespacedCustomObject**](docs/CustomObjectsApi.md#replaceNamespacedCustomObject) | **PUT** /apis/{group}/{version}/namespaces/{namespace}/{plural}/{name} | 
-
-
-## Documentation for Models
-
- - [IoOpenkruiseAppsV1alpha1BroadcastJob](docs/IoOpenkruiseAppsV1alpha1BroadcastJob.md)
- - [IoOpenkruiseAppsV1alpha1BroadcastJobList](docs/IoOpenkruiseAppsV1alpha1BroadcastJobList.md)
- - [IoOpenkruiseAppsV1alpha1BroadcastJobSpec](docs/IoOpenkruiseAppsV1alpha1BroadcastJobSpec.md)
- - [IoOpenkruiseAppsV1alpha1BroadcastJobStatus](docs/IoOpenkruiseAppsV1alpha1BroadcastJobStatus.md)
- - [IoOpenkruiseAppsV1alpha1CompletionPolicy](docs/IoOpenkruiseAppsV1alpha1CompletionPolicy.md)
- - [IoOpenkruiseAppsV1alpha1InPlaceUpdateContainerStatus](docs/IoOpenkruiseAppsV1alpha1InPlaceUpdateContainerStatus.md)
- - [IoOpenkruiseAppsV1alpha1InPlaceUpdateState](docs/IoOpenkruiseAppsV1alpha1InPlaceUpdateState.md)
- - [IoOpenkruiseAppsV1alpha1JobCondition](docs/IoOpenkruiseAppsV1alpha1JobCondition.md)
- - [IoOpenkruiseAppsV1alpha1RollingUpdateStatefulSetStrategy](docs/IoOpenkruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.md)
- - [IoOpenkruiseAppsV1alpha1SidecarContainer](docs/IoOpenkruiseAppsV1alpha1SidecarContainer.md)
- - [IoOpenkruiseAppsV1alpha1SidecarSet](docs/IoOpenkruiseAppsV1alpha1SidecarSet.md)
- - [IoOpenkruiseAppsV1alpha1SidecarSetList](docs/IoOpenkruiseAppsV1alpha1SidecarSetList.md)
- - [IoOpenkruiseAppsV1alpha1SidecarSetSpec](docs/IoOpenkruiseAppsV1alpha1SidecarSetSpec.md)
- - [IoOpenkruiseAppsV1alpha1SidecarSetStatus](docs/IoOpenkruiseAppsV1alpha1SidecarSetStatus.md)
- - [IoOpenkruiseAppsV1alpha1StatefulSet](docs/IoOpenkruiseAppsV1alpha1StatefulSet.md)
- - [IoOpenkruiseAppsV1alpha1StatefulSetList](docs/IoOpenkruiseAppsV1alpha1StatefulSetList.md)
- - [IoOpenkruiseAppsV1alpha1StatefulSetSpec](docs/IoOpenkruiseAppsV1alpha1StatefulSetSpec.md)
- - [IoOpenkruiseAppsV1alpha1StatefulSetStatus](docs/IoOpenkruiseAppsV1alpha1StatefulSetStatus.md)
- - [IoOpenkruiseAppsV1alpha1StatefulSetUpdateStrategy](docs/IoOpenkruiseAppsV1alpha1StatefulSetUpdateStrategy.md)
-
-
-## Documentation for Authorization
-
-All endpoints do not require authorization.
-Authentication schemes defined for the API:
-
-## Recommendation
-
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-
-## Author
-
-
-
