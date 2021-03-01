@@ -28,11 +28,11 @@ import java.io.IOException;
  */
 @ApiModel(description = "UpdatePriorityOrder defines order priority.")
 
-public class KruiseAppsV1alpha1UpdatePriorityOrderTerm {
+public class KruiseAppsPubUpdatePriorityOrderTerm {
   @SerializedName("orderedKey")
   private String orderedKey = null;
 
-  public KruiseAppsV1alpha1UpdatePriorityOrderTerm orderedKey(String orderedKey) {
+  public KruiseAppsPubUpdatePriorityOrderTerm orderedKey(String orderedKey) {
     this.orderedKey = orderedKey;
     return this;
   }
@@ -59,8 +59,8 @@ public class KruiseAppsV1alpha1UpdatePriorityOrderTerm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdatePriorityOrderTerm kruiseAppsV1alpha1UpdatePriorityOrderTerm = (KruiseAppsV1alpha1UpdatePriorityOrderTerm) o;
-    return Objects.equals(this.orderedKey, kruiseAppsV1alpha1UpdatePriorityOrderTerm.orderedKey);
+    KruiseAppsPubUpdatePriorityOrderTerm kruiseAppsPubUpdatePriorityOrderTerm = (KruiseAppsPubUpdatePriorityOrderTerm) o;
+    return Objects.equals(this.orderedKey, kruiseAppsPubUpdatePriorityOrderTerm.orderedKey);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class KruiseAppsV1alpha1UpdatePriorityOrderTerm {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdatePriorityOrderTerm {\n");
+    sb.append("class KruiseAppsPubUpdatePriorityOrderTerm {\n");
     
     sb.append("    orderedKey: ").append(toIndentedString(orderedKey)).append("\n");
     sb.append("}");

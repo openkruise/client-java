@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.openkruise.client.models.KruiseAppsV1alpha1UpdatePriorityOrderTerm;
-import io.openkruise.client.models.KruiseAppsV1alpha1UpdatePriorityWeightTerm;
+import io.openkruise.client.models.KruiseAppsPubUpdatePriorityOrderTerm;
+import io.openkruise.client.models.KruiseAppsPubUpdatePriorityWeightTerm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -32,21 +32,21 @@ import java.util.List;
  */
 @ApiModel(description = "UpdatePriorityStrategy is the strategy to define priority for pods update. Only one of orderPriority and weightPriority can be set.")
 
-public class KruiseAppsV1alpha1UpdatePriorityStrategy {
+public class KruiseAppsPubUpdatePriorityStrategy {
   @SerializedName("orderPriority")
-  private List<KruiseAppsV1alpha1UpdatePriorityOrderTerm> orderPriority = null;
+  private List<KruiseAppsPubUpdatePriorityOrderTerm> orderPriority = null;
 
   @SerializedName("weightPriority")
-  private List<KruiseAppsV1alpha1UpdatePriorityWeightTerm> weightPriority = null;
+  private List<KruiseAppsPubUpdatePriorityWeightTerm> weightPriority = null;
 
-  public KruiseAppsV1alpha1UpdatePriorityStrategy orderPriority(List<KruiseAppsV1alpha1UpdatePriorityOrderTerm> orderPriority) {
+  public KruiseAppsPubUpdatePriorityStrategy orderPriority(List<KruiseAppsPubUpdatePriorityOrderTerm> orderPriority) {
     this.orderPriority = orderPriority;
     return this;
   }
 
-  public KruiseAppsV1alpha1UpdatePriorityStrategy addOrderPriorityItem(KruiseAppsV1alpha1UpdatePriorityOrderTerm orderPriorityItem) {
+  public KruiseAppsPubUpdatePriorityStrategy addOrderPriorityItem(KruiseAppsPubUpdatePriorityOrderTerm orderPriorityItem) {
     if (this.orderPriority == null) {
-      this.orderPriority = new ArrayList<KruiseAppsV1alpha1UpdatePriorityOrderTerm>();
+      this.orderPriority = new ArrayList<KruiseAppsPubUpdatePriorityOrderTerm>();
     }
     this.orderPriority.add(orderPriorityItem);
     return this;
@@ -57,22 +57,22 @@ public class KruiseAppsV1alpha1UpdatePriorityStrategy {
    * @return orderPriority
   **/
   @ApiModelProperty(value = "Order priority terms, pods will be sorted by the value of orderedKey. For example: ``` orderPriority: - orderedKey: key1 - orderedKey: key2 ``` First, all pods which have key1 in labels will be sorted by the value of key1. Then, the left pods which have no key1 but have key2 in labels will be sorted by the value of key2 and put behind those pods have key1.")
-  public List<KruiseAppsV1alpha1UpdatePriorityOrderTerm> getOrderPriority() {
+  public List<KruiseAppsPubUpdatePriorityOrderTerm> getOrderPriority() {
     return orderPriority;
   }
 
-  public void setOrderPriority(List<KruiseAppsV1alpha1UpdatePriorityOrderTerm> orderPriority) {
+  public void setOrderPriority(List<KruiseAppsPubUpdatePriorityOrderTerm> orderPriority) {
     this.orderPriority = orderPriority;
   }
 
-  public KruiseAppsV1alpha1UpdatePriorityStrategy weightPriority(List<KruiseAppsV1alpha1UpdatePriorityWeightTerm> weightPriority) {
+  public KruiseAppsPubUpdatePriorityStrategy weightPriority(List<KruiseAppsPubUpdatePriorityWeightTerm> weightPriority) {
     this.weightPriority = weightPriority;
     return this;
   }
 
-  public KruiseAppsV1alpha1UpdatePriorityStrategy addWeightPriorityItem(KruiseAppsV1alpha1UpdatePriorityWeightTerm weightPriorityItem) {
+  public KruiseAppsPubUpdatePriorityStrategy addWeightPriorityItem(KruiseAppsPubUpdatePriorityWeightTerm weightPriorityItem) {
     if (this.weightPriority == null) {
-      this.weightPriority = new ArrayList<KruiseAppsV1alpha1UpdatePriorityWeightTerm>();
+      this.weightPriority = new ArrayList<KruiseAppsPubUpdatePriorityWeightTerm>();
     }
     this.weightPriority.add(weightPriorityItem);
     return this;
@@ -83,11 +83,11 @@ public class KruiseAppsV1alpha1UpdatePriorityStrategy {
    * @return weightPriority
   **/
   @ApiModelProperty(value = "Weight priority terms, pods will be sorted by the sum of all terms weight.")
-  public List<KruiseAppsV1alpha1UpdatePriorityWeightTerm> getWeightPriority() {
+  public List<KruiseAppsPubUpdatePriorityWeightTerm> getWeightPriority() {
     return weightPriority;
   }
 
-  public void setWeightPriority(List<KruiseAppsV1alpha1UpdatePriorityWeightTerm> weightPriority) {
+  public void setWeightPriority(List<KruiseAppsPubUpdatePriorityWeightTerm> weightPriority) {
     this.weightPriority = weightPriority;
   }
 
@@ -100,9 +100,9 @@ public class KruiseAppsV1alpha1UpdatePriorityStrategy {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdatePriorityStrategy kruiseAppsV1alpha1UpdatePriorityStrategy = (KruiseAppsV1alpha1UpdatePriorityStrategy) o;
-    return Objects.equals(this.orderPriority, kruiseAppsV1alpha1UpdatePriorityStrategy.orderPriority) &&
-        Objects.equals(this.weightPriority, kruiseAppsV1alpha1UpdatePriorityStrategy.weightPriority);
+    KruiseAppsPubUpdatePriorityStrategy kruiseAppsPubUpdatePriorityStrategy = (KruiseAppsPubUpdatePriorityStrategy) o;
+    return Objects.equals(this.orderPriority, kruiseAppsPubUpdatePriorityStrategy.orderPriority) &&
+        Objects.equals(this.weightPriority, kruiseAppsPubUpdatePriorityStrategy.weightPriority);
   }
 
   @Override
@@ -114,7 +114,7 @@ public class KruiseAppsV1alpha1UpdatePriorityStrategy {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdatePriorityStrategy {\n");
+    sb.append("class KruiseAppsPubUpdatePriorityStrategy {\n");
     
     sb.append("    orderPriority: ").append(toIndentedString(orderPriority)).append("\n");
     sb.append("    weightPriority: ").append(toIndentedString(weightPriority)).append("\n");

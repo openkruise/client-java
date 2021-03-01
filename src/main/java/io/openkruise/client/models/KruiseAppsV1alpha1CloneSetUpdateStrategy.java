@@ -20,9 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.kubernetes.client.custom.IntOrString;
-import io.openkruise.client.models.KruiseAppsV1alpha1CloneSetUpdateScatterTerm;
-import io.openkruise.client.models.KruiseAppsV1alpha1InPlaceUpdateStrategy;
-import io.openkruise.client.models.KruiseAppsV1alpha1UpdatePriorityStrategy;
+import io.openkruise.client.models.KruiseAppsPubInPlaceUpdateStrategy;
+import io.openkruise.client.models.KruiseAppsPubUpdatePriorityStrategy;
+import io.openkruise.client.models.KruiseAppsV1alpha1UpdateScatterTerm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -36,7 +36,7 @@ import java.util.List;
 
 public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
   @SerializedName("inPlaceUpdateStrategy")
-  private KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy = null;
+  private KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy = null;
 
   @SerializedName("maxSurge")
   private IntOrString maxSurge = null;
@@ -45,21 +45,21 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
   private IntOrString maxUnavailable = null;
 
   @SerializedName("partition")
-  private Integer partition = null;
+  private IntOrString partition = null;
 
   @SerializedName("paused")
   private Boolean paused = null;
 
   @SerializedName("priorityStrategy")
-  private KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy = null;
+  private KruiseAppsPubUpdatePriorityStrategy priorityStrategy = null;
 
   @SerializedName("scatterStrategy")
-  private List<KruiseAppsV1alpha1CloneSetUpdateScatterTerm> scatterStrategy = null;
+  private List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy = null;
 
   @SerializedName("type")
   private String type = null;
 
-  public KruiseAppsV1alpha1CloneSetUpdateStrategy inPlaceUpdateStrategy(KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy) {
+  public KruiseAppsV1alpha1CloneSetUpdateStrategy inPlaceUpdateStrategy(KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy) {
     this.inPlaceUpdateStrategy = inPlaceUpdateStrategy;
     return this;
   }
@@ -69,11 +69,11 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
    * @return inPlaceUpdateStrategy
   **/
   @ApiModelProperty(value = "InPlaceUpdateStrategy contains strategies for in-place update.")
-  public KruiseAppsV1alpha1InPlaceUpdateStrategy getInPlaceUpdateStrategy() {
+  public KruiseAppsPubInPlaceUpdateStrategy getInPlaceUpdateStrategy() {
     return inPlaceUpdateStrategy;
   }
 
-  public void setInPlaceUpdateStrategy(KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy) {
+  public void setInPlaceUpdateStrategy(KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy) {
     this.inPlaceUpdateStrategy = inPlaceUpdateStrategy;
   }
 
@@ -101,10 +101,10 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
   }
 
    /**
-   * The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 20%.
+   * The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge &gt; 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.
    * @return maxUnavailable
   **/
-  @ApiModelProperty(value = "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 20%.")
+  @ApiModelProperty(value = "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge > 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.")
   public IntOrString getMaxUnavailable() {
     return maxUnavailable;
   }
@@ -113,21 +113,21 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
     this.maxUnavailable = maxUnavailable;
   }
 
-  public KruiseAppsV1alpha1CloneSetUpdateStrategy partition(Integer partition) {
+  public KruiseAppsV1alpha1CloneSetUpdateStrategy partition(IntOrString partition) {
     this.partition = partition;
     return this;
   }
 
    /**
-   * Partition is the desired number of pods in old revisions. It means when partition is set during pods updating, (replicas - partition) number of pods will be updated. Default value is 0.
+   * Partition is the desired number of pods in old revisions. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. It means when partition is set during pods updating, (replicas - partition value) number of pods will be updated. Default value is 0.
    * @return partition
   **/
-  @ApiModelProperty(value = "Partition is the desired number of pods in old revisions. It means when partition is set during pods updating, (replicas - partition) number of pods will be updated. Default value is 0.")
-  public Integer getPartition() {
+  @ApiModelProperty(value = "Partition is the desired number of pods in old revisions. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. It means when partition is set during pods updating, (replicas - partition value) number of pods will be updated. Default value is 0.")
+  public IntOrString getPartition() {
     return partition;
   }
 
-  public void setPartition(Integer partition) {
+  public void setPartition(IntOrString partition) {
     this.partition = partition;
   }
 
@@ -149,7 +149,7 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
     this.paused = paused;
   }
 
-  public KruiseAppsV1alpha1CloneSetUpdateStrategy priorityStrategy(KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy) {
+  public KruiseAppsV1alpha1CloneSetUpdateStrategy priorityStrategy(KruiseAppsPubUpdatePriorityStrategy priorityStrategy) {
     this.priorityStrategy = priorityStrategy;
     return this;
   }
@@ -159,22 +159,22 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
    * @return priorityStrategy
   **/
   @ApiModelProperty(value = "Priorities are the rules for calculating the priority of updating pods. Each pod to be updated, will pass through these terms and get a sum of weights.")
-  public KruiseAppsV1alpha1UpdatePriorityStrategy getPriorityStrategy() {
+  public KruiseAppsPubUpdatePriorityStrategy getPriorityStrategy() {
     return priorityStrategy;
   }
 
-  public void setPriorityStrategy(KruiseAppsV1alpha1UpdatePriorityStrategy priorityStrategy) {
+  public void setPriorityStrategy(KruiseAppsPubUpdatePriorityStrategy priorityStrategy) {
     this.priorityStrategy = priorityStrategy;
   }
 
-  public KruiseAppsV1alpha1CloneSetUpdateStrategy scatterStrategy(List<KruiseAppsV1alpha1CloneSetUpdateScatterTerm> scatterStrategy) {
+  public KruiseAppsV1alpha1CloneSetUpdateStrategy scatterStrategy(List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy) {
     this.scatterStrategy = scatterStrategy;
     return this;
   }
 
-  public KruiseAppsV1alpha1CloneSetUpdateStrategy addScatterStrategyItem(KruiseAppsV1alpha1CloneSetUpdateScatterTerm scatterStrategyItem) {
+  public KruiseAppsV1alpha1CloneSetUpdateStrategy addScatterStrategyItem(KruiseAppsV1alpha1UpdateScatterTerm scatterStrategyItem) {
     if (this.scatterStrategy == null) {
-      this.scatterStrategy = new ArrayList<KruiseAppsV1alpha1CloneSetUpdateScatterTerm>();
+      this.scatterStrategy = new ArrayList<KruiseAppsV1alpha1UpdateScatterTerm>();
     }
     this.scatterStrategy.add(scatterStrategyItem);
     return this;
@@ -185,11 +185,11 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
    * @return scatterStrategy
   **/
   @ApiModelProperty(value = "ScatterStrategy defines the scatter rules to make pods been scattered when update. This will avoid pods with the same key-value to be updated in one batch. - Note that pods will be scattered after priority sort. So, although priority strategy and scatter strategy can be applied together, we suggest to use either one of them. - If scatterStrategy is used, we suggest to just use one term. Otherwise, the update order can be hard to understand.")
-  public List<KruiseAppsV1alpha1CloneSetUpdateScatterTerm> getScatterStrategy() {
+  public List<KruiseAppsV1alpha1UpdateScatterTerm> getScatterStrategy() {
     return scatterStrategy;
   }
 
-  public void setScatterStrategy(List<KruiseAppsV1alpha1CloneSetUpdateScatterTerm> scatterStrategy) {
+  public void setScatterStrategy(List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy) {
     this.scatterStrategy = scatterStrategy;
   }
 

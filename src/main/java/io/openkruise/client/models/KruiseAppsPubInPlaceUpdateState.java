@@ -19,11 +19,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.openkruise.client.models.KruiseAppsV1alpha1InPlaceUpdateContainerStatus;
+import org.joda.time.DateTime;
+import io.openkruise.client.models.KruiseAppsPubInPlaceUpdateContainerStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +33,9 @@ import java.util.Map;
  */
 @ApiModel(description = "InPlaceUpdateState records latest inplace-update state, including old statuses of containers.")
 
-public class KruiseAppsV1alpha1InPlaceUpdateState {
+public class KruiseAppsPubInPlaceUpdateState {
   @SerializedName("lastContainerStatuses")
-  private Map<String, KruiseAppsV1alpha1InPlaceUpdateContainerStatus> lastContainerStatuses = new HashMap<String, KruiseAppsV1alpha1InPlaceUpdateContainerStatus>();
+  private Map<String, KruiseAppsPubInPlaceUpdateContainerStatus> lastContainerStatuses = new HashMap<String, KruiseAppsPubInPlaceUpdateContainerStatus>();
 
   @SerializedName("revision")
   private String revision = null;
@@ -44,12 +43,12 @@ public class KruiseAppsV1alpha1InPlaceUpdateState {
   @SerializedName("updateTimestamp")
   private DateTime updateTimestamp = null;
 
-  public KruiseAppsV1alpha1InPlaceUpdateState lastContainerStatuses(Map<String, KruiseAppsV1alpha1InPlaceUpdateContainerStatus> lastContainerStatuses) {
+  public KruiseAppsPubInPlaceUpdateState lastContainerStatuses(Map<String, KruiseAppsPubInPlaceUpdateContainerStatus> lastContainerStatuses) {
     this.lastContainerStatuses = lastContainerStatuses;
     return this;
   }
 
-  public KruiseAppsV1alpha1InPlaceUpdateState putLastContainerStatusesItem(String key, KruiseAppsV1alpha1InPlaceUpdateContainerStatus lastContainerStatusesItem) {
+  public KruiseAppsPubInPlaceUpdateState putLastContainerStatusesItem(String key, KruiseAppsPubInPlaceUpdateContainerStatus lastContainerStatusesItem) {
     this.lastContainerStatuses.put(key, lastContainerStatusesItem);
     return this;
   }
@@ -59,15 +58,15 @@ public class KruiseAppsV1alpha1InPlaceUpdateState {
    * @return lastContainerStatuses
   **/
   @ApiModelProperty(required = true, value = "LastContainerStatuses records the before-in-place-update container statuses. It is a map from ContainerName to InPlaceUpdateContainerStatus")
-  public Map<String, KruiseAppsV1alpha1InPlaceUpdateContainerStatus> getLastContainerStatuses() {
+  public Map<String, KruiseAppsPubInPlaceUpdateContainerStatus> getLastContainerStatuses() {
     return lastContainerStatuses;
   }
 
-  public void setLastContainerStatuses(Map<String, KruiseAppsV1alpha1InPlaceUpdateContainerStatus> lastContainerStatuses) {
+  public void setLastContainerStatuses(Map<String, KruiseAppsPubInPlaceUpdateContainerStatus> lastContainerStatuses) {
     this.lastContainerStatuses = lastContainerStatuses;
   }
 
-  public KruiseAppsV1alpha1InPlaceUpdateState revision(String revision) {
+  public KruiseAppsPubInPlaceUpdateState revision(String revision) {
     this.revision = revision;
     return this;
   }
@@ -85,7 +84,7 @@ public class KruiseAppsV1alpha1InPlaceUpdateState {
     this.revision = revision;
   }
 
-  public KruiseAppsV1alpha1InPlaceUpdateState updateTimestamp(DateTime updateTimestamp) {
+  public KruiseAppsPubInPlaceUpdateState updateTimestamp(DateTime updateTimestamp) {
     this.updateTimestamp = updateTimestamp;
     return this;
   }
@@ -112,10 +111,10 @@ public class KruiseAppsV1alpha1InPlaceUpdateState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1InPlaceUpdateState kruiseAppsV1alpha1InPlaceUpdateState = (KruiseAppsV1alpha1InPlaceUpdateState) o;
-    return Objects.equals(this.lastContainerStatuses, kruiseAppsV1alpha1InPlaceUpdateState.lastContainerStatuses) &&
-        Objects.equals(this.revision, kruiseAppsV1alpha1InPlaceUpdateState.revision) &&
-        Objects.equals(this.updateTimestamp, kruiseAppsV1alpha1InPlaceUpdateState.updateTimestamp);
+    KruiseAppsPubInPlaceUpdateState kruiseAppsPubInPlaceUpdateState = (KruiseAppsPubInPlaceUpdateState) o;
+    return Objects.equals(this.lastContainerStatuses, kruiseAppsPubInPlaceUpdateState.lastContainerStatuses) &&
+        Objects.equals(this.revision, kruiseAppsPubInPlaceUpdateState.revision) &&
+        Objects.equals(this.updateTimestamp, kruiseAppsPubInPlaceUpdateState.updateTimestamp);
   }
 
   @Override
@@ -127,7 +126,7 @@ public class KruiseAppsV1alpha1InPlaceUpdateState {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1InPlaceUpdateState {\n");
+    sb.append("class KruiseAppsPubInPlaceUpdateState {\n");
     
     sb.append("    lastContainerStatuses: ").append(toIndentedString(lastContainerStatuses)).append("\n");
     sb.append("    revision: ").append(toIndentedString(revision)).append("\n");

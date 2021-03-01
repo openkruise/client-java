@@ -19,10 +19,14 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.openkruise.client.models.KruiseAppsV1alpha1RollingUpdateSidecarSet;
+import io.kubernetes.client.openapi.models.V1LabelSelector;
+import io.kubernetes.client.custom.IntOrString;
+import io.openkruise.client.models.KruiseAppsV1alpha1UpdateScatterTerm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SidecarSetUpdateStrategy indicates the strategy that the SidecarSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.
@@ -30,25 +34,138 @@ import java.io.IOException;
 @ApiModel(description = "SidecarSetUpdateStrategy indicates the strategy that the SidecarSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy.")
 
 public class KruiseAppsV1alpha1SidecarSetUpdateStrategy {
-  @SerializedName("rollingUpdate")
-  private KruiseAppsV1alpha1RollingUpdateSidecarSet rollingUpdate = null;
+  @SerializedName("maxUnavailable")
+  private IntOrString maxUnavailable = null;
 
-  public KruiseAppsV1alpha1SidecarSetUpdateStrategy rollingUpdate(KruiseAppsV1alpha1RollingUpdateSidecarSet rollingUpdate) {
-    this.rollingUpdate = rollingUpdate;
+  @SerializedName("partition")
+  private IntOrString partition = null;
+
+  @SerializedName("paused")
+  private Boolean paused = null;
+
+  @SerializedName("scatterStrategy")
+  private List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy = null;
+
+  @SerializedName("selector")
+  private V1LabelSelector selector = null;
+
+  @SerializedName("type")
+  private String type = null;
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy maxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
     return this;
   }
 
    /**
-   * Get rollingUpdate
-   * @return rollingUpdate
+   * The maximum number of SidecarSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of SidecarSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1.
+   * @return maxUnavailable
   **/
-  @ApiModelProperty(value = "")
-  public KruiseAppsV1alpha1RollingUpdateSidecarSet getRollingUpdate() {
-    return rollingUpdate;
+  @ApiModelProperty(value = "The maximum number of SidecarSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of SidecarSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1.")
+  public IntOrString getMaxUnavailable() {
+    return maxUnavailable;
   }
 
-  public void setRollingUpdate(KruiseAppsV1alpha1RollingUpdateSidecarSet rollingUpdate) {
-    this.rollingUpdate = rollingUpdate;
+  public void setMaxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy partition(IntOrString partition) {
+    this.partition = partition;
+    return this;
+  }
+
+   /**
+   * Partition is the desired number of pods in old revisions. It means when partition is set during pods updating, (replicas - partition) number of pods will be updated. Default value is 0.
+   * @return partition
+  **/
+  @ApiModelProperty(value = "Partition is the desired number of pods in old revisions. It means when partition is set during pods updating, (replicas - partition) number of pods will be updated. Default value is 0.")
+  public IntOrString getPartition() {
+    return partition;
+  }
+
+  public void setPartition(IntOrString partition) {
+    this.partition = partition;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy paused(Boolean paused) {
+    this.paused = paused;
+    return this;
+  }
+
+   /**
+   * Paused indicates that the SidecarSet is paused to update the injected pods, but it don&#39;t affect the webhook inject sidecar container into the newly created pods. default is false
+   * @return paused
+  **/
+  @ApiModelProperty(value = "Paused indicates that the SidecarSet is paused to update the injected pods, but it don't affect the webhook inject sidecar container into the newly created pods. default is false")
+  public Boolean isPaused() {
+    return paused;
+  }
+
+  public void setPaused(Boolean paused) {
+    this.paused = paused;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy scatterStrategy(List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy) {
+    this.scatterStrategy = scatterStrategy;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy addScatterStrategyItem(KruiseAppsV1alpha1UpdateScatterTerm scatterStrategyItem) {
+    if (this.scatterStrategy == null) {
+      this.scatterStrategy = new ArrayList<KruiseAppsV1alpha1UpdateScatterTerm>();
+    }
+    this.scatterStrategy.add(scatterStrategyItem);
+    return this;
+  }
+
+   /**
+   * ScatterStrategy defines the scatter rules to make pods been scattered when update. This will avoid pods with the same key-value to be updated in one batch. - Note that pods will be scattered after priority sort. So, although priority strategy and scatter strategy can be applied together, we suggest to use either one of them. - If scatterStrategy is used, we suggest to just use one term. Otherwise, the update order can be hard to understand.
+   * @return scatterStrategy
+  **/
+  @ApiModelProperty(value = "ScatterStrategy defines the scatter rules to make pods been scattered when update. This will avoid pods with the same key-value to be updated in one batch. - Note that pods will be scattered after priority sort. So, although priority strategy and scatter strategy can be applied together, we suggest to use either one of them. - If scatterStrategy is used, we suggest to just use one term. Otherwise, the update order can be hard to understand.")
+  public List<KruiseAppsV1alpha1UpdateScatterTerm> getScatterStrategy() {
+    return scatterStrategy;
+  }
+
+  public void setScatterStrategy(List<KruiseAppsV1alpha1UpdateScatterTerm> scatterStrategy) {
+    this.scatterStrategy = scatterStrategy;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy selector(V1LabelSelector selector) {
+    this.selector = selector;
+    return this;
+  }
+
+   /**
+   * If selector is not nil, this upgrade will only update the selected pods.
+   * @return selector
+  **/
+  @ApiModelProperty(value = "If selector is not nil, this upgrade will only update the selected pods.")
+  public V1LabelSelector getSelector() {
+    return selector;
+  }
+
+  public void setSelector(V1LabelSelector selector) {
+    this.selector = selector;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy type(String type) {
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * Type is NotUpdate, the SidecarSet don&#39;t update the injected pods, it will only inject sidecar container into the newly created pods. Type is RollingUpdate, the SidecarSet will update the injected pods to the latest version on RollingUpdate Strategy. default is RollingUpdate
+   * @return type
+  **/
+  @ApiModelProperty(value = "Type is NotUpdate, the SidecarSet don't update the injected pods, it will only inject sidecar container into the newly created pods. Type is RollingUpdate, the SidecarSet will update the injected pods to the latest version on RollingUpdate Strategy. default is RollingUpdate")
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 
@@ -61,12 +178,17 @@ public class KruiseAppsV1alpha1SidecarSetUpdateStrategy {
       return false;
     }
     KruiseAppsV1alpha1SidecarSetUpdateStrategy kruiseAppsV1alpha1SidecarSetUpdateStrategy = (KruiseAppsV1alpha1SidecarSetUpdateStrategy) o;
-    return Objects.equals(this.rollingUpdate, kruiseAppsV1alpha1SidecarSetUpdateStrategy.rollingUpdate);
+    return Objects.equals(this.maxUnavailable, kruiseAppsV1alpha1SidecarSetUpdateStrategy.maxUnavailable) &&
+        Objects.equals(this.partition, kruiseAppsV1alpha1SidecarSetUpdateStrategy.partition) &&
+        Objects.equals(this.paused, kruiseAppsV1alpha1SidecarSetUpdateStrategy.paused) &&
+        Objects.equals(this.scatterStrategy, kruiseAppsV1alpha1SidecarSetUpdateStrategy.scatterStrategy) &&
+        Objects.equals(this.selector, kruiseAppsV1alpha1SidecarSetUpdateStrategy.selector) &&
+        Objects.equals(this.type, kruiseAppsV1alpha1SidecarSetUpdateStrategy.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rollingUpdate);
+    return Objects.hash(maxUnavailable, partition, paused, scatterStrategy, selector, type);
   }
 
 
@@ -75,7 +197,12 @@ public class KruiseAppsV1alpha1SidecarSetUpdateStrategy {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1SidecarSetUpdateStrategy {\n");
     
-    sb.append("    rollingUpdate: ").append(toIndentedString(rollingUpdate)).append("\n");
+    sb.append("    maxUnavailable: ").append(toIndentedString(maxUnavailable)).append("\n");
+    sb.append("    partition: ").append(toIndentedString(partition)).append("\n");
+    sb.append("    paused: ").append(toIndentedString(paused)).append("\n");
+    sb.append("    scatterStrategy: ").append(toIndentedString(scatterStrategy)).append("\n");
+    sb.append("    selector: ").append(toIndentedString(selector)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

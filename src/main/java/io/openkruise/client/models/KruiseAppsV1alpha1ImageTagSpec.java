@@ -19,12 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1ObjectReference;
+import io.kubernetes.client.openapi.models.V1ObjectReference;
+import org.joda.time.DateTime;
 import io.openkruise.client.models.KruiseAppsV1alpha1ImageTagPullPolicy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,9 @@ public class KruiseAppsV1alpha1ImageTagSpec {
 
   @SerializedName("tag")
   private String tag = null;
+
+  @SerializedName("version")
+  private Long version = null;
 
   public KruiseAppsV1alpha1ImageTagSpec createdAt(DateTime createdAt) {
     this.createdAt = createdAt;
@@ -127,6 +129,24 @@ public class KruiseAppsV1alpha1ImageTagSpec {
     this.tag = tag;
   }
 
+  public KruiseAppsV1alpha1ImageTagSpec version(Long version) {
+    this.version = version;
+    return this;
+  }
+
+   /**
+   * An opaque value that represents the internal version of this tag that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server.  Populated by the system. Read-only. Value must be treated as opaque by clients and .
+   * @return version
+  **/
+  @ApiModelProperty(value = "An opaque value that represents the internal version of this tag that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server.  Populated by the system. Read-only. Value must be treated as opaque by clients and .")
+  public Long getVersion() {
+    return version;
+  }
+
+  public void setVersion(Long version) {
+    this.version = version;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -140,12 +160,13 @@ public class KruiseAppsV1alpha1ImageTagSpec {
     return Objects.equals(this.createdAt, kruiseAppsV1alpha1ImageTagSpec.createdAt) &&
         Objects.equals(this.ownerReferences, kruiseAppsV1alpha1ImageTagSpec.ownerReferences) &&
         Objects.equals(this.pullPolicy, kruiseAppsV1alpha1ImageTagSpec.pullPolicy) &&
-        Objects.equals(this.tag, kruiseAppsV1alpha1ImageTagSpec.tag);
+        Objects.equals(this.tag, kruiseAppsV1alpha1ImageTagSpec.tag) &&
+        Objects.equals(this.version, kruiseAppsV1alpha1ImageTagSpec.version);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, ownerReferences, pullPolicy, tag);
+    return Objects.hash(createdAt, ownerReferences, pullPolicy, tag, version);
   }
 
 
@@ -158,6 +179,7 @@ public class KruiseAppsV1alpha1ImageTagSpec {
     sb.append("    ownerReferences: ").append(toIndentedString(ownerReferences)).append("\n");
     sb.append("    pullPolicy: ").append(toIndentedString(pullPolicy)).append("\n");
     sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("}");
     return sb.toString();
   }

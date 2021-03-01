@@ -19,11 +19,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import org.joda.time.DateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ImagePullJobStatus defines the observed state of ImagePullJob
@@ -42,6 +43,9 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
 
   @SerializedName("failed")
   private Integer failed = null;
+
+  @SerializedName("failedNodes")
+  private List<String> failedNodes = null;
 
   @SerializedName("message")
   private String message = null;
@@ -124,6 +128,32 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
     this.failed = failed;
   }
 
+  public KruiseAppsV1alpha1ImagePullJobStatus failedNodes(List<String> failedNodes) {
+    this.failedNodes = failedNodes;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1ImagePullJobStatus addFailedNodesItem(String failedNodesItem) {
+    if (this.failedNodes == null) {
+      this.failedNodes = new ArrayList<String>();
+    }
+    this.failedNodes.add(failedNodesItem);
+    return this;
+  }
+
+   /**
+   * The nodes that failed to pull the image.
+   * @return failedNodes
+  **/
+  @ApiModelProperty(value = "The nodes that failed to pull the image.")
+  public List<String> getFailedNodes() {
+    return failedNodes;
+  }
+
+  public void setFailedNodes(List<String> failedNodes) {
+    this.failedNodes = failedNodes;
+  }
+
   public KruiseAppsV1alpha1ImagePullJobStatus message(String message) {
     this.message = message;
     return this;
@@ -192,6 +222,7 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
         Objects.equals(this.completionTime, kruiseAppsV1alpha1ImagePullJobStatus.completionTime) &&
         Objects.equals(this.desired, kruiseAppsV1alpha1ImagePullJobStatus.desired) &&
         Objects.equals(this.failed, kruiseAppsV1alpha1ImagePullJobStatus.failed) &&
+        Objects.equals(this.failedNodes, kruiseAppsV1alpha1ImagePullJobStatus.failedNodes) &&
         Objects.equals(this.message, kruiseAppsV1alpha1ImagePullJobStatus.message) &&
         Objects.equals(this.startTime, kruiseAppsV1alpha1ImagePullJobStatus.startTime) &&
         Objects.equals(this.succeeded, kruiseAppsV1alpha1ImagePullJobStatus.succeeded);
@@ -199,7 +230,7 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
 
   @Override
   public int hashCode() {
-    return Objects.hash(active, completionTime, desired, failed, message, startTime, succeeded);
+    return Objects.hash(active, completionTime, desired, failed, failedNodes, message, startTime, succeeded);
   }
 
 
@@ -212,6 +243,7 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
     sb.append("    completionTime: ").append(toIndentedString(completionTime)).append("\n");
     sb.append("    desired: ").append(toIndentedString(desired)).append("\n");
     sb.append("    failed: ").append(toIndentedString(failed)).append("\n");
+    sb.append("    failedNodes: ").append(toIndentedString(failedNodes)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
     sb.append("    succeeded: ").append(toIndentedString(succeeded)).append("\n");

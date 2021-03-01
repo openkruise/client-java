@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1LabelSelector;
+import io.kubernetes.client.openapi.models.V1LabelSelector;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,14 +29,14 @@ import java.io.IOException;
  */
 @ApiModel(description = "UpdatePriorityWeightTerm defines weight priority.")
 
-public class KruiseAppsV1alpha1UpdatePriorityWeightTerm {
+public class KruiseAppsPubUpdatePriorityWeightTerm {
   @SerializedName("matchSelector")
   private V1LabelSelector matchSelector = null;
 
   @SerializedName("weight")
   private Integer weight = null;
 
-  public KruiseAppsV1alpha1UpdatePriorityWeightTerm matchSelector(V1LabelSelector matchSelector) {
+  public KruiseAppsPubUpdatePriorityWeightTerm matchSelector(V1LabelSelector matchSelector) {
     this.matchSelector = matchSelector;
     return this;
   }
@@ -54,7 +54,7 @@ public class KruiseAppsV1alpha1UpdatePriorityWeightTerm {
     this.matchSelector = matchSelector;
   }
 
-  public KruiseAppsV1alpha1UpdatePriorityWeightTerm weight(Integer weight) {
+  public KruiseAppsPubUpdatePriorityWeightTerm weight(Integer weight) {
     this.weight = weight;
     return this;
   }
@@ -81,9 +81,9 @@ public class KruiseAppsV1alpha1UpdatePriorityWeightTerm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdatePriorityWeightTerm kruiseAppsV1alpha1UpdatePriorityWeightTerm = (KruiseAppsV1alpha1UpdatePriorityWeightTerm) o;
-    return Objects.equals(this.matchSelector, kruiseAppsV1alpha1UpdatePriorityWeightTerm.matchSelector) &&
-        Objects.equals(this.weight, kruiseAppsV1alpha1UpdatePriorityWeightTerm.weight);
+    KruiseAppsPubUpdatePriorityWeightTerm kruiseAppsPubUpdatePriorityWeightTerm = (KruiseAppsPubUpdatePriorityWeightTerm) o;
+    return Objects.equals(this.matchSelector, kruiseAppsPubUpdatePriorityWeightTerm.matchSelector) &&
+        Objects.equals(this.weight, kruiseAppsPubUpdatePriorityWeightTerm.weight);
   }
 
   @Override
@@ -95,7 +95,7 @@ public class KruiseAppsV1alpha1UpdatePriorityWeightTerm {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdatePriorityWeightTerm {\n");
+    sb.append("class KruiseAppsPubUpdatePriorityWeightTerm {\n");
     
     sb.append("    matchSelector: ").append(toIndentedString(matchSelector)).append("\n");
     sb.append("    weight: ").append(toIndentedString(weight)).append("\n");

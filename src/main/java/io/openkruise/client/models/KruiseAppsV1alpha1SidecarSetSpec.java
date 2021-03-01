@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.models.V1Volume;
-import io.kubernetes.client.models.V1LabelSelector;
+import io.kubernetes.client.openapi.models.V1Volume;
+import io.kubernetes.client.openapi.models.V1LabelSelector;
 import io.openkruise.client.models.KruiseAppsV1alpha1SidecarContainer;
 import io.openkruise.client.models.KruiseAppsV1alpha1SidecarSetUpdateStrategy;
 import io.swagger.annotations.ApiModel;
@@ -38,14 +38,17 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
   @SerializedName("containers")
   private List<KruiseAppsV1alpha1SidecarContainer> containers = null;
 
-  @SerializedName("paused")
-  private Boolean paused = null;
+  @SerializedName("initContainers")
+  private List<KruiseAppsV1alpha1SidecarContainer> initContainers = null;
+
+  @SerializedName("namespace")
+  private String namespace = null;
 
   @SerializedName("selector")
   private V1LabelSelector selector = null;
 
-  @SerializedName("strategy")
-  private KruiseAppsV1alpha1SidecarSetUpdateStrategy strategy = null;
+  @SerializedName("updateStrategy")
+  private KruiseAppsV1alpha1SidecarSetUpdateStrategy updateStrategy = null;
 
   @SerializedName("volumes")
   private List<V1Volume> volumes = null;
@@ -76,22 +79,48 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     this.containers = containers;
   }
 
-  public KruiseAppsV1alpha1SidecarSetSpec paused(Boolean paused) {
-    this.paused = paused;
+  public KruiseAppsV1alpha1SidecarSetSpec initContainers(List<KruiseAppsV1alpha1SidecarContainer> initContainers) {
+    this.initContainers = initContainers;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetSpec addInitContainersItem(KruiseAppsV1alpha1SidecarContainer initContainersItem) {
+    if (this.initContainers == null) {
+      this.initContainers = new ArrayList<KruiseAppsV1alpha1SidecarContainer>();
+    }
+    this.initContainers.add(initContainersItem);
     return this;
   }
 
    /**
-   * Paused indicates that the sidecarset is paused and will not be processed by the sidecarset controller.
-   * @return paused
+   * Containers is the list of init containers to be injected into the selected pod We will inject those containers by their name in ascending order We only inject init containers when a new pod is created, it does not apply to any existing pod
+   * @return initContainers
   **/
-  @ApiModelProperty(value = "Paused indicates that the sidecarset is paused and will not be processed by the sidecarset controller.")
-  public Boolean isPaused() {
-    return paused;
+  @ApiModelProperty(value = "Containers is the list of init containers to be injected into the selected pod We will inject those containers by their name in ascending order We only inject init containers when a new pod is created, it does not apply to any existing pod")
+  public List<KruiseAppsV1alpha1SidecarContainer> getInitContainers() {
+    return initContainers;
   }
 
-  public void setPaused(Boolean paused) {
-    this.paused = paused;
+  public void setInitContainers(List<KruiseAppsV1alpha1SidecarContainer> initContainers) {
+    this.initContainers = initContainers;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetSpec namespace(String namespace) {
+    this.namespace = namespace;
+    return this;
+  }
+
+   /**
+   * Namespace sidecarSet will only match the pods in the namespace otherwise, match pods in all namespaces(in cluster)
+   * @return namespace
+  **/
+  @ApiModelProperty(value = "Namespace sidecarSet will only match the pods in the namespace otherwise, match pods in all namespaces(in cluster)")
+  public String getNamespace() {
+    return namespace;
+  }
+
+  public void setNamespace(String namespace) {
+    this.namespace = namespace;
   }
 
   public KruiseAppsV1alpha1SidecarSetSpec selector(V1LabelSelector selector) {
@@ -112,22 +141,22 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     this.selector = selector;
   }
 
-  public KruiseAppsV1alpha1SidecarSetSpec strategy(KruiseAppsV1alpha1SidecarSetUpdateStrategy strategy) {
-    this.strategy = strategy;
+  public KruiseAppsV1alpha1SidecarSetSpec updateStrategy(KruiseAppsV1alpha1SidecarSetUpdateStrategy updateStrategy) {
+    this.updateStrategy = updateStrategy;
     return this;
   }
 
    /**
    * The sidecarset strategy to use to replace existing pods with new ones.
-   * @return strategy
+   * @return updateStrategy
   **/
   @ApiModelProperty(value = "The sidecarset strategy to use to replace existing pods with new ones.")
-  public KruiseAppsV1alpha1SidecarSetUpdateStrategy getStrategy() {
-    return strategy;
+  public KruiseAppsV1alpha1SidecarSetUpdateStrategy getUpdateStrategy() {
+    return updateStrategy;
   }
 
-  public void setStrategy(KruiseAppsV1alpha1SidecarSetUpdateStrategy strategy) {
-    this.strategy = strategy;
+  public void setUpdateStrategy(KruiseAppsV1alpha1SidecarSetUpdateStrategy updateStrategy) {
+    this.updateStrategy = updateStrategy;
   }
 
   public KruiseAppsV1alpha1SidecarSetSpec volumes(List<V1Volume> volumes) {
@@ -167,15 +196,16 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     }
     KruiseAppsV1alpha1SidecarSetSpec kruiseAppsV1alpha1SidecarSetSpec = (KruiseAppsV1alpha1SidecarSetSpec) o;
     return Objects.equals(this.containers, kruiseAppsV1alpha1SidecarSetSpec.containers) &&
-        Objects.equals(this.paused, kruiseAppsV1alpha1SidecarSetSpec.paused) &&
+        Objects.equals(this.initContainers, kruiseAppsV1alpha1SidecarSetSpec.initContainers) &&
+        Objects.equals(this.namespace, kruiseAppsV1alpha1SidecarSetSpec.namespace) &&
         Objects.equals(this.selector, kruiseAppsV1alpha1SidecarSetSpec.selector) &&
-        Objects.equals(this.strategy, kruiseAppsV1alpha1SidecarSetSpec.strategy) &&
+        Objects.equals(this.updateStrategy, kruiseAppsV1alpha1SidecarSetSpec.updateStrategy) &&
         Objects.equals(this.volumes, kruiseAppsV1alpha1SidecarSetSpec.volumes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(containers, paused, selector, strategy, volumes);
+    return Objects.hash(containers, initContainers, namespace, selector, updateStrategy, volumes);
   }
 
 
@@ -185,9 +215,10 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     sb.append("class KruiseAppsV1alpha1SidecarSetSpec {\n");
     
     sb.append("    containers: ").append(toIndentedString(containers)).append("\n");
-    sb.append("    paused: ").append(toIndentedString(paused)).append("\n");
+    sb.append("    initContainers: ").append(toIndentedString(initContainers)).append("\n");
+    sb.append("    namespace: ").append(toIndentedString(namespace)).append("\n");
     sb.append("    selector: ").append(toIndentedString(selector)).append("\n");
-    sb.append("    strategy: ").append(toIndentedString(strategy)).append("\n");
+    sb.append("    updateStrategy: ").append(toIndentedString(updateStrategy)).append("\n");
     sb.append("    volumes: ").append(toIndentedString(volumes)).append("\n");
     sb.append("}");
     return sb.toString();

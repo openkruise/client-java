@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.kubernetes.client.custom.IntOrString;
-import io.openkruise.client.models.KruiseAppsV1alpha1InPlaceUpdateStrategy;
+import io.openkruise.client.models.KruiseAppsPubInPlaceUpdateStrategy;
 import io.openkruise.client.models.KruiseAppsV1alpha1UnorderedUpdateStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,10 +33,13 @@ import java.io.IOException;
 
 public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
   @SerializedName("inPlaceUpdateStrategy")
-  private KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy = null;
+  private KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy = null;
 
   @SerializedName("maxUnavailable")
   private IntOrString maxUnavailable = null;
+
+  @SerializedName("minReadySeconds")
+  private Integer minReadySeconds = null;
 
   @SerializedName("partition")
   private Integer partition = null;
@@ -50,7 +53,7 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
   @SerializedName("unorderedUpdate")
   private KruiseAppsV1alpha1UnorderedUpdateStrategy unorderedUpdate = null;
 
-  public KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy inPlaceUpdateStrategy(KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy) {
+  public KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy inPlaceUpdateStrategy(KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy) {
     this.inPlaceUpdateStrategy = inPlaceUpdateStrategy;
     return this;
   }
@@ -60,11 +63,11 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
    * @return inPlaceUpdateStrategy
   **/
   @ApiModelProperty(value = "InPlaceUpdateStrategy contains strategies for in-place update.")
-  public KruiseAppsV1alpha1InPlaceUpdateStrategy getInPlaceUpdateStrategy() {
+  public KruiseAppsPubInPlaceUpdateStrategy getInPlaceUpdateStrategy() {
     return inPlaceUpdateStrategy;
   }
 
-  public void setInPlaceUpdateStrategy(KruiseAppsV1alpha1InPlaceUpdateStrategy inPlaceUpdateStrategy) {
+  public void setInPlaceUpdateStrategy(KruiseAppsPubInPlaceUpdateStrategy inPlaceUpdateStrategy) {
     this.inPlaceUpdateStrategy = inPlaceUpdateStrategy;
   }
 
@@ -84,6 +87,24 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
 
   public void setMaxUnavailable(IntOrString maxUnavailable) {
     this.maxUnavailable = maxUnavailable;
+  }
+
+  public KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy minReadySeconds(Integer minReadySeconds) {
+    this.minReadySeconds = minReadySeconds;
+    return this;
+  }
+
+   /**
+   * MinReadySeconds indicates how long will the pod be considered ready after it&#39;s updated. MinReadySeconds works with both OrderedReady and Parallel podManagementPolicy. It affects the pod scale up speed when the podManagementPolicy is set to be OrderedReady. Combined with MaxUnavailable, it affects the pod update speed regardless of podManagementPolicy. Default value is 0, max is 300.
+   * @return minReadySeconds
+  **/
+  @ApiModelProperty(value = "MinReadySeconds indicates how long will the pod be considered ready after it's updated. MinReadySeconds works with both OrderedReady and Parallel podManagementPolicy. It affects the pod scale up speed when the podManagementPolicy is set to be OrderedReady. Combined with MaxUnavailable, it affects the pod update speed regardless of podManagementPolicy. Default value is 0, max is 300.")
+  public Integer getMinReadySeconds() {
+    return minReadySeconds;
+  }
+
+  public void setMinReadySeconds(Integer minReadySeconds) {
+    this.minReadySeconds = minReadySeconds;
   }
 
   public KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy partition(Integer partition) {
@@ -170,6 +191,7 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
     KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy = (KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy) o;
     return Objects.equals(this.inPlaceUpdateStrategy, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.inPlaceUpdateStrategy) &&
         Objects.equals(this.maxUnavailable, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.maxUnavailable) &&
+        Objects.equals(this.minReadySeconds, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.minReadySeconds) &&
         Objects.equals(this.partition, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.partition) &&
         Objects.equals(this.paused, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.paused) &&
         Objects.equals(this.podUpdatePolicy, kruiseAppsV1alpha1RollingUpdateStatefulSetStrategy.podUpdatePolicy) &&
@@ -178,7 +200,7 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
 
   @Override
   public int hashCode() {
-    return Objects.hash(inPlaceUpdateStrategy, maxUnavailable, partition, paused, podUpdatePolicy, unorderedUpdate);
+    return Objects.hash(inPlaceUpdateStrategy, maxUnavailable, minReadySeconds, partition, paused, podUpdatePolicy, unorderedUpdate);
   }
 
 
@@ -189,6 +211,7 @@ public class KruiseAppsV1alpha1RollingUpdateStatefulSetStrategy {
     
     sb.append("    inPlaceUpdateStrategy: ").append(toIndentedString(inPlaceUpdateStrategy)).append("\n");
     sb.append("    maxUnavailable: ").append(toIndentedString(maxUnavailable)).append("\n");
+    sb.append("    minReadySeconds: ").append(toIndentedString(minReadySeconds)).append("\n");
     sb.append("    partition: ").append(toIndentedString(partition)).append("\n");
     sb.append("    paused: ").append(toIndentedString(paused)).append("\n");
     sb.append("    podUpdatePolicy: ").append(toIndentedString(podUpdatePolicy)).append("\n");
