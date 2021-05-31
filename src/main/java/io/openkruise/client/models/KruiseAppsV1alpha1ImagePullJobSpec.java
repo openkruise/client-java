@@ -44,6 +44,9 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
   @SerializedName("parallelism")
   private IntOrString parallelism = null;
 
+  @SerializedName("podSelector")
+  private KruiseAppsV1alpha1ImagePullJobPodSelector podSelector = null;
+
   @SerializedName("pullPolicy")
   private KruiseAppsV1alpha1PullPolicy pullPolicy = null;
 
@@ -105,6 +108,24 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
 
   public void setParallelism(IntOrString parallelism) {
     this.parallelism = parallelism;
+  }
+
+  public KruiseAppsV1alpha1ImagePullJobSpec podSelector(KruiseAppsV1alpha1ImagePullJobPodSelector podSelector) {
+    this.podSelector = podSelector;
+    return this;
+  }
+
+   /**
+   * PodSelector is a query over pods that should pull image on nodes of these pods. Mutually exclusive with Selector.
+   * @return podSelector
+  **/
+  @ApiModelProperty(value = "PodSelector is a query over pods that should pull image on nodes of these pods. Mutually exclusive with Selector.")
+  public KruiseAppsV1alpha1ImagePullJobPodSelector getPodSelector() {
+    return podSelector;
+  }
+
+  public void setPodSelector(KruiseAppsV1alpha1ImagePullJobPodSelector podSelector) {
+    this.podSelector = podSelector;
   }
 
   public KruiseAppsV1alpha1ImagePullJobSpec pullPolicy(KruiseAppsV1alpha1PullPolicy pullPolicy) {
@@ -182,6 +203,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
     return Objects.equals(this.completionPolicy, kruiseAppsV1alpha1ImagePullJobSpec.completionPolicy) &&
         Objects.equals(this.image, kruiseAppsV1alpha1ImagePullJobSpec.image) &&
         Objects.equals(this.parallelism, kruiseAppsV1alpha1ImagePullJobSpec.parallelism) &&
+        Objects.equals(this.podSelector, kruiseAppsV1alpha1ImagePullJobSpec.podSelector) &&
         Objects.equals(this.pullPolicy, kruiseAppsV1alpha1ImagePullJobSpec.pullPolicy) &&
         Objects.equals(this.pullSecrets, kruiseAppsV1alpha1ImagePullJobSpec.pullSecrets) &&
         Objects.equals(this.selector, kruiseAppsV1alpha1ImagePullJobSpec.selector);
@@ -189,7 +211,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
 
   @Override
   public int hashCode() {
-    return Objects.hash(completionPolicy, image, parallelism, pullPolicy, pullSecrets, selector);
+    return Objects.hash(completionPolicy, image, parallelism, podSelector, pullPolicy, pullSecrets, selector);
   }
 
 
@@ -201,6 +223,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
     sb.append("    completionPolicy: ").append(toIndentedString(completionPolicy)).append("\n");
     sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("    parallelism: ").append(toIndentedString(parallelism)).append("\n");
+    sb.append("    podSelector: ").append(toIndentedString(podSelector)).append("\n");
     sb.append("    pullPolicy: ").append(toIndentedString(pullPolicy)).append("\n");
     sb.append("    pullSecrets: ").append(toIndentedString(pullSecrets)).append("\n");
     sb.append("    selector: ").append(toIndentedString(selector)).append("\n");

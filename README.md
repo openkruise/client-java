@@ -33,15 +33,10 @@ Add this dependency to your project's POM:
 </dependency>
 ```
 
-### Gradle users
+Note that this package has not been uploaded to the maven official repository.
+Currently, you should manually download this repo and package it to use.
 
-Add this dependency to your project's build file:
-
-```groovy
-compile "io.openkruise:client-java:0.1.1"
-```
-
-### Others
+### Manually
 
 At first generate the JAR by executing:
 
@@ -71,41 +66,28 @@ public class MyExample {
     public void createStatefulSet(String namespace, KruiseAppsV1alpha1StatefulSet statefulSet) throws ApiException {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         customObjectsApi.createNamespacedCustomObject(
-                KruiseAppsV1alpha1StatefulSet.group,
-                KruiseAppsV1alpha1StatefulSet.version,
+                "apps.kruise.io",
+                "v1alpha1",
                 namespace,
-                KruiseAppsV1alpha1StatefulSet.plural,
+                "statefulsets",
                 statefulSet,
-                "true"
+                "true",
+                null,
+                null
         );
     }
 
     public KruiseAppsV1alpha1StatefulSet getStatefulSet(String namespace, String name) throws Exception {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         Object obj = customObjectsApi.getNamespacedCustomObject(
-                KruiseAppsV1alpha1StatefulSet.group,
-                KruiseAppsV1alpha1StatefulSet.version,
+                "apps.kruise.io",
+                "v1alpha1",
                 namespace,
-                KruiseAppsV1alpha1StatefulSet.plural,
+                "statefulsets",
                 name
         );
         Gson gson = new JSON().getGson();
         return gson.fromJson(gson.toJsonTree(obj).getAsJsonObject(), KruiseAppsV1alpha1StatefulSet.class);
-    }
-
-    /*
-    Note that currently ClientJava can only support merge-patch+json
-    */
-    public void patchStatefulSet(String namespace, String name, String patchBody) throws ApiException {
-        CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
-        customObjectsApi.patchNamespacedCustomObject(
-                KruiseAppsV1alpha1StatefulSet.group,
-                KruiseAppsV1alpha1StatefulSet.version,
-                namespace,
-                KruiseAppsV1alpha1StatefulSet.plural,
-                name,
-                patchpatchBody.getBytes()ody
-        );
     }
 
     public boolean updateStatefulSet(String namespace, String name, String image, int partition, int maxUnavailable) throws ApiException {
@@ -124,12 +106,14 @@ public class MyExample {
 
             try {
                 customObjectsApi.replaceNamespacedCustomObject(
-                        KruiseAppsV1alpha1StatefulSet.group,
-                        KruiseAppsV1alpha1StatefulSet.version,
+                        "apps.kruise.io",
+                        "v1alpha1",
                         namespace,
-                        KruiseAppsV1alpha1StatefulSet.plural,
+                        "statefulsets",
                         name,
-                        statefulSet
+                        statefulSet,
+                        null,
+                        null
                 );
                 updateSuccess = true;
                 break;

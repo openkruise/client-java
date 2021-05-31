@@ -147,10 +147,10 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
   }
 
    /**
-   * The sidecarset strategy to use to replace existing pods with new ones.
+   * The sidecarset updateStrategy to use to replace existing pods with new ones.
    * @return updateStrategy
   **/
-  @ApiModelProperty(value = "The sidecarset strategy to use to replace existing pods with new ones.")
+  @ApiModelProperty(value = "The sidecarset updateStrategy to use to replace existing pods with new ones.")
   public KruiseAppsV1alpha1SidecarSetUpdateStrategy getUpdateStrategy() {
     return updateStrategy;
   }
