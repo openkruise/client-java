@@ -8,7 +8,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>io.openkruise</groupId>
     <artifactId>client-java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <scope>compile</scope>
 </dependency>
 ```
