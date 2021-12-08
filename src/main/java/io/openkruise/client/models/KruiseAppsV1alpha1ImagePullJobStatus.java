@@ -33,16 +33,16 @@ import java.util.List;
 
 public class KruiseAppsV1alpha1ImagePullJobStatus {
   @SerializedName("active")
-  private Integer active = null;
+  private Integer active = 0;
 
   @SerializedName("completionTime")
   private DateTime completionTime = null;
 
   @SerializedName("desired")
-  private Integer desired = null;
+  private Integer desired = 0;
 
   @SerializedName("failed")
-  private Integer failed = null;
+  private Integer failed = 0;
 
   @SerializedName("failedNodes")
   private List<String> failedNodes = null;
@@ -54,7 +54,7 @@ public class KruiseAppsV1alpha1ImagePullJobStatus {
   private DateTime startTime = null;
 
   @SerializedName("succeeded")
-  private Integer succeeded = null;
+  private Integer succeeded = 0;
 
   public KruiseAppsV1alpha1ImagePullJobStatus active(Integer active) {
     this.active = active;

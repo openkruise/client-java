@@ -43,7 +43,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestStatus {
   private String message = null;
 
   @SerializedName("phase")
-  private String phase = null;
+  private String phase = "";
 
   public KruiseAppsV1alpha1ContainerRecreateRequestStatus completionTime(DateTime completionTime) {
     this.completionTime = completionTime;

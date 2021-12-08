@@ -30,16 +30,16 @@ import java.io.IOException;
 
 public class KruiseAppsV1alpha1SidecarSetStatus {
   @SerializedName("matchedPods")
-  private Integer matchedPods = null;
+  private Integer matchedPods = 0;
 
   @SerializedName("observedGeneration")
   private Long observedGeneration = null;
 
   @SerializedName("readyPods")
-  private Integer readyPods = null;
+  private Integer readyPods = 0;
 
   @SerializedName("updatedPods")
-  private Integer updatedPods = null;
+  private Integer updatedPods = 0;
 
   @SerializedName("updatedReadyPods")
   private Integer updatedReadyPods = null;

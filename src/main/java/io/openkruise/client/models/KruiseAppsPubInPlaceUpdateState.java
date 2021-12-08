@@ -38,7 +38,10 @@ public class KruiseAppsPubInPlaceUpdateState {
   private Map<String, KruiseAppsPubInPlaceUpdateContainerStatus> lastContainerStatuses = new HashMap<String, KruiseAppsPubInPlaceUpdateContainerStatus>();
 
   @SerializedName("revision")
-  private String revision = null;
+  private String revision = "";
+
+  @SerializedName("updateEnvFromMetadata")
+  private Boolean updateEnvFromMetadata = null;
 
   @SerializedName("updateTimestamp")
   private DateTime updateTimestamp = null;
@@ -84,6 +87,24 @@ public class KruiseAppsPubInPlaceUpdateState {
     this.revision = revision;
   }
 
+  public KruiseAppsPubInPlaceUpdateState updateEnvFromMetadata(Boolean updateEnvFromMetadata) {
+    this.updateEnvFromMetadata = updateEnvFromMetadata;
+    return this;
+  }
+
+   /**
+   * UpdateEnvFromMetadata indicates there are envs from annotations/labels that should be in-place update.
+   * @return updateEnvFromMetadata
+  **/
+  @ApiModelProperty(value = "UpdateEnvFromMetadata indicates there are envs from annotations/labels that should be in-place update.")
+  public Boolean isUpdateEnvFromMetadata() {
+    return updateEnvFromMetadata;
+  }
+
+  public void setUpdateEnvFromMetadata(Boolean updateEnvFromMetadata) {
+    this.updateEnvFromMetadata = updateEnvFromMetadata;
+  }
+
   public KruiseAppsPubInPlaceUpdateState updateTimestamp(DateTime updateTimestamp) {
     this.updateTimestamp = updateTimestamp;
     return this;
@@ -114,12 +135,13 @@ public class KruiseAppsPubInPlaceUpdateState {
     KruiseAppsPubInPlaceUpdateState kruiseAppsPubInPlaceUpdateState = (KruiseAppsPubInPlaceUpdateState) o;
     return Objects.equals(this.lastContainerStatuses, kruiseAppsPubInPlaceUpdateState.lastContainerStatuses) &&
         Objects.equals(this.revision, kruiseAppsPubInPlaceUpdateState.revision) &&
+        Objects.equals(this.updateEnvFromMetadata, kruiseAppsPubInPlaceUpdateState.updateEnvFromMetadata) &&
         Objects.equals(this.updateTimestamp, kruiseAppsPubInPlaceUpdateState.updateTimestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastContainerStatuses, revision, updateTimestamp);
+    return Objects.hash(lastContainerStatuses, revision, updateEnvFromMetadata, updateTimestamp);
   }
 
 
@@ -130,6 +152,7 @@ public class KruiseAppsPubInPlaceUpdateState {
     
     sb.append("    lastContainerStatuses: ").append(toIndentedString(lastContainerStatuses)).append("\n");
     sb.append("    revision: ").append(toIndentedString(revision)).append("\n");
+    sb.append("    updateEnvFromMetadata: ").append(toIndentedString(updateEnvFromMetadata)).append("\n");
     sb.append("    updateTimestamp: ").append(toIndentedString(updateTimestamp)).append("\n");
     sb.append("}");
     return sb.toString();

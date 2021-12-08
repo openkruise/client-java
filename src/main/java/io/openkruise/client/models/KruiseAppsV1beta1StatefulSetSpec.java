@@ -23,6 +23,7 @@ import io.kubernetes.client.openapi.models.V1PersistentVolumeClaim;
 import io.kubernetes.client.openapi.models.V1PodTemplateSpec;
 import io.kubernetes.client.openapi.models.V1LabelSelector;
 import io.openkruise.client.models.KruiseAppsPubLifecycle;
+import io.openkruise.client.models.KruiseAppsV1beta1StatefulSetScaleStrategy;
 import io.openkruise.client.models.KruiseAppsV1beta1StatefulSetUpdateStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,6 +51,9 @@ public class KruiseAppsV1beta1StatefulSetSpec {
 
   @SerializedName("revisionHistoryLimit")
   private Integer revisionHistoryLimit = null;
+
+  @SerializedName("scaleStrategy")
+  private KruiseAppsV1beta1StatefulSetScaleStrategy scaleStrategy = null;
 
   @SerializedName("selector")
   private V1LabelSelector selector = null;
@@ -162,6 +166,24 @@ public class KruiseAppsV1beta1StatefulSetSpec {
 
   public void setRevisionHistoryLimit(Integer revisionHistoryLimit) {
     this.revisionHistoryLimit = revisionHistoryLimit;
+  }
+
+  public KruiseAppsV1beta1StatefulSetSpec scaleStrategy(KruiseAppsV1beta1StatefulSetScaleStrategy scaleStrategy) {
+    this.scaleStrategy = scaleStrategy;
+    return this;
+  }
+
+   /**
+   * scaleStrategy indicates the StatefulSetScaleStrategy that will be employed to scale Pods in the StatefulSet.
+   * @return scaleStrategy
+  **/
+  @ApiModelProperty(value = "scaleStrategy indicates the StatefulSetScaleStrategy that will be employed to scale Pods in the StatefulSet.")
+  public KruiseAppsV1beta1StatefulSetScaleStrategy getScaleStrategy() {
+    return scaleStrategy;
+  }
+
+  public void setScaleStrategy(KruiseAppsV1beta1StatefulSetScaleStrategy scaleStrategy) {
+    this.scaleStrategy = scaleStrategy;
   }
 
   public KruiseAppsV1beta1StatefulSetSpec selector(V1LabelSelector selector) {
@@ -277,6 +299,7 @@ public class KruiseAppsV1beta1StatefulSetSpec {
         Objects.equals(this.replicas, kruiseAppsV1beta1StatefulSetSpec.replicas) &&
         Objects.equals(this.reserveOrdinals, kruiseAppsV1beta1StatefulSetSpec.reserveOrdinals) &&
         Objects.equals(this.revisionHistoryLimit, kruiseAppsV1beta1StatefulSetSpec.revisionHistoryLimit) &&
+        Objects.equals(this.scaleStrategy, kruiseAppsV1beta1StatefulSetSpec.scaleStrategy) &&
         Objects.equals(this.selector, kruiseAppsV1beta1StatefulSetSpec.selector) &&
         Objects.equals(this.serviceName, kruiseAppsV1beta1StatefulSetSpec.serviceName) &&
         Objects.equals(this.template, kruiseAppsV1beta1StatefulSetSpec.template) &&
@@ -286,7 +309,7 @@ public class KruiseAppsV1beta1StatefulSetSpec {
 
   @Override
   public int hashCode() {
-    return Objects.hash(lifecycle, podManagementPolicy, replicas, reserveOrdinals, revisionHistoryLimit, selector, serviceName, template, updateStrategy, volumeClaimTemplates);
+    return Objects.hash(lifecycle, podManagementPolicy, replicas, reserveOrdinals, revisionHistoryLimit, scaleStrategy, selector, serviceName, template, updateStrategy, volumeClaimTemplates);
   }
 
 
@@ -300,6 +323,7 @@ public class KruiseAppsV1beta1StatefulSetSpec {
     sb.append("    replicas: ").append(toIndentedString(replicas)).append("\n");
     sb.append("    reserveOrdinals: ").append(toIndentedString(reserveOrdinals)).append("\n");
     sb.append("    revisionHistoryLimit: ").append(toIndentedString(revisionHistoryLimit)).append("\n");
+    sb.append("    scaleStrategy: ").append(toIndentedString(scaleStrategy)).append("\n");
     sb.append("    selector: ").append(toIndentedString(selector)).append("\n");
     sb.append("    serviceName: ").append(toIndentedString(serviceName)).append("\n");
     sb.append("    template: ").append(toIndentedString(template)).append("\n");

@@ -40,7 +40,7 @@ public class KruiseAppsV1alpha1ImageTagStatus {
   private String message = null;
 
   @SerializedName("phase")
-  private String phase = null;
+  private String phase = "";
 
   @SerializedName("progress")
   private Integer progress = null;
@@ -49,7 +49,7 @@ public class KruiseAppsV1alpha1ImageTagStatus {
   private DateTime startTime = null;
 
   @SerializedName("tag")
-  private String tag = null;
+  private String tag = "";
 
   @SerializedName("version")
   private Long version = null;

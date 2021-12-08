@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.kubernetes.client.custom.IntOrString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,8 +32,29 @@ import java.util.List;
 @ApiModel(description = "CloneSetScaleStrategy defines strategies for pods scale.")
 
 public class KruiseAppsV1alpha1CloneSetScaleStrategy {
+  @SerializedName("maxUnavailable")
+  private IntOrString maxUnavailable = null;
+
   @SerializedName("podsToDelete")
   private List<String> podsToDelete = null;
+
+  public KruiseAppsV1alpha1CloneSetScaleStrategy maxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
+    return this;
+  }
+
+   /**
+   * The maximum number of pods that can be unavailable for scaled pods. This field can control the changes rate of replicas for CloneSet so as to minimize the impact for users&#39; service. The scale will fail if the number of unavailable pods were greater than this MaxUnavailable at scaling up. MaxUnavailable works only when scaling up.
+   * @return maxUnavailable
+  **/
+  @ApiModelProperty(value = "The maximum number of pods that can be unavailable for scaled pods. This field can control the changes rate of replicas for CloneSet so as to minimize the impact for users' service. The scale will fail if the number of unavailable pods were greater than this MaxUnavailable at scaling up. MaxUnavailable works only when scaling up.")
+  public IntOrString getMaxUnavailable() {
+    return maxUnavailable;
+  }
+
+  public void setMaxUnavailable(IntOrString maxUnavailable) {
+    this.maxUnavailable = maxUnavailable;
+  }
 
   public KruiseAppsV1alpha1CloneSetScaleStrategy podsToDelete(List<String> podsToDelete) {
     this.podsToDelete = podsToDelete;
@@ -70,12 +92,13 @@ public class KruiseAppsV1alpha1CloneSetScaleStrategy {
       return false;
     }
     KruiseAppsV1alpha1CloneSetScaleStrategy kruiseAppsV1alpha1CloneSetScaleStrategy = (KruiseAppsV1alpha1CloneSetScaleStrategy) o;
-    return Objects.equals(this.podsToDelete, kruiseAppsV1alpha1CloneSetScaleStrategy.podsToDelete);
+    return Objects.equals(this.maxUnavailable, kruiseAppsV1alpha1CloneSetScaleStrategy.maxUnavailable) &&
+        Objects.equals(this.podsToDelete, kruiseAppsV1alpha1CloneSetScaleStrategy.podsToDelete);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(podsToDelete);
+    return Objects.hash(maxUnavailable, podsToDelete);
   }
 
 
@@ -84,6 +107,7 @@ public class KruiseAppsV1alpha1CloneSetScaleStrategy {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1CloneSetScaleStrategy {\n");
     
+    sb.append("    maxUnavailable: ").append(toIndentedString(maxUnavailable)).append("\n");
     sb.append("    podsToDelete: ").append(toIndentedString(podsToDelete)).append("\n");
     sb.append("}");
     return sb.toString();

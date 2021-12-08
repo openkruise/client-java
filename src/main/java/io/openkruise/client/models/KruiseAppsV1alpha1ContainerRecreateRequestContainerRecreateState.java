@@ -33,10 +33,10 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainerRecreateState {
   private String message = null;
 
   @SerializedName("name")
-  private String name = null;
+  private String name = "";
 
   @SerializedName("phase")
-  private String phase = null;
+  private String phase = "";
 
   public KruiseAppsV1alpha1ContainerRecreateRequestContainerRecreateState message(String message) {
     this.message = message;

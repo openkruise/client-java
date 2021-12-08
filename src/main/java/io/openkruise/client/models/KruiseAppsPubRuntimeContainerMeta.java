@@ -19,32 +19,39 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.openkruise.client.models.KruiseAppsPubRuntimeContainerHashes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * ContainerRecreateRequestContainerContext contains context status of the container that need to recreate.
+ * RuntimeContainerMeta contains the meta data of a runtime container.
  */
-@ApiModel(description = "ContainerRecreateRequestContainerContext contains context status of the container that need to recreate.")
+@ApiModel(description = "RuntimeContainerMeta contains the meta data of a runtime container.")
 
-public class KruiseAppsV1alpha1ContainerRecreateRequestContainerContext {
+public class KruiseAppsPubRuntimeContainerMeta {
   @SerializedName("containerID")
   private String containerID = "";
+
+  @SerializedName("hashes")
+  private KruiseAppsPubRuntimeContainerHashes hashes = null;
+
+  @SerializedName("name")
+  private String name = "";
 
   @SerializedName("restartCount")
   private Integer restartCount = 0;
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestContainerContext containerID(String containerID) {
+  public KruiseAppsPubRuntimeContainerMeta containerID(String containerID) {
     this.containerID = containerID;
     return this;
   }
 
    /**
-   * Container&#39;s ID in the format &#39;docker://&lt;container_id&gt;&#39;.
+   * Get containerID
    * @return containerID
   **/
-  @ApiModelProperty(required = true, value = "Container's ID in the format 'docker://<container_id>'.")
+  @ApiModelProperty(required = true, value = "")
   public String getContainerID() {
     return containerID;
   }
@@ -53,16 +60,52 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainerContext {
     this.containerID = containerID;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestContainerContext restartCount(Integer restartCount) {
+  public KruiseAppsPubRuntimeContainerMeta hashes(KruiseAppsPubRuntimeContainerHashes hashes) {
+    this.hashes = hashes;
+    return this;
+  }
+
+   /**
+   * Get hashes
+   * @return hashes
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public KruiseAppsPubRuntimeContainerHashes getHashes() {
+    return hashes;
+  }
+
+  public void setHashes(KruiseAppsPubRuntimeContainerHashes hashes) {
+    this.hashes = hashes;
+  }
+
+  public KruiseAppsPubRuntimeContainerMeta name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Get name
+   * @return name
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public KruiseAppsPubRuntimeContainerMeta restartCount(Integer restartCount) {
     this.restartCount = restartCount;
     return this;
   }
 
    /**
-   * The number of times the container has been restarted, currently based on the number of dead containers that have not yet been removed. Note that this is calculated from dead containers. But those containers are subject to garbage collection. This value will get capped at 5 by GC.
+   * Get restartCount
    * @return restartCount
   **/
-  @ApiModelProperty(required = true, value = "The number of times the container has been restarted, currently based on the number of dead containers that have not yet been removed. Note that this is calculated from dead containers. But those containers are subject to garbage collection. This value will get capped at 5 by GC.")
+  @ApiModelProperty(required = true, value = "")
   public Integer getRestartCount() {
     return restartCount;
   }
@@ -80,23 +123,27 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainerContext {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1ContainerRecreateRequestContainerContext kruiseAppsV1alpha1ContainerRecreateRequestContainerContext = (KruiseAppsV1alpha1ContainerRecreateRequestContainerContext) o;
-    return Objects.equals(this.containerID, kruiseAppsV1alpha1ContainerRecreateRequestContainerContext.containerID) &&
-        Objects.equals(this.restartCount, kruiseAppsV1alpha1ContainerRecreateRequestContainerContext.restartCount);
+    KruiseAppsPubRuntimeContainerMeta kruiseAppsPubRuntimeContainerMeta = (KruiseAppsPubRuntimeContainerMeta) o;
+    return Objects.equals(this.containerID, kruiseAppsPubRuntimeContainerMeta.containerID) &&
+        Objects.equals(this.hashes, kruiseAppsPubRuntimeContainerMeta.hashes) &&
+        Objects.equals(this.name, kruiseAppsPubRuntimeContainerMeta.name) &&
+        Objects.equals(this.restartCount, kruiseAppsPubRuntimeContainerMeta.restartCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(containerID, restartCount);
+    return Objects.hash(containerID, hashes, name, restartCount);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1ContainerRecreateRequestContainerContext {\n");
+    sb.append("class KruiseAppsPubRuntimeContainerMeta {\n");
     
     sb.append("    containerID: ").append(toIndentedString(containerID)).append("\n");
+    sb.append("    hashes: ").append(toIndentedString(hashes)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    restartCount: ").append(toIndentedString(restartCount)).append("\n");
     sb.append("}");
     return sb.toString();

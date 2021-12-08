@@ -40,10 +40,10 @@ public class KruiseAppsV1alpha1CloneSetCondition {
   private String reason = null;
 
   @SerializedName("status")
-  private String status = null;
+  private String status = "";
 
   @SerializedName("type")
-  private String type = null;
+  private String type = "";
 
   public KruiseAppsV1alpha1CloneSetCondition lastTransitionTime(DateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;

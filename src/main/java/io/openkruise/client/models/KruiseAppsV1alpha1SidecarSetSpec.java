@@ -19,9 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.kubernetes.client.openapi.models.V1LocalObjectReference;
 import io.kubernetes.client.openapi.models.V1Volume;
 import io.kubernetes.client.openapi.models.V1LabelSelector;
 import io.openkruise.client.models.KruiseAppsV1alpha1SidecarContainer;
+import io.openkruise.client.models.KruiseAppsV1alpha1SidecarSetInjectionStrategy;
 import io.openkruise.client.models.KruiseAppsV1alpha1SidecarSetUpdateStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,8 +40,14 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
   @SerializedName("containers")
   private List<KruiseAppsV1alpha1SidecarContainer> containers = null;
 
+  @SerializedName("imagePullSecrets")
+  private List<V1LocalObjectReference> imagePullSecrets = null;
+
   @SerializedName("initContainers")
   private List<KruiseAppsV1alpha1SidecarContainer> initContainers = null;
+
+  @SerializedName("injectionStrategy")
+  private KruiseAppsV1alpha1SidecarSetInjectionStrategy injectionStrategy = null;
 
   @SerializedName("namespace")
   private String namespace = null;
@@ -79,6 +87,32 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     this.containers = containers;
   }
 
+  public KruiseAppsV1alpha1SidecarSetSpec imagePullSecrets(List<V1LocalObjectReference> imagePullSecrets) {
+    this.imagePullSecrets = imagePullSecrets;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetSpec addImagePullSecretsItem(V1LocalObjectReference imagePullSecretsItem) {
+    if (this.imagePullSecrets == null) {
+      this.imagePullSecrets = new ArrayList<V1LocalObjectReference>();
+    }
+    this.imagePullSecrets.add(imagePullSecretsItem);
+    return this;
+  }
+
+   /**
+   * List of the names of secrets required by pulling sidecar container images
+   * @return imagePullSecrets
+  **/
+  @ApiModelProperty(value = "List of the names of secrets required by pulling sidecar container images")
+  public List<V1LocalObjectReference> getImagePullSecrets() {
+    return imagePullSecrets;
+  }
+
+  public void setImagePullSecrets(List<V1LocalObjectReference> imagePullSecrets) {
+    this.imagePullSecrets = imagePullSecrets;
+  }
+
   public KruiseAppsV1alpha1SidecarSetSpec initContainers(List<KruiseAppsV1alpha1SidecarContainer> initContainers) {
     this.initContainers = initContainers;
     return this;
@@ -103,6 +137,24 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
 
   public void setInitContainers(List<KruiseAppsV1alpha1SidecarContainer> initContainers) {
     this.initContainers = initContainers;
+  }
+
+  public KruiseAppsV1alpha1SidecarSetSpec injectionStrategy(KruiseAppsV1alpha1SidecarSetInjectionStrategy injectionStrategy) {
+    this.injectionStrategy = injectionStrategy;
+    return this;
+  }
+
+   /**
+   * InjectionStrategy describe the strategy when sidecarset is injected into pods
+   * @return injectionStrategy
+  **/
+  @ApiModelProperty(value = "InjectionStrategy describe the strategy when sidecarset is injected into pods")
+  public KruiseAppsV1alpha1SidecarSetInjectionStrategy getInjectionStrategy() {
+    return injectionStrategy;
+  }
+
+  public void setInjectionStrategy(KruiseAppsV1alpha1SidecarSetInjectionStrategy injectionStrategy) {
+    this.injectionStrategy = injectionStrategy;
   }
 
   public KruiseAppsV1alpha1SidecarSetSpec namespace(String namespace) {
@@ -196,7 +248,9 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     }
     KruiseAppsV1alpha1SidecarSetSpec kruiseAppsV1alpha1SidecarSetSpec = (KruiseAppsV1alpha1SidecarSetSpec) o;
     return Objects.equals(this.containers, kruiseAppsV1alpha1SidecarSetSpec.containers) &&
+        Objects.equals(this.imagePullSecrets, kruiseAppsV1alpha1SidecarSetSpec.imagePullSecrets) &&
         Objects.equals(this.initContainers, kruiseAppsV1alpha1SidecarSetSpec.initContainers) &&
+        Objects.equals(this.injectionStrategy, kruiseAppsV1alpha1SidecarSetSpec.injectionStrategy) &&
         Objects.equals(this.namespace, kruiseAppsV1alpha1SidecarSetSpec.namespace) &&
         Objects.equals(this.selector, kruiseAppsV1alpha1SidecarSetSpec.selector) &&
         Objects.equals(this.updateStrategy, kruiseAppsV1alpha1SidecarSetSpec.updateStrategy) &&
@@ -205,7 +259,7 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
 
   @Override
   public int hashCode() {
-    return Objects.hash(containers, initContainers, namespace, selector, updateStrategy, volumes);
+    return Objects.hash(containers, imagePullSecrets, initContainers, injectionStrategy, namespace, selector, updateStrategy, volumes);
   }
 
 
@@ -215,7 +269,9 @@ public class KruiseAppsV1alpha1SidecarSetSpec {
     sb.append("class KruiseAppsV1alpha1SidecarSetSpec {\n");
     
     sb.append("    containers: ").append(toIndentedString(containers)).append("\n");
+    sb.append("    imagePullSecrets: ").append(toIndentedString(imagePullSecrets)).append("\n");
     sb.append("    initContainers: ").append(toIndentedString(initContainers)).append("\n");
+    sb.append("    injectionStrategy: ").append(toIndentedString(injectionStrategy)).append("\n");
     sb.append("    namespace: ").append(toIndentedString(namespace)).append("\n");
     sb.append("    selector: ").append(toIndentedString(selector)).append("\n");
     sb.append("    updateStrategy: ").append(toIndentedString(updateStrategy)).append("\n");

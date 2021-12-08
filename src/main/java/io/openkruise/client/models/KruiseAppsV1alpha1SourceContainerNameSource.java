@@ -19,55 +19,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.kubernetes.client.openapi.models.V1ObjectFieldSelector;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * KruiseAppsV1alpha1UpdateScatterTerm
+ * KruiseAppsV1alpha1SourceContainerNameSource
  */
 
-public class KruiseAppsV1alpha1UpdateScatterTerm {
-  @SerializedName("key")
-  private String key = "";
+public class KruiseAppsV1alpha1SourceContainerNameSource {
+  @SerializedName("fieldRef")
+  private V1ObjectFieldSelector fieldRef = null;
 
-  @SerializedName("value")
-  private String value = "";
-
-  public KruiseAppsV1alpha1UpdateScatterTerm key(String key) {
-    this.key = key;
+  public KruiseAppsV1alpha1SourceContainerNameSource fieldRef(V1ObjectFieldSelector fieldRef) {
+    this.fieldRef = fieldRef;
     return this;
   }
 
    /**
-   * Get key
-   * @return key
+   * Selects a field of the pod: supports metadata.name, &#x60;metadata.labels[&#39;&lt;KEY&gt;&#39;]&#x60;, &#x60;metadata.annotations[&#39;&lt;KEY&gt;&#39;]&#x60;,
+   * @return fieldRef
   **/
-  @ApiModelProperty(required = true, value = "")
-  public String getKey() {
-    return key;
+  @ApiModelProperty(value = "Selects a field of the pod: supports metadata.name, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,")
+  public V1ObjectFieldSelector getFieldRef() {
+    return fieldRef;
   }
 
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public KruiseAppsV1alpha1UpdateScatterTerm value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setFieldRef(V1ObjectFieldSelector fieldRef) {
+    this.fieldRef = fieldRef;
   }
 
 
@@ -79,24 +59,22 @@ public class KruiseAppsV1alpha1UpdateScatterTerm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdateScatterTerm kruiseAppsV1alpha1UpdateScatterTerm = (KruiseAppsV1alpha1UpdateScatterTerm) o;
-    return Objects.equals(this.key, kruiseAppsV1alpha1UpdateScatterTerm.key) &&
-        Objects.equals(this.value, kruiseAppsV1alpha1UpdateScatterTerm.value);
+    KruiseAppsV1alpha1SourceContainerNameSource kruiseAppsV1alpha1SourceContainerNameSource = (KruiseAppsV1alpha1SourceContainerNameSource) o;
+    return Objects.equals(this.fieldRef, kruiseAppsV1alpha1SourceContainerNameSource.fieldRef);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(fieldRef);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdateScatterTerm {\n");
+    sb.append("class KruiseAppsV1alpha1SourceContainerNameSource {\n");
     
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    fieldRef: ").append(toIndentedString(fieldRef)).append("\n");
     sb.append("}");
     return sb.toString();
   }

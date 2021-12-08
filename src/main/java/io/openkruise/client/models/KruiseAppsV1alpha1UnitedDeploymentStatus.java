@@ -42,7 +42,7 @@ public class KruiseAppsV1alpha1UnitedDeploymentStatus {
   private List<KruiseAppsV1alpha1UnitedDeploymentCondition> conditions = null;
 
   @SerializedName("currentRevision")
-  private String currentRevision = null;
+  private String currentRevision = "";
 
   @SerializedName("observedGeneration")
   private Long observedGeneration = null;
@@ -51,7 +51,7 @@ public class KruiseAppsV1alpha1UnitedDeploymentStatus {
   private Integer readyReplicas = null;
 
   @SerializedName("replicas")
-  private Integer replicas = null;
+  private Integer replicas = 0;
 
   @SerializedName("subsetReplicas")
   private Map<String, Integer> subsetReplicas = null;
@@ -63,7 +63,7 @@ public class KruiseAppsV1alpha1UnitedDeploymentStatus {
   private Integer updatedReadyReplicas = null;
 
   @SerializedName("updatedReplicas")
-  private Integer updatedReplicas = null;
+  private Integer updatedReplicas = 0;
 
   public KruiseAppsV1alpha1UnitedDeploymentStatus collisionCount(Integer collisionCount) {
     this.collisionCount = collisionCount;

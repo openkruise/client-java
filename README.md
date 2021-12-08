@@ -1,26 +1,6 @@
 # client-java
 
-## Requirements
-
-Building the API client library requires [Maven](https://maven.apache.org/) to be installed.
-
-## Installation
-
-To install the API client library to your local Maven repository, simply execute:
-
-```shell
-mvn install
-```
-
-To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
-
-```shell
-mvn deploy
-```
-
-Refer to the [official documentation](https://maven.apache.org/plugins/maven-deploy-plugin/usage.html) for more information.
-
-### Maven users
+## Usage
 
 Add this dependency to your project's POM:
 
@@ -28,15 +8,24 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>io.openkruise</groupId>
     <artifactId>client-java</artifactId>
-    <version>0.1.1</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>compile</scope>
 </dependency>
 ```
 
-Note that this package has not been uploaded to the maven official repository.
-Currently, you should manually download this repo and package it to use.
+**Note that this package has not been uploaded to the maven official repository. Currently, you should manually download this repo and package it to use.**
 
-### Manually
+You should also add the dependency of Kubernetes official java SDK:
+
+```xml
+<dependency>
+    <groupId>io.kubernetes</groupId>
+    <artifactId>client-java</artifactId>
+    <version>11.0.1</version>
+</dependency>
+```
+
+### Manually package
 
 At first generate the JAR by executing:
 
@@ -44,12 +33,12 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/client-java-1.0-SNAPSHOT.jar
+* target/client-java-1.0.0.jar
 * target/lib/*.jar
 
 ## Getting Started
 
-It is suggested that you should use ApiClient and CustomObjectsApi from `io.kubernetes:client-java` instead of `io.openkruise:client-java`.
+You have to use `ApiClient` and `CustomObjectsApi` in `io.kubernetes:client-java` package.
 The only thing you should import from `io.openkruise:client-java` is `io.openkruise.client.models.*`.
 
 ```java
@@ -63,55 +52,55 @@ public class MyExample {
     // generate this client from a kubeconfig file or something else
     ApiClient apiClient;
 
-    public void createStatefulSet(String namespace, KruiseAppsV1alpha1StatefulSet statefulSet) throws ApiException {
+    public void createCloneSet(String namespace, KruiseAppsV1alpha1CloneSet cloneSet) throws ApiException {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         customObjectsApi.createNamespacedCustomObject(
                 "apps.kruise.io",
                 "v1alpha1",
                 namespace,
-                "statefulsets",
-                statefulSet,
+                "clonesets",
+                cloneSet,
                 "true",
                 null,
                 null
         );
     }
 
-    public KruiseAppsV1alpha1StatefulSet getStatefulSet(String namespace, String name) throws Exception {
+    public KruiseAppsV1alpha1CloneSet getCloneSet(String namespace, String name) throws Exception {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         Object obj = customObjectsApi.getNamespacedCustomObject(
                 "apps.kruise.io",
                 "v1alpha1",
                 namespace,
-                "statefulsets",
+                "clonesets",
                 name
         );
         Gson gson = new JSON().getGson();
-        return gson.fromJson(gson.toJsonTree(obj).getAsJsonObject(), KruiseAppsV1alpha1StatefulSet.class);
+        return gson.fromJson(gson.toJsonTree(obj).getAsJsonObject(), KruiseAppsV1alpha1CloneSet.class);
     }
 
-    public boolean updateStatefulSet(String namespace, String name, String image, int partition, int maxUnavailable) throws ApiException {
+    public boolean updateCloneSet(String namespace, String name, String image, int partition, int maxUnavailable) throws ApiException {
         CustomObjectsApi customObjectsApi = new CustomObjectsApi(apiClient);
         boolean updateSuccess = false;
         // a loop to handle update conflicts
         for (int i=0; i<5; i++) {
-            KruiseAppsV1alpha1StatefulSet statefulSet = this.getStatefulSet(namespace, name);
+            KruiseAppsV1alpha1CloneSet cloneSet = this.getCloneSet(namespace, name);
 
             // update image in first container
-            statefulSet.getSpec().getTemplate().getSpec().getContainers().get(0).setImage(image);
+            cloneSet.getSpec().getTemplate().getSpec().getContainers().get(0).setImage(image);
             // update partition
-            statefulSet.getSpec().getUpdateStrategy().getRollingUpdate().setPartition(partition);
+            cloneSet.getSpec().getUpdateStrategy().setPartition(new IntOrString(partition));
             // update maxUnavailable
-            statefulSet.getSpec().getUpdateStrategy().getRollingUpdate().setMaxUnavailable(new IntOrString(maxUnavailable));
+            cloneSet.getSpec().getUpdateStrategy().setMaxUnavailable(new IntOrString(maxUnavailable));
 
             try {
                 customObjectsApi.replaceNamespacedCustomObject(
                         "apps.kruise.io",
                         "v1alpha1",
                         namespace,
-                        "statefulsets",
+                        "clonesets",
                         name,
-                        statefulSet,
+                        cloneSet,
                         null,
                         null
                 );

@@ -33,7 +33,7 @@ import java.util.List;
 
 public class KruiseAppsV1alpha1CloneSetStatus {
   @SerializedName("availableReplicas")
-  private Integer availableReplicas = null;
+  private Integer availableReplicas = 0;
 
   @SerializedName("collisionCount")
   private Integer collisionCount = null;
@@ -51,19 +51,19 @@ public class KruiseAppsV1alpha1CloneSetStatus {
   private Long observedGeneration = null;
 
   @SerializedName("readyReplicas")
-  private Integer readyReplicas = null;
+  private Integer readyReplicas = 0;
 
   @SerializedName("replicas")
-  private Integer replicas = null;
+  private Integer replicas = 0;
 
   @SerializedName("updateRevision")
   private String updateRevision = null;
 
   @SerializedName("updatedReadyReplicas")
-  private Integer updatedReadyReplicas = null;
+  private Integer updatedReadyReplicas = 0;
 
   @SerializedName("updatedReplicas")
-  private Integer updatedReplicas = null;
+  private Integer updatedReplicas = 0;
 
   public KruiseAppsV1alpha1CloneSetStatus availableReplicas(Integer availableReplicas) {
     this.availableReplicas = availableReplicas;

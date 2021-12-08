@@ -35,10 +35,10 @@ import java.util.Map;
 
 public class KruiseAppsV1alpha1NodeImageStatus {
   @SerializedName("desired")
-  private Integer desired = null;
+  private Integer desired = 0;
 
   @SerializedName("failed")
-  private Integer failed = null;
+  private Integer failed = 0;
 
   @SerializedName("firstSyncStatus")
   private KruiseAppsV1alpha1SyncStatus firstSyncStatus = null;
@@ -47,10 +47,10 @@ public class KruiseAppsV1alpha1NodeImageStatus {
   private Map<String, KruiseAppsV1alpha1ImageStatus> imageStatuses = null;
 
   @SerializedName("pulling")
-  private Integer pulling = null;
+  private Integer pulling = 0;
 
   @SerializedName("succeeded")
-  private Integer succeeded = null;
+  private Integer succeeded = 0;
 
   public KruiseAppsV1alpha1NodeImageStatus desired(Integer desired) {
     this.desired = desired;

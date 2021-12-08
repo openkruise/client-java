@@ -39,22 +39,22 @@ public class KruiseAppsV1alpha1DaemonSetStatus {
   private List<KruiseAppsV1alpha1DaemonSetCondition> conditions = null;
 
   @SerializedName("currentNumberScheduled")
-  private Integer currentNumberScheduled = null;
+  private Integer currentNumberScheduled = 0;
 
   @SerializedName("daemonSetHash")
-  private String daemonSetHash = null;
+  private String daemonSetHash = "";
 
   @SerializedName("desiredNumberScheduled")
-  private Integer desiredNumberScheduled = null;
+  private Integer desiredNumberScheduled = 0;
 
   @SerializedName("numberAvailable")
   private Integer numberAvailable = null;
 
   @SerializedName("numberMisscheduled")
-  private Integer numberMisscheduled = null;
+  private Integer numberMisscheduled = 0;
 
   @SerializedName("numberReady")
-  private Integer numberReady = null;
+  private Integer numberReady = 0;
 
   @SerializedName("numberUnavailable")
   private Integer numberUnavailable = null;
@@ -63,7 +63,7 @@ public class KruiseAppsV1alpha1DaemonSetStatus {
   private Long observedGeneration = null;
 
   @SerializedName("updatedNumberScheduled")
-  private Integer updatedNumberScheduled = null;
+  private Integer updatedNumberScheduled = 0;
 
   public KruiseAppsV1alpha1DaemonSetStatus collisionCount(Integer collisionCount) {
     this.collisionCount = collisionCount;

@@ -19,33 +19,35 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.kubernetes.client.openapi.models.V1ListMeta;
-import io.openkruise.client.models.KruiseAppsV1alpha1ContainerRecreateRequest;
+import io.kubernetes.client.openapi.models.V1ObjectMeta;
+import io.openkruise.client.models.KruiseAppsV1alpha1WorkloadSpreadSpec;
+import io.openkruise.client.models.KruiseAppsV1alpha1WorkloadSpreadStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * ContainerRecreateRequestList contains a list of ContainerRecreateRequest
+ * WorkloadSpread is the Schema for the WorkloadSpread API
  */
-@ApiModel(description = "ContainerRecreateRequestList contains a list of ContainerRecreateRequest")
+@ApiModel(description = "WorkloadSpread is the Schema for the WorkloadSpread API")
 
-public class KruiseAppsV1alpha1ContainerRecreateRequestList {
+public class KruiseAppsV1alpha1WorkloadSpread {
   @SerializedName("apiVersion")
   private String apiVersion = null;
-
-  @SerializedName("items")
-  private List<KruiseAppsV1alpha1ContainerRecreateRequest> items = new ArrayList<KruiseAppsV1alpha1ContainerRecreateRequest>();
 
   @SerializedName("kind")
   private String kind = null;
 
   @SerializedName("metadata")
-  private V1ListMeta metadata = null;
+  private V1ObjectMeta metadata = null;
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList apiVersion(String apiVersion) {
+  @SerializedName("spec")
+  private KruiseAppsV1alpha1WorkloadSpreadSpec spec = null;
+
+  @SerializedName("status")
+  private KruiseAppsV1alpha1WorkloadSpreadStatus status = null;
+
+  public KruiseAppsV1alpha1WorkloadSpread apiVersion(String apiVersion) {
     this.apiVersion = apiVersion;
     return this;
   }
@@ -63,30 +65,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     this.apiVersion = apiVersion;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList items(List<KruiseAppsV1alpha1ContainerRecreateRequest> items) {
-    this.items = items;
-    return this;
-  }
-
-  public KruiseAppsV1alpha1ContainerRecreateRequestList addItemsItem(KruiseAppsV1alpha1ContainerRecreateRequest itemsItem) {
-    this.items.add(itemsItem);
-    return this;
-  }
-
-   /**
-   * Get items
-   * @return items
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public List<KruiseAppsV1alpha1ContainerRecreateRequest> getItems() {
-    return items;
-  }
-
-  public void setItems(List<KruiseAppsV1alpha1ContainerRecreateRequest> items) {
-    this.items = items;
-  }
-
-  public KruiseAppsV1alpha1ContainerRecreateRequestList kind(String kind) {
+  public KruiseAppsV1alpha1WorkloadSpread kind(String kind) {
     this.kind = kind;
     return this;
   }
@@ -104,7 +83,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     this.kind = kind;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList metadata(V1ListMeta metadata) {
+  public KruiseAppsV1alpha1WorkloadSpread metadata(V1ObjectMeta metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -114,12 +93,48 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
    * @return metadata
   **/
   @ApiModelProperty(value = "")
-  public V1ListMeta getMetadata() {
+  public V1ObjectMeta getMetadata() {
     return metadata;
   }
 
-  public void setMetadata(V1ListMeta metadata) {
+  public void setMetadata(V1ObjectMeta metadata) {
     this.metadata = metadata;
+  }
+
+  public KruiseAppsV1alpha1WorkloadSpread spec(KruiseAppsV1alpha1WorkloadSpreadSpec spec) {
+    this.spec = spec;
+    return this;
+  }
+
+   /**
+   * Get spec
+   * @return spec
+  **/
+  @ApiModelProperty(value = "")
+  public KruiseAppsV1alpha1WorkloadSpreadSpec getSpec() {
+    return spec;
+  }
+
+  public void setSpec(KruiseAppsV1alpha1WorkloadSpreadSpec spec) {
+    this.spec = spec;
+  }
+
+  public KruiseAppsV1alpha1WorkloadSpread status(KruiseAppsV1alpha1WorkloadSpreadStatus status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @ApiModelProperty(value = "")
+  public KruiseAppsV1alpha1WorkloadSpreadStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(KruiseAppsV1alpha1WorkloadSpreadStatus status) {
+    this.status = status;
   }
 
 
@@ -131,28 +146,30 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1ContainerRecreateRequestList kruiseAppsV1alpha1ContainerRecreateRequestList = (KruiseAppsV1alpha1ContainerRecreateRequestList) o;
-    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1ContainerRecreateRequestList.apiVersion) &&
-        Objects.equals(this.items, kruiseAppsV1alpha1ContainerRecreateRequestList.items) &&
-        Objects.equals(this.kind, kruiseAppsV1alpha1ContainerRecreateRequestList.kind) &&
-        Objects.equals(this.metadata, kruiseAppsV1alpha1ContainerRecreateRequestList.metadata);
+    KruiseAppsV1alpha1WorkloadSpread kruiseAppsV1alpha1WorkloadSpread = (KruiseAppsV1alpha1WorkloadSpread) o;
+    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1WorkloadSpread.apiVersion) &&
+        Objects.equals(this.kind, kruiseAppsV1alpha1WorkloadSpread.kind) &&
+        Objects.equals(this.metadata, kruiseAppsV1alpha1WorkloadSpread.metadata) &&
+        Objects.equals(this.spec, kruiseAppsV1alpha1WorkloadSpread.spec) &&
+        Objects.equals(this.status, kruiseAppsV1alpha1WorkloadSpread.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiVersion, items, kind, metadata);
+    return Objects.hash(apiVersion, kind, metadata, spec, status);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1ContainerRecreateRequestList {\n");
+    sb.append("class KruiseAppsV1alpha1WorkloadSpread {\n");
     
     sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
-    sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    spec: ").append(toIndentedString(spec)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.kubernetes.client.openapi.models.V1ListMeta;
-import io.openkruise.client.models.KruiseAppsV1alpha1ContainerRecreateRequest;
+import io.openkruise.client.models.KruiseAppsV1alpha1WorkloadSpread;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -28,16 +28,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ContainerRecreateRequestList contains a list of ContainerRecreateRequest
+ * WorkloadSpreadList contains a list of WorkloadSpread
  */
-@ApiModel(description = "ContainerRecreateRequestList contains a list of ContainerRecreateRequest")
+@ApiModel(description = "WorkloadSpreadList contains a list of WorkloadSpread")
 
-public class KruiseAppsV1alpha1ContainerRecreateRequestList {
+public class KruiseAppsV1alpha1WorkloadSpreadList {
   @SerializedName("apiVersion")
   private String apiVersion = null;
 
   @SerializedName("items")
-  private List<KruiseAppsV1alpha1ContainerRecreateRequest> items = new ArrayList<KruiseAppsV1alpha1ContainerRecreateRequest>();
+  private List<KruiseAppsV1alpha1WorkloadSpread> items = new ArrayList<KruiseAppsV1alpha1WorkloadSpread>();
 
   @SerializedName("kind")
   private String kind = null;
@@ -45,7 +45,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
   @SerializedName("metadata")
   private V1ListMeta metadata = null;
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList apiVersion(String apiVersion) {
+  public KruiseAppsV1alpha1WorkloadSpreadList apiVersion(String apiVersion) {
     this.apiVersion = apiVersion;
     return this;
   }
@@ -63,12 +63,12 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     this.apiVersion = apiVersion;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList items(List<KruiseAppsV1alpha1ContainerRecreateRequest> items) {
+  public KruiseAppsV1alpha1WorkloadSpreadList items(List<KruiseAppsV1alpha1WorkloadSpread> items) {
     this.items = items;
     return this;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList addItemsItem(KruiseAppsV1alpha1ContainerRecreateRequest itemsItem) {
+  public KruiseAppsV1alpha1WorkloadSpreadList addItemsItem(KruiseAppsV1alpha1WorkloadSpread itemsItem) {
     this.items.add(itemsItem);
     return this;
   }
@@ -78,15 +78,15 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
    * @return items
   **/
   @ApiModelProperty(required = true, value = "")
-  public List<KruiseAppsV1alpha1ContainerRecreateRequest> getItems() {
+  public List<KruiseAppsV1alpha1WorkloadSpread> getItems() {
     return items;
   }
 
-  public void setItems(List<KruiseAppsV1alpha1ContainerRecreateRequest> items) {
+  public void setItems(List<KruiseAppsV1alpha1WorkloadSpread> items) {
     this.items = items;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList kind(String kind) {
+  public KruiseAppsV1alpha1WorkloadSpreadList kind(String kind) {
     this.kind = kind;
     return this;
   }
@@ -104,7 +104,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     this.kind = kind;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestList metadata(V1ListMeta metadata) {
+  public KruiseAppsV1alpha1WorkloadSpreadList metadata(V1ListMeta metadata) {
     this.metadata = metadata;
     return this;
   }
@@ -131,11 +131,11 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1ContainerRecreateRequestList kruiseAppsV1alpha1ContainerRecreateRequestList = (KruiseAppsV1alpha1ContainerRecreateRequestList) o;
-    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1ContainerRecreateRequestList.apiVersion) &&
-        Objects.equals(this.items, kruiseAppsV1alpha1ContainerRecreateRequestList.items) &&
-        Objects.equals(this.kind, kruiseAppsV1alpha1ContainerRecreateRequestList.kind) &&
-        Objects.equals(this.metadata, kruiseAppsV1alpha1ContainerRecreateRequestList.metadata);
+    KruiseAppsV1alpha1WorkloadSpreadList kruiseAppsV1alpha1WorkloadSpreadList = (KruiseAppsV1alpha1WorkloadSpreadList) o;
+    return Objects.equals(this.apiVersion, kruiseAppsV1alpha1WorkloadSpreadList.apiVersion) &&
+        Objects.equals(this.items, kruiseAppsV1alpha1WorkloadSpreadList.items) &&
+        Objects.equals(this.kind, kruiseAppsV1alpha1WorkloadSpreadList.kind) &&
+        Objects.equals(this.metadata, kruiseAppsV1alpha1WorkloadSpreadList.metadata);
   }
 
   @Override
@@ -147,7 +147,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestList {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1ContainerRecreateRequestList {\n");
+    sb.append("class KruiseAppsV1alpha1WorkloadSpreadList {\n");
     
     sb.append("    apiVersion: ").append(toIndentedString(apiVersion)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");

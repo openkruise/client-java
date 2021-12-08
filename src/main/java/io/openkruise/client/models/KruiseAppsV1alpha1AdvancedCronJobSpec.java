@@ -40,7 +40,7 @@ public class KruiseAppsV1alpha1AdvancedCronJobSpec {
   private Boolean paused = null;
 
   @SerializedName("schedule")
-  private String schedule = null;
+  private String schedule = "";
 
   @SerializedName("startingDeadlineSeconds")
   private Long startingDeadlineSeconds = null;

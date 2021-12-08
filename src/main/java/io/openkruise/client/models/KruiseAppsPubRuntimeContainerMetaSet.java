@@ -19,55 +19,43 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.openkruise.client.models.KruiseAppsPubRuntimeContainerMeta;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * KruiseAppsV1alpha1UpdateScatterTerm
+ * RuntimeContainerMetaSet contains all the containers&#39; meta of the Pod.
  */
+@ApiModel(description = "RuntimeContainerMetaSet contains all the containers' meta of the Pod.")
 
-public class KruiseAppsV1alpha1UpdateScatterTerm {
-  @SerializedName("key")
-  private String key = "";
+public class KruiseAppsPubRuntimeContainerMetaSet {
+  @SerializedName("containers")
+  private List<KruiseAppsPubRuntimeContainerMeta> containers = new ArrayList<KruiseAppsPubRuntimeContainerMeta>();
 
-  @SerializedName("value")
-  private String value = "";
+  public KruiseAppsPubRuntimeContainerMetaSet containers(List<KruiseAppsPubRuntimeContainerMeta> containers) {
+    this.containers = containers;
+    return this;
+  }
 
-  public KruiseAppsV1alpha1UpdateScatterTerm key(String key) {
-    this.key = key;
+  public KruiseAppsPubRuntimeContainerMetaSet addContainersItem(KruiseAppsPubRuntimeContainerMeta containersItem) {
+    this.containers.add(containersItem);
     return this;
   }
 
    /**
-   * Get key
-   * @return key
+   * Get containers
+   * @return containers
   **/
   @ApiModelProperty(required = true, value = "")
-  public String getKey() {
-    return key;
+  public List<KruiseAppsPubRuntimeContainerMeta> getContainers() {
+    return containers;
   }
 
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public KruiseAppsV1alpha1UpdateScatterTerm value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setContainers(List<KruiseAppsPubRuntimeContainerMeta> containers) {
+    this.containers = containers;
   }
 
 
@@ -79,24 +67,22 @@ public class KruiseAppsV1alpha1UpdateScatterTerm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdateScatterTerm kruiseAppsV1alpha1UpdateScatterTerm = (KruiseAppsV1alpha1UpdateScatterTerm) o;
-    return Objects.equals(this.key, kruiseAppsV1alpha1UpdateScatterTerm.key) &&
-        Objects.equals(this.value, kruiseAppsV1alpha1UpdateScatterTerm.value);
+    KruiseAppsPubRuntimeContainerMetaSet kruiseAppsPubRuntimeContainerMetaSet = (KruiseAppsPubRuntimeContainerMetaSet) o;
+    return Objects.equals(this.containers, kruiseAppsPubRuntimeContainerMetaSet.containers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(containers);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdateScatterTerm {\n");
+    sb.append("class KruiseAppsPubRuntimeContainerMetaSet {\n");
     
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    containers: ").append(toIndentedString(containers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -33,13 +33,13 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestSyncContainerStatus {
   private String containerID = null;
 
   @SerializedName("name")
-  private String name = null;
+  private String name = "";
 
   @SerializedName("ready")
-  private Boolean ready = null;
+  private Boolean ready = false;
 
   @SerializedName("restartCount")
-  private Integer restartCount = null;
+  private Integer restartCount = 0;
 
   public KruiseAppsV1alpha1ContainerRecreateRequestSyncContainerStatus containerID(String containerID) {
     this.containerID = containerID;

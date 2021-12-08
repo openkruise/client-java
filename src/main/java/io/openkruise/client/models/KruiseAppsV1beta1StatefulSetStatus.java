@@ -33,7 +33,7 @@ import java.util.List;
 
 public class KruiseAppsV1beta1StatefulSetStatus {
   @SerializedName("availableReplicas")
-  private Integer availableReplicas = null;
+  private Integer availableReplicas = 0;
 
   @SerializedName("collisionCount")
   private Integer collisionCount = null;
@@ -42,7 +42,7 @@ public class KruiseAppsV1beta1StatefulSetStatus {
   private List<V1StatefulSetCondition> conditions = null;
 
   @SerializedName("currentReplicas")
-  private Integer currentReplicas = null;
+  private Integer currentReplicas = 0;
 
   @SerializedName("currentRevision")
   private String currentRevision = null;
@@ -54,16 +54,16 @@ public class KruiseAppsV1beta1StatefulSetStatus {
   private Long observedGeneration = null;
 
   @SerializedName("readyReplicas")
-  private Integer readyReplicas = null;
+  private Integer readyReplicas = 0;
 
   @SerializedName("replicas")
-  private Integer replicas = null;
+  private Integer replicas = 0;
 
   @SerializedName("updateRevision")
   private String updateRevision = null;
 
   @SerializedName("updatedReplicas")
-  private Integer updatedReplicas = null;
+  private Integer updatedReplicas = 0;
 
   public KruiseAppsV1beta1StatefulSetStatus availableReplicas(Integer availableReplicas) {
     this.availableReplicas = availableReplicas;

@@ -21,7 +21,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.kubernetes.client.custom.IntOrString;
 import io.openkruise.client.models.KruiseAppsV1alpha1CompletionPolicy;
-import io.openkruise.client.models.KruiseAppsV1alpha1NodeSelector;
+import io.openkruise.client.models.KruiseAppsV1alpha1ImagePullJobNodeSelector;
+import io.openkruise.client.models.KruiseAppsV1alpha1ImagePullJobPodSelector;
 import io.openkruise.client.models.KruiseAppsV1alpha1PullPolicy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -39,7 +40,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
   private KruiseAppsV1alpha1CompletionPolicy completionPolicy = null;
 
   @SerializedName("image")
-  private String image = null;
+  private String image = "";
 
   @SerializedName("parallelism")
   private IntOrString parallelism = null;
@@ -54,7 +55,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
   private List<String> pullSecrets = null;
 
   @SerializedName("selector")
-  private KruiseAppsV1alpha1NodeSelector selector = null;
+  private KruiseAppsV1alpha1ImagePullJobNodeSelector selector = null;
 
   public KruiseAppsV1alpha1ImagePullJobSpec completionPolicy(KruiseAppsV1alpha1CompletionPolicy completionPolicy) {
     this.completionPolicy = completionPolicy;
@@ -172,7 +173,7 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
     this.pullSecrets = pullSecrets;
   }
 
-  public KruiseAppsV1alpha1ImagePullJobSpec selector(KruiseAppsV1alpha1NodeSelector selector) {
+  public KruiseAppsV1alpha1ImagePullJobSpec selector(KruiseAppsV1alpha1ImagePullJobNodeSelector selector) {
     this.selector = selector;
     return this;
   }
@@ -182,11 +183,11 @@ public class KruiseAppsV1alpha1ImagePullJobSpec {
    * @return selector
   **/
   @ApiModelProperty(value = "Selector is a query over nodes that should match the job. nil to match all nodes.")
-  public KruiseAppsV1alpha1NodeSelector getSelector() {
+  public KruiseAppsV1alpha1ImagePullJobNodeSelector getSelector() {
     return selector;
   }
 
-  public void setSelector(KruiseAppsV1alpha1NodeSelector selector) {
+  public void setSelector(KruiseAppsV1alpha1ImagePullJobNodeSelector selector) {
     this.selector = selector;
   }
 

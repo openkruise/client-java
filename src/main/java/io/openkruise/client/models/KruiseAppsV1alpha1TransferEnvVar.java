@@ -19,9 +19,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.openkruise.client.models.KruiseAppsV1alpha1SourceContainerNameSource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * KruiseAppsV1alpha1TransferEnvVar
@@ -31,8 +34,14 @@ public class KruiseAppsV1alpha1TransferEnvVar {
   @SerializedName("envName")
   private String envName = null;
 
+  @SerializedName("envNames")
+  private List<String> envNames = null;
+
   @SerializedName("sourceContainerName")
   private String sourceContainerName = null;
+
+  @SerializedName("sourceContainerNameFrom")
+  private KruiseAppsV1alpha1SourceContainerNameSource sourceContainerNameFrom = null;
 
   public KruiseAppsV1alpha1TransferEnvVar envName(String envName) {
     this.envName = envName;
@@ -50,6 +59,32 @@ public class KruiseAppsV1alpha1TransferEnvVar {
 
   public void setEnvName(String envName) {
     this.envName = envName;
+  }
+
+  public KruiseAppsV1alpha1TransferEnvVar envNames(List<String> envNames) {
+    this.envNames = envNames;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1TransferEnvVar addEnvNamesItem(String envNamesItem) {
+    if (this.envNames == null) {
+      this.envNames = new ArrayList<String>();
+    }
+    this.envNames.add(envNamesItem);
+    return this;
+  }
+
+   /**
+   * Get envNames
+   * @return envNames
+  **/
+  @ApiModelProperty(value = "")
+  public List<String> getEnvNames() {
+    return envNames;
+  }
+
+  public void setEnvNames(List<String> envNames) {
+    this.envNames = envNames;
   }
 
   public KruiseAppsV1alpha1TransferEnvVar sourceContainerName(String sourceContainerName) {
@@ -70,6 +105,24 @@ public class KruiseAppsV1alpha1TransferEnvVar {
     this.sourceContainerName = sourceContainerName;
   }
 
+  public KruiseAppsV1alpha1TransferEnvVar sourceContainerNameFrom(KruiseAppsV1alpha1SourceContainerNameSource sourceContainerNameFrom) {
+    this.sourceContainerNameFrom = sourceContainerNameFrom;
+    return this;
+  }
+
+   /**
+   * Get sourceContainerNameFrom
+   * @return sourceContainerNameFrom
+  **/
+  @ApiModelProperty(value = "")
+  public KruiseAppsV1alpha1SourceContainerNameSource getSourceContainerNameFrom() {
+    return sourceContainerNameFrom;
+  }
+
+  public void setSourceContainerNameFrom(KruiseAppsV1alpha1SourceContainerNameSource sourceContainerNameFrom) {
+    this.sourceContainerNameFrom = sourceContainerNameFrom;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -81,12 +134,14 @@ public class KruiseAppsV1alpha1TransferEnvVar {
     }
     KruiseAppsV1alpha1TransferEnvVar kruiseAppsV1alpha1TransferEnvVar = (KruiseAppsV1alpha1TransferEnvVar) o;
     return Objects.equals(this.envName, kruiseAppsV1alpha1TransferEnvVar.envName) &&
-        Objects.equals(this.sourceContainerName, kruiseAppsV1alpha1TransferEnvVar.sourceContainerName);
+        Objects.equals(this.envNames, kruiseAppsV1alpha1TransferEnvVar.envNames) &&
+        Objects.equals(this.sourceContainerName, kruiseAppsV1alpha1TransferEnvVar.sourceContainerName) &&
+        Objects.equals(this.sourceContainerNameFrom, kruiseAppsV1alpha1TransferEnvVar.sourceContainerNameFrom);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(envName, sourceContainerName);
+    return Objects.hash(envName, envNames, sourceContainerName, sourceContainerNameFrom);
   }
 
 
@@ -96,7 +151,9 @@ public class KruiseAppsV1alpha1TransferEnvVar {
     sb.append("class KruiseAppsV1alpha1TransferEnvVar {\n");
     
     sb.append("    envName: ").append(toIndentedString(envName)).append("\n");
+    sb.append("    envNames: ").append(toIndentedString(envNames)).append("\n");
     sb.append("    sourceContainerName: ").append(toIndentedString(sourceContainerName)).append("\n");
+    sb.append("    sourceContainerNameFrom: ").append(toIndentedString(sourceContainerNameFrom)).append("\n");
     sb.append("}");
     return sb.toString();
   }

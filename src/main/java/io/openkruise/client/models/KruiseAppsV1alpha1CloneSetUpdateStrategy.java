@@ -83,10 +83,10 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
   }
 
    /**
-   * The maximum number of pods that can be scheduled above the desired replicas during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 0.
+   * The maximum number of pods that can be scheduled above the desired replicas during update or specified delete. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 0.
    * @return maxSurge
   **/
-  @ApiModelProperty(value = "The maximum number of pods that can be scheduled above the desired replicas during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 0.")
+  @ApiModelProperty(value = "The maximum number of pods that can be scheduled above the desired replicas during update or specified delete. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up. Defaults to 0.")
   public IntOrString getMaxSurge() {
     return maxSurge;
   }
@@ -101,10 +101,10 @@ public class KruiseAppsV1alpha1CloneSetUpdateStrategy {
   }
 
    /**
-   * The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge &gt; 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.
+   * The maximum number of pods that can be unavailable during update or scale. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge &gt; 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.
    * @return maxUnavailable
   **/
-  @ApiModelProperty(value = "The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge > 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.")
+  @ApiModelProperty(value = "The maximum number of pods that can be unavailable during update or scale. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding up by default. When maxSurge > 0, absolute number is calculated from percentage by rounding down. Defaults to 20%.")
   public IntOrString getMaxUnavailable() {
     return maxUnavailable;
   }

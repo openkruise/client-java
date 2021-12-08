@@ -3,8 +3,8 @@
     <groupId>io.openkruise</groupId>
     <artifactId>client-java</artifactId>
     <packaging>jar</packaging>
-    <name>client-java-SNAPSHOT</name>
-    <version>0.1.1-SNAPHOST</version>
+    <name>client-java</name>
+    <version>1.0.0</version>
     <url>https://github.com/openkruise/client-java</url>
     <description>Jave Client For OpenKruise</description>
 

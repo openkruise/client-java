@@ -13,19 +13,11 @@
 
 package io.openkruise.client.apis;
 
+import io.kubernetes.client.openapi.ApiException;
+import io.kubernetes.client.openapi.apis.CustomObjectsApi;
 import io.kubernetes.client.openapi.models.V1DeleteOptions;
-import io.kubernetes.client.util.Config;
-import io.kubernetes.client.util.KubeConfig;
-import io.openkruise.client.ApiClient;
-import io.openkruise.client.ApiException;
 import org.junit.Test;
 import org.junit.Ignore;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * API tests for CustomObjectsApi
@@ -51,7 +43,9 @@ public class CustomObjectsApiTest {
         String plural = null;
         Object body = null;
         String pretty = null;
-        Object response = api.createClusterCustomObject(group, version, plural, body, pretty);
+        String dryRun = null;
+        String fieldManager = null;
+        Object response = api.createClusterCustomObject(group, version, plural, body, pretty, dryRun, fieldManager);
 
         // TODO: test validations
     }
@@ -72,7 +66,9 @@ public class CustomObjectsApiTest {
         String plural = null;
         Object body = null;
         String pretty = null;
-        Object response = api.createNamespacedCustomObject(group, version, namespace, plural, body, pretty);
+        String dryRun = null;
+        String fieldManager = null;
+        Object response = api.createNamespacedCustomObject(group, version, namespace, plural, body, pretty, dryRun, fieldManager);
 
         // TODO: test validations
     }
@@ -95,7 +91,8 @@ public class CustomObjectsApiTest {
         Integer gracePeriodSeconds = null;
         Boolean orphanDependents = null;
         String propagationPolicy = null;
-        Object response = api.deleteClusterCustomObject(group, version, plural, name, body, gracePeriodSeconds, orphanDependents, propagationPolicy);
+        String dryRun = null;
+        Object response = api.deleteClusterCustomObject(group, version, plural, name, gracePeriodSeconds, orphanDependents, propagationPolicy, dryRun, body);
 
         // TODO: test validations
     }
@@ -119,7 +116,8 @@ public class CustomObjectsApiTest {
         Integer gracePeriodSeconds = null;
         Boolean orphanDependents = null;
         String propagationPolicy = null;
-        Object response = api.deleteNamespacedCustomObject(group, version, namespace, plural, name, body, gracePeriodSeconds, orphanDependents, propagationPolicy);
+        String dryRun = null;
+        Object response = api.deleteNamespacedCustomObject(group, version, namespace, plural, name, gracePeriodSeconds, orphanDependents, propagationPolicy, dryRun, body);
 
         // TODO: test validations
     }
@@ -180,7 +178,11 @@ public class CustomObjectsApiTest {
         String labelSelector = null;
         String resourceVersion = null;
         Boolean watch = null;
-        Object response = api.listClusterCustomObject(group, version, plural, pretty, labelSelector, resourceVersion, watch);
+        String _continue = null;
+        String fieldSelector = null;
+        Integer limit = null;
+        Integer timeoutSeconds = null;
+        Object response = api.listClusterCustomObject(group, version, plural, pretty, _continue, fieldSelector, labelSelector, limit, resourceVersion, timeoutSeconds, watch);
 
         // TODO: test validations
     }
@@ -203,7 +205,11 @@ public class CustomObjectsApiTest {
         String labelSelector = null;
         String resourceVersion = null;
         Boolean watch = null;
-        Object response = api.listNamespacedCustomObject(group, version, namespace, plural, pretty, labelSelector, resourceVersion, watch);
+        String _continue = null;
+        String fieldSelector = null;
+        Integer limit = null;
+        Integer timeoutSeconds = null;
+        Object response = api.listNamespacedCustomObject(group, version, namespace, plural, pretty, _continue, fieldSelector, labelSelector, limit, resourceVersion, timeoutSeconds, watch);
 
         // TODO: test validations
     }
@@ -223,7 +229,10 @@ public class CustomObjectsApiTest {
         String plural = null;
         String name = null;
         Object body = null;
-        Object response = api.patchClusterCustomObject(group, version, plural, name, body);
+        String dryRun = null;
+        String fieldManager = null;
+        Boolean force = null;
+        Object response = api.patchClusterCustomObject(group, version, plural, name, body, dryRun, fieldManager, force);
 
         // TODO: test validations
     }
@@ -244,7 +253,10 @@ public class CustomObjectsApiTest {
         String plural = null;
         String name = null;
         Object body = null;
-        Object response = api.patchNamespacedCustomObject(group, version, namespace, plural, name, body);
+        String dryRun = null;
+        String fieldManager = null;
+        Boolean force = null;
+        Object response = api.patchNamespacedCustomObject(group, version, namespace, plural, name, body, dryRun, fieldManager, force);
 
         // TODO: test validations
     }
@@ -264,7 +276,9 @@ public class CustomObjectsApiTest {
         String plural = null;
         String name = null;
         Object body = null;
-        Object response = api.replaceClusterCustomObject(group, version, plural, name, body);
+        String dryRun = null;
+        String fieldManager = null;
+        Object response = api.replaceClusterCustomObject(group, version, plural, name, body, dryRun, fieldManager);
 
         // TODO: test validations
     }
@@ -285,7 +299,9 @@ public class CustomObjectsApiTest {
         String plural = null;
         String name = null;
         Object body = null;
-        Object response = api.replaceNamespacedCustomObject(group, version, namespace, plural, name, body);
+        String dryRun = null;
+        String fieldManager = null;
+        Object response = api.replaceNamespacedCustomObject(group, version, namespace, plural, name, body, dryRun, fieldManager);
 
         // TODO: test validations
     }

@@ -28,8 +28,29 @@ import java.io.IOException;
  */
 
 public class KruiseAppsV1alpha1SidecarContainerUpgradeStrategy {
+  @SerializedName("hotUpgradeEmptyImage")
+  private String hotUpgradeEmptyImage = null;
+
   @SerializedName("upgradeType")
   private String upgradeType = null;
+
+  public KruiseAppsV1alpha1SidecarContainerUpgradeStrategy hotUpgradeEmptyImage(String hotUpgradeEmptyImage) {
+    this.hotUpgradeEmptyImage = hotUpgradeEmptyImage;
+    return this;
+  }
+
+   /**
+   * when HotUpgrade, HotUpgradeEmptyImage is used to complete the hot upgrading process HotUpgradeEmptyImage is consistent of sidecar container in Command, Args, Liveness probe, etc. but it does no actual work.
+   * @return hotUpgradeEmptyImage
+  **/
+  @ApiModelProperty(value = "when HotUpgrade, HotUpgradeEmptyImage is used to complete the hot upgrading process HotUpgradeEmptyImage is consistent of sidecar container in Command, Args, Liveness probe, etc. but it does no actual work.")
+  public String getHotUpgradeEmptyImage() {
+    return hotUpgradeEmptyImage;
+  }
+
+  public void setHotUpgradeEmptyImage(String hotUpgradeEmptyImage) {
+    this.hotUpgradeEmptyImage = hotUpgradeEmptyImage;
+  }
 
   public KruiseAppsV1alpha1SidecarContainerUpgradeStrategy upgradeType(String upgradeType) {
     this.upgradeType = upgradeType;
@@ -37,10 +58,10 @@ public class KruiseAppsV1alpha1SidecarContainerUpgradeStrategy {
   }
 
    /**
-   * Get upgradeType
+   * when sidecar container is stateless, use ColdUpgrade otherwise HotUpgrade are more HotUpgrade. examples for istio envoy container is suitable for HotUpgrade default is ColdUpgrade
    * @return upgradeType
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "when sidecar container is stateless, use ColdUpgrade otherwise HotUpgrade are more HotUpgrade. examples for istio envoy container is suitable for HotUpgrade default is ColdUpgrade")
   public String getUpgradeType() {
     return upgradeType;
   }
@@ -59,12 +80,13 @@ public class KruiseAppsV1alpha1SidecarContainerUpgradeStrategy {
       return false;
     }
     KruiseAppsV1alpha1SidecarContainerUpgradeStrategy kruiseAppsV1alpha1SidecarContainerUpgradeStrategy = (KruiseAppsV1alpha1SidecarContainerUpgradeStrategy) o;
-    return Objects.equals(this.upgradeType, kruiseAppsV1alpha1SidecarContainerUpgradeStrategy.upgradeType);
+    return Objects.equals(this.hotUpgradeEmptyImage, kruiseAppsV1alpha1SidecarContainerUpgradeStrategy.hotUpgradeEmptyImage) &&
+        Objects.equals(this.upgradeType, kruiseAppsV1alpha1SidecarContainerUpgradeStrategy.upgradeType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(upgradeType);
+    return Objects.hash(hotUpgradeEmptyImage, upgradeType);
   }
 
 
@@ -73,6 +95,7 @@ public class KruiseAppsV1alpha1SidecarContainerUpgradeStrategy {
     StringBuilder sb = new StringBuilder();
     sb.append("class KruiseAppsV1alpha1SidecarContainerUpgradeStrategy {\n");
     
+    sb.append("    hotUpgradeEmptyImage: ").append(toIndentedString(hotUpgradeEmptyImage)).append("\n");
     sb.append("    upgradeType: ").append(toIndentedString(upgradeType)).append("\n");
     sb.append("}");
     return sb.toString();

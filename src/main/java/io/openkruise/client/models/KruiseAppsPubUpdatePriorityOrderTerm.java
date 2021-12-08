@@ -30,7 +30,7 @@ import java.io.IOException;
 
 public class KruiseAppsPubUpdatePriorityOrderTerm {
   @SerializedName("orderedKey")
-  private String orderedKey = null;
+  private String orderedKey = "";
 
   public KruiseAppsPubUpdatePriorityOrderTerm orderedKey(String orderedKey) {
     this.orderedKey = orderedKey;

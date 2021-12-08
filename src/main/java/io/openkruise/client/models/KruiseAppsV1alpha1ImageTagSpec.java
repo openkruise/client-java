@@ -44,7 +44,7 @@ public class KruiseAppsV1alpha1ImageTagSpec {
   private KruiseAppsV1alpha1ImageTagPullPolicy pullPolicy = null;
 
   @SerializedName("tag")
-  private String tag = null;
+  private String tag = "";
 
   @SerializedName("version")
   private Long version = null;

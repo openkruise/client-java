@@ -34,7 +34,7 @@ public class KruiseAppsPubUpdatePriorityWeightTerm {
   private V1LabelSelector matchSelector = null;
 
   @SerializedName("weight")
-  private Integer weight = null;
+  private Integer weight = 0;
 
   public KruiseAppsPubUpdatePriorityWeightTerm matchSelector(V1LabelSelector matchSelector) {
     this.matchSelector = matchSelector;

@@ -23,21 +23,20 @@ import org.joda.time.DateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * JobCondition describes current state of a job.
+ * ResourceDistributionCondition allows a row to be marked with additional information.
  */
-@ApiModel(description = "JobCondition describes current state of a job.")
+@ApiModel(description = "ResourceDistributionCondition allows a row to be marked with additional information.")
 
-public class KruiseAppsV1alpha1JobCondition {
-  @SerializedName("lastProbeTime")
-  private DateTime lastProbeTime = null;
+public class KruiseAppsV1alpha1ResourceDistributionCondition {
+  @SerializedName("failedNamespace")
+  private List<String> failedNamespace = null;
 
   @SerializedName("lastTransitionTime")
   private DateTime lastTransitionTime = null;
-
-  @SerializedName("message")
-  private String message = null;
 
   @SerializedName("reason")
   private String reason = null;
@@ -48,34 +47,42 @@ public class KruiseAppsV1alpha1JobCondition {
   @SerializedName("type")
   private String type = "";
 
-  public KruiseAppsV1alpha1JobCondition lastProbeTime(DateTime lastProbeTime) {
-    this.lastProbeTime = lastProbeTime;
+  public KruiseAppsV1alpha1ResourceDistributionCondition failedNamespace(List<String> failedNamespace) {
+    this.failedNamespace = failedNamespace;
+    return this;
+  }
+
+  public KruiseAppsV1alpha1ResourceDistributionCondition addFailedNamespaceItem(String failedNamespaceItem) {
+    if (this.failedNamespace == null) {
+      this.failedNamespace = new ArrayList<String>();
+    }
+    this.failedNamespace.add(failedNamespaceItem);
     return this;
   }
 
    /**
-   * Last time the condition was checked.
-   * @return lastProbeTime
+   * FailedNamespaces describe all failed namespaces when Status is False
+   * @return failedNamespace
   **/
-  @ApiModelProperty(value = "Last time the condition was checked.")
-  public DateTime getLastProbeTime() {
-    return lastProbeTime;
+  @ApiModelProperty(value = "FailedNamespaces describe all failed namespaces when Status is False")
+  public List<String> getFailedNamespace() {
+    return failedNamespace;
   }
 
-  public void setLastProbeTime(DateTime lastProbeTime) {
-    this.lastProbeTime = lastProbeTime;
+  public void setFailedNamespace(List<String> failedNamespace) {
+    this.failedNamespace = failedNamespace;
   }
 
-  public KruiseAppsV1alpha1JobCondition lastTransitionTime(DateTime lastTransitionTime) {
+  public KruiseAppsV1alpha1ResourceDistributionCondition lastTransitionTime(DateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
     return this;
   }
 
    /**
-   * Last time the condition transit from one status to another.
+   * LastTransitionTime is the last time the condition transitioned from one status to another.
    * @return lastTransitionTime
   **/
-  @ApiModelProperty(value = "Last time the condition transit from one status to another.")
+  @ApiModelProperty(value = "LastTransitionTime is the last time the condition transitioned from one status to another.")
   public DateTime getLastTransitionTime() {
     return lastTransitionTime;
   }
@@ -84,34 +91,16 @@ public class KruiseAppsV1alpha1JobCondition {
     this.lastTransitionTime = lastTransitionTime;
   }
 
-  public KruiseAppsV1alpha1JobCondition message(String message) {
-    this.message = message;
-    return this;
-  }
-
-   /**
-   * Human readable message indicating details about last transition.
-   * @return message
-  **/
-  @ApiModelProperty(value = "Human readable message indicating details about last transition.")
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
-
-  public KruiseAppsV1alpha1JobCondition reason(String reason) {
+  public KruiseAppsV1alpha1ResourceDistributionCondition reason(String reason) {
     this.reason = reason;
     return this;
   }
 
    /**
-   * (brief) reason for the condition&#39;s last transition.
+   * Reason describe human readable message indicating details about last transition.
    * @return reason
   **/
-  @ApiModelProperty(value = "(brief) reason for the condition's last transition.")
+  @ApiModelProperty(value = "Reason describe human readable message indicating details about last transition.")
   public String getReason() {
     return reason;
   }
@@ -120,7 +109,7 @@ public class KruiseAppsV1alpha1JobCondition {
     this.reason = reason;
   }
 
-  public KruiseAppsV1alpha1JobCondition status(String status) {
+  public KruiseAppsV1alpha1ResourceDistributionCondition status(String status) {
     this.status = status;
     return this;
   }
@@ -138,16 +127,16 @@ public class KruiseAppsV1alpha1JobCondition {
     this.status = status;
   }
 
-  public KruiseAppsV1alpha1JobCondition type(String type) {
+  public KruiseAppsV1alpha1ResourceDistributionCondition type(String type) {
     this.type = type;
     return this;
   }
 
    /**
-   * Type of job condition, Complete or Failed.
+   * Type of ResourceDistributionCondition.
    * @return type
   **/
-  @ApiModelProperty(required = true, value = "Type of job condition, Complete or Failed.")
+  @ApiModelProperty(required = true, value = "Type of ResourceDistributionCondition.")
   public String getType() {
     return type;
   }
@@ -165,29 +154,27 @@ public class KruiseAppsV1alpha1JobCondition {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1JobCondition kruiseAppsV1alpha1JobCondition = (KruiseAppsV1alpha1JobCondition) o;
-    return Objects.equals(this.lastProbeTime, kruiseAppsV1alpha1JobCondition.lastProbeTime) &&
-        Objects.equals(this.lastTransitionTime, kruiseAppsV1alpha1JobCondition.lastTransitionTime) &&
-        Objects.equals(this.message, kruiseAppsV1alpha1JobCondition.message) &&
-        Objects.equals(this.reason, kruiseAppsV1alpha1JobCondition.reason) &&
-        Objects.equals(this.status, kruiseAppsV1alpha1JobCondition.status) &&
-        Objects.equals(this.type, kruiseAppsV1alpha1JobCondition.type);
+    KruiseAppsV1alpha1ResourceDistributionCondition kruiseAppsV1alpha1ResourceDistributionCondition = (KruiseAppsV1alpha1ResourceDistributionCondition) o;
+    return Objects.equals(this.failedNamespace, kruiseAppsV1alpha1ResourceDistributionCondition.failedNamespace) &&
+        Objects.equals(this.lastTransitionTime, kruiseAppsV1alpha1ResourceDistributionCondition.lastTransitionTime) &&
+        Objects.equals(this.reason, kruiseAppsV1alpha1ResourceDistributionCondition.reason) &&
+        Objects.equals(this.status, kruiseAppsV1alpha1ResourceDistributionCondition.status) &&
+        Objects.equals(this.type, kruiseAppsV1alpha1ResourceDistributionCondition.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lastProbeTime, lastTransitionTime, message, reason, status, type);
+    return Objects.hash(failedNamespace, lastTransitionTime, reason, status, type);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1JobCondition {\n");
+    sb.append("class KruiseAppsV1alpha1ResourceDistributionCondition {\n");
     
-    sb.append("    lastProbeTime: ").append(toIndentedString(lastProbeTime)).append("\n");
+    sb.append("    failedNamespace: ").append(toIndentedString(failedNamespace)).append("\n");
     sb.append("    lastTransitionTime: ").append(toIndentedString(lastTransitionTime)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

@@ -35,7 +35,7 @@ import java.util.List;
 
 public class KruiseAppsV1alpha1ContainerRecreateRequestContainer {
   @SerializedName("name")
-  private String name = null;
+  private String name = "";
 
   @SerializedName("ports")
   private List<V1ContainerPort> ports = null;

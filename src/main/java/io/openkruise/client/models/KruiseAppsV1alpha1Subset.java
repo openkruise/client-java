@@ -35,7 +35,7 @@ import java.util.List;
 
 public class KruiseAppsV1alpha1Subset {
   @SerializedName("name")
-  private String name = null;
+  private String name = "";
 
   @SerializedName("nodeSelectorTerm")
   private V1NodeSelectorTerm nodeSelectorTerm = null;

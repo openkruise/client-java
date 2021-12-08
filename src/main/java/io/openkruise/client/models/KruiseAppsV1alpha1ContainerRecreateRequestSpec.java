@@ -40,7 +40,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestSpec {
   private List<KruiseAppsV1alpha1ContainerRecreateRequestContainer> containers = new ArrayList<KruiseAppsV1alpha1ContainerRecreateRequestContainer>();
 
   @SerializedName("podName")
-  private String podName = null;
+  private String podName = "";
 
   @SerializedName("strategy")
   private KruiseAppsV1alpha1ContainerRecreateRequestStrategy strategy = null;

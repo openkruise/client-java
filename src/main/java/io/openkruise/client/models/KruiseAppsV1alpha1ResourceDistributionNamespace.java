@@ -24,50 +24,30 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * KruiseAppsV1alpha1UpdateScatterTerm
+ * ResourceDistributionNamespace contains a namespace name
  */
+@ApiModel(description = "ResourceDistributionNamespace contains a namespace name")
 
-public class KruiseAppsV1alpha1UpdateScatterTerm {
-  @SerializedName("key")
-  private String key = "";
+public class KruiseAppsV1alpha1ResourceDistributionNamespace {
+  @SerializedName("name")
+  private String name = null;
 
-  @SerializedName("value")
-  private String value = "";
-
-  public KruiseAppsV1alpha1UpdateScatterTerm key(String key) {
-    this.key = key;
+  public KruiseAppsV1alpha1ResourceDistributionNamespace name(String name) {
+    this.name = name;
     return this;
   }
 
    /**
-   * Get key
-   * @return key
+   * Namespace name
+   * @return name
   **/
-  @ApiModelProperty(required = true, value = "")
-  public String getKey() {
-    return key;
+  @ApiModelProperty(value = "Namespace name")
+  public String getName() {
+    return name;
   }
 
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public KruiseAppsV1alpha1UpdateScatterTerm value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -79,24 +59,22 @@ public class KruiseAppsV1alpha1UpdateScatterTerm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    KruiseAppsV1alpha1UpdateScatterTerm kruiseAppsV1alpha1UpdateScatterTerm = (KruiseAppsV1alpha1UpdateScatterTerm) o;
-    return Objects.equals(this.key, kruiseAppsV1alpha1UpdateScatterTerm.key) &&
-        Objects.equals(this.value, kruiseAppsV1alpha1UpdateScatterTerm.value);
+    KruiseAppsV1alpha1ResourceDistributionNamespace kruiseAppsV1alpha1ResourceDistributionNamespace = (KruiseAppsV1alpha1ResourceDistributionNamespace) o;
+    return Objects.equals(this.name, kruiseAppsV1alpha1ResourceDistributionNamespace.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value);
+    return Objects.hash(name);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class KruiseAppsV1alpha1UpdateScatterTerm {\n");
+    sb.append("class KruiseAppsV1alpha1ResourceDistributionNamespace {\n");
     
-    sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }
