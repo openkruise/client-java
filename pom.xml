@@ -4,7 +4,7 @@
     <artifactId>client-java</artifactId>
     <packaging>jar</packaging>
     <name>client-java</name>
-    <version>1.0.0</version>
+    <version>1.4.0</version>
     <url>https://github.com/openkruise/client-java</url>
     <description>Jave Client For OpenKruise</description>
 
@@ -225,7 +225,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <k8s.client.version>11.0.1</k8s.client.version>
+        <k8s.client.version>14.0.0</k8s.client.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
