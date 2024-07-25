@@ -21,7 +21,7 @@ You should also add the dependency of Kubernetes official java SDK:
 <dependency>
     <groupId>io.kubernetes</groupId>
     <artifactId>client-java</artifactId>
-    <version>11.0.1</version>
+    <version>18.0.1</version>
 </dependency>
 ```
 

@@ -17,11 +17,12 @@ import com.google.gson.annotations.SerializedName;
 import io.kubernetes.client.openapi.models.V1ObjectReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * AdvancedCronJobStatus defines the observed state of AdvancedCronJob
@@ -33,7 +34,7 @@ public class KruiseAppsV1alpha1AdvancedCronJobStatus {
   private List<V1ObjectReference> active = null;
 
   @SerializedName("lastScheduleTime")
-  private DateTime lastScheduleTime = null;
+  private OffsetDateTime lastScheduleTime = null;
 
   @SerializedName("type")
   private String type = null;
@@ -64,7 +65,7 @@ public class KruiseAppsV1alpha1AdvancedCronJobStatus {
     this.active = active;
   }
 
-  public KruiseAppsV1alpha1AdvancedCronJobStatus lastScheduleTime(DateTime lastScheduleTime) {
+  public KruiseAppsV1alpha1AdvancedCronJobStatus lastScheduleTime(OffsetDateTime lastScheduleTime) {
     this.lastScheduleTime = lastScheduleTime;
     return this;
   }
@@ -74,11 +75,11 @@ public class KruiseAppsV1alpha1AdvancedCronJobStatus {
    * @return lastScheduleTime
   **/
   @ApiModelProperty(value = "Information when was the last time the job was successfully scheduled.")
-  public DateTime getLastScheduleTime() {
+  public OffsetDateTime getLastScheduleTime() {
     return lastScheduleTime;
   }
 
-  public void setLastScheduleTime(DateTime lastScheduleTime) {
+  public void setLastScheduleTime(OffsetDateTime lastScheduleTime) {
     this.lastScheduleTime = lastScheduleTime;
   }
 

@@ -15,7 +15,6 @@ package io.openkruise.client.models;
 
 import com.google.gson.annotations.SerializedName;
 import io.kubernetes.client.openapi.models.V1ContainerPort;
-import io.kubernetes.client.openapi.models.V1Handler;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainer {
   private List<V1ContainerPort> ports = null;
 
   @SerializedName("preStop")
-  private V1Handler preStop = null;
+  private ProbeHandler preStop = null;
 
   @SerializedName("statusContext")
   private KruiseAppsV1alpha1ContainerRecreateRequestContext statusContext = null;
@@ -85,7 +84,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainer {
     this.ports = ports;
   }
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestContainer preStop(V1Handler preStop) {
+  public KruiseAppsV1alpha1ContainerRecreateRequestContainer preStop(ProbeHandler preStop) {
     this.preStop = preStop;
     return this;
   }
@@ -95,11 +94,11 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestContainer {
    * @return preStop
   **/
   @ApiModelProperty(value = "")
-  public V1Handler getPreStop() {
+  public ProbeHandler getPreStop() {
     return preStop;
   }
 
-  public void setPreStop(V1Handler preStop) {
+  public void setPreStop(ProbeHandler preStop) {
     this.preStop = preStop;
   }
 

@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * PodUnavailableBudgetStatus defines the observed state of PodUnavailableBudget
@@ -35,7 +36,7 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
   private Integer desiredAvailable = null;
 
   @SerializedName("disruptedPods")
-  private Map<String, DateTime> disruptedPods = null;
+  private Map<String, OffsetDateTime> disruptedPods = null;
 
   @SerializedName("observedGeneration")
   private Long observedGeneration = null;
@@ -47,7 +48,7 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
   private Integer unavailableAllowed = null;
 
   @SerializedName("unavailablePods")
-  private Map<String, DateTime> unavailablePods = null;
+  private Map<String, OffsetDateTime> unavailablePods = null;
 
   public KruisePolicyV1alpha1PodUnavailableBudgetStatus currentAvailable(Integer currentAvailable) {
     this.currentAvailable = currentAvailable;
@@ -85,14 +86,14 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
     this.desiredAvailable = desiredAvailable;
   }
 
-  public KruisePolicyV1alpha1PodUnavailableBudgetStatus disruptedPods(Map<String, DateTime> disruptedPods) {
+  public KruisePolicyV1alpha1PodUnavailableBudgetStatus disruptedPods(Map<String, OffsetDateTime> disruptedPods) {
     this.disruptedPods = disruptedPods;
     return this;
   }
 
-  public KruisePolicyV1alpha1PodUnavailableBudgetStatus putDisruptedPodsItem(String key, DateTime disruptedPodsItem) {
+  public KruisePolicyV1alpha1PodUnavailableBudgetStatus putDisruptedPodsItem(String key, OffsetDateTime disruptedPodsItem) {
     if (this.disruptedPods == null) {
-      this.disruptedPods = new HashMap<String, DateTime>();
+      this.disruptedPods = new HashMap<String, OffsetDateTime>();
     }
     this.disruptedPods.put(key, disruptedPodsItem);
     return this;
@@ -103,11 +104,11 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
    * @return disruptedPods
   **/
   @ApiModelProperty(value = "DisruptedPods contains information about pods whose eviction or deletion was processed by the API handler but has not yet been observed by the PodUnavailableBudget.")
-  public Map<String, DateTime> getDisruptedPods() {
+  public Map<String, OffsetDateTime> getDisruptedPods() {
     return disruptedPods;
   }
 
-  public void setDisruptedPods(Map<String, DateTime> disruptedPods) {
+  public void setDisruptedPods(Map<String, OffsetDateTime> disruptedPods) {
     this.disruptedPods = disruptedPods;
   }
 
@@ -165,14 +166,14 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
     this.unavailableAllowed = unavailableAllowed;
   }
 
-  public KruisePolicyV1alpha1PodUnavailableBudgetStatus unavailablePods(Map<String, DateTime> unavailablePods) {
+  public KruisePolicyV1alpha1PodUnavailableBudgetStatus unavailablePods(Map<String, OffsetDateTime> unavailablePods) {
     this.unavailablePods = unavailablePods;
     return this;
   }
 
-  public KruisePolicyV1alpha1PodUnavailableBudgetStatus putUnavailablePodsItem(String key, DateTime unavailablePodsItem) {
+  public KruisePolicyV1alpha1PodUnavailableBudgetStatus putUnavailablePodsItem(String key, OffsetDateTime unavailablePodsItem) {
     if (this.unavailablePods == null) {
-      this.unavailablePods = new HashMap<String, DateTime>();
+      this.unavailablePods = new HashMap<String, OffsetDateTime>();
     }
     this.unavailablePods.put(key, unavailablePodsItem);
     return this;
@@ -183,11 +184,11 @@ public class KruisePolicyV1alpha1PodUnavailableBudgetStatus {
    * @return unavailablePods
   **/
   @ApiModelProperty(value = "UnavailablePods contains information about pods whose specification changed(inplace-update pod), once pod is available(consistent and ready) again, it will be removed from the list.")
-  public Map<String, DateTime> getUnavailablePods() {
+  public Map<String, OffsetDateTime> getUnavailablePods() {
     return unavailablePods;
   }
 
-  public void setUnavailablePods(Map<String, DateTime> unavailablePods) {
+  public void setUnavailablePods(Map<String, OffsetDateTime> unavailablePods) {
     this.unavailablePods = unavailablePods;
   }
 

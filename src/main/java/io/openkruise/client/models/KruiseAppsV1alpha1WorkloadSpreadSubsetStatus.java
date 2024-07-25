@@ -16,13 +16,14 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * WorkloadSpreadSubsetStatus defines the observed state of subset
@@ -34,10 +35,10 @@ public class KruiseAppsV1alpha1WorkloadSpreadSubsetStatus {
   private List<KruiseAppsV1alpha1WorkloadSpreadCondition> conditions = null;
 
   @SerializedName("creatingPods")
-  private Map<String, DateTime> creatingPods = null;
+  private Map<String, OffsetDateTime> creatingPods = null;
 
   @SerializedName("deletingPods")
-  private Map<String, DateTime> deletingPods = null;
+  private Map<String, OffsetDateTime> deletingPods = null;
 
   @SerializedName("missingReplicas")
   private Integer missingReplicas = null;
@@ -74,14 +75,14 @@ public class KruiseAppsV1alpha1WorkloadSpreadSubsetStatus {
     this.conditions = conditions;
   }
 
-  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus creatingPods(Map<String, DateTime> creatingPods) {
+  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus creatingPods(Map<String, OffsetDateTime> creatingPods) {
     this.creatingPods = creatingPods;
     return this;
   }
 
-  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus putCreatingPodsItem(String key, DateTime creatingPodsItem) {
+  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus putCreatingPodsItem(String key, OffsetDateTime creatingPodsItem) {
     if (this.creatingPods == null) {
-      this.creatingPods = new HashMap<String, DateTime>();
+      this.creatingPods = new HashMap<String, OffsetDateTime>();
     }
     this.creatingPods.put(key, creatingPodsItem);
     return this;
@@ -92,22 +93,22 @@ public class KruiseAppsV1alpha1WorkloadSpreadSubsetStatus {
    * @return creatingPods
   **/
   @ApiModelProperty(value = "CreatingPods contains information about pods whose creation was processed by the webhook handler but not yet been observed by the WorkloadSpread controller. A pod will be in this map from the time when the webhook handler processed the creation request to the time when the pod is seen by controller. The key in the map is the name of the pod and the value is the time when the webhook handler process the creation request. If the real creation didn't happen and a pod is still in this map, it will be removed from the list automatically by WorkloadSpread controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod creations.")
-  public Map<String, DateTime> getCreatingPods() {
+  public Map<String, OffsetDateTime> getCreatingPods() {
     return creatingPods;
   }
 
-  public void setCreatingPods(Map<String, DateTime> creatingPods) {
+  public void setCreatingPods(Map<String, OffsetDateTime> creatingPods) {
     this.creatingPods = creatingPods;
   }
 
-  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus deletingPods(Map<String, DateTime> deletingPods) {
+  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus deletingPods(Map<String, OffsetDateTime> deletingPods) {
     this.deletingPods = deletingPods;
     return this;
   }
 
-  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus putDeletingPodsItem(String key, DateTime deletingPodsItem) {
+  public KruiseAppsV1alpha1WorkloadSpreadSubsetStatus putDeletingPodsItem(String key, OffsetDateTime deletingPodsItem) {
     if (this.deletingPods == null) {
-      this.deletingPods = new HashMap<String, DateTime>();
+      this.deletingPods = new HashMap<String, OffsetDateTime>();
     }
     this.deletingPods.put(key, deletingPodsItem);
     return this;
@@ -118,11 +119,11 @@ public class KruiseAppsV1alpha1WorkloadSpreadSubsetStatus {
    * @return deletingPods
   **/
   @ApiModelProperty(value = "DeletingPods is similar with CreatingPods and it contains information about pod deletion.")
-  public Map<String, DateTime> getDeletingPods() {
+  public Map<String, OffsetDateTime> getDeletingPods() {
     return deletingPods;
   }
 
-  public void setDeletingPods(Map<String, DateTime> deletingPods) {
+  public void setDeletingPods(Map<String, OffsetDateTime> deletingPods) {
     this.deletingPods = deletingPods;
   }
 

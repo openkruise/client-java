@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * ContainerRecreateRequestStatus defines the observed state of ContainerRecreateRequest
@@ -29,7 +30,7 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1ContainerRecreateRequestStatus {
   @SerializedName("completionTime")
-  private DateTime completionTime = null;
+  private OffsetDateTime completionTime = null;
 
   @SerializedName("containerRecreateStates")
   private List<KruiseAppsV1alpha1ContainerRecreateRequestContainerRecreateState> containerRecreateStates = null;
@@ -40,7 +41,7 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestStatus {
   @SerializedName("phase")
   private String phase = null;
 
-  public KruiseAppsV1alpha1ContainerRecreateRequestStatus completionTime(DateTime completionTime) {
+  public KruiseAppsV1alpha1ContainerRecreateRequestStatus completionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
     return this;
   }
@@ -50,11 +51,11 @@ public class KruiseAppsV1alpha1ContainerRecreateRequestStatus {
    * @return completionTime
   **/
   @ApiModelProperty(value = "Represents time when the ContainerRecreateRequest was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getCompletionTime() {
+  public OffsetDateTime getCompletionTime() {
     return completionTime;
   }
 
-  public void setCompletionTime(DateTime completionTime) {
+  public void setCompletionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
   }
 

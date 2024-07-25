@@ -14,7 +14,7 @@
 package io.openkruise.client.models;
 
 import com.google.gson.annotations.SerializedName;
-import io.kubernetes.client.openapi.models.V1beta1JobTemplateSpec;
+import io.kubernetes.client.openapi.models.V1JobTemplateSpec;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
@@ -30,7 +30,7 @@ public class KruiseAppsV1alpha1CronJobTemplate {
   private KruiseAppsV1alpha1BroadcastJobSpec broadcastJobTemplate = null;
 
   @SerializedName("jobTemplate")
-  private V1beta1JobTemplateSpec jobTemplate = null;
+  private V1JobTemplateSpec jobTemplate = null;
 
   public KruiseAppsV1alpha1CronJobTemplate broadcastJobTemplate(KruiseAppsV1alpha1BroadcastJobSpec broadcastJobTemplate) {
     this.broadcastJobTemplate = broadcastJobTemplate;
@@ -50,7 +50,7 @@ public class KruiseAppsV1alpha1CronJobTemplate {
     this.broadcastJobTemplate = broadcastJobTemplate;
   }
 
-  public KruiseAppsV1alpha1CronJobTemplate jobTemplate(V1beta1JobTemplateSpec jobTemplate) {
+  public KruiseAppsV1alpha1CronJobTemplate jobTemplate(V1JobTemplateSpec jobTemplate) {
     this.jobTemplate = jobTemplate;
     return this;
   }
@@ -60,11 +60,11 @@ public class KruiseAppsV1alpha1CronJobTemplate {
    * @return jobTemplate
   **/
   @ApiModelProperty(value = "Specifies the job that will be created when executing a CronJob.")
-  public V1beta1JobTemplateSpec getJobTemplate() {
+  public V1JobTemplateSpec getJobTemplate() {
     return jobTemplate;
   }
 
-  public void setJobTemplate(V1beta1JobTemplateSpec jobTemplate) {
+  public void setJobTemplate(V1JobTemplateSpec jobTemplate) {
     this.jobTemplate = jobTemplate;
   }
 

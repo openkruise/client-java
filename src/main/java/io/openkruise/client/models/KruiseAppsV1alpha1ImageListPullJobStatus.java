@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * ImageListPullJobStatus defines the observed state of ImageListPullJob
@@ -35,7 +36,7 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
   private Integer completed = null;
 
   @SerializedName("completionTime")
-  private DateTime completionTime = null;
+  private OffsetDateTime completionTime = null;
 
   @SerializedName("desired")
   private Integer desired = null;
@@ -44,7 +45,7 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
   private List<KruiseAppsV1alpha1FailedImageStatus> failedImageStatuses = null;
 
   @SerializedName("startTime")
-  private DateTime startTime = null;
+  private OffsetDateTime startTime = null;
 
   @SerializedName("succeeded")
   private Integer succeeded = null;
@@ -85,7 +86,7 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
     this.completed = completed;
   }
 
-  public KruiseAppsV1alpha1ImageListPullJobStatus completionTime(DateTime completionTime) {
+  public KruiseAppsV1alpha1ImageListPullJobStatus completionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
     return this;
   }
@@ -95,11 +96,11 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
    * @return completionTime
   **/
   @ApiModelProperty(value = "Represents time when the all the image pull job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getCompletionTime() {
+  public OffsetDateTime getCompletionTime() {
     return completionTime;
   }
 
-  public void setCompletionTime(DateTime completionTime) {
+  public void setCompletionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
   }
 
@@ -147,7 +148,7 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
     this.failedImageStatuses = failedImageStatuses;
   }
 
-  public KruiseAppsV1alpha1ImageListPullJobStatus startTime(DateTime startTime) {
+  public KruiseAppsV1alpha1ImageListPullJobStatus startTime(OffsetDateTime startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -157,11 +158,11 @@ public class KruiseAppsV1alpha1ImageListPullJobStatus {
    * @return startTime
   **/
   @ApiModelProperty(value = "Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getStartTime() {
+  public OffsetDateTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(DateTime startTime) {
+  public void setStartTime(OffsetDateTime startTime) {
     this.startTime = startTime;
   }
 

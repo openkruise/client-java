@@ -16,9 +16,10 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * JobCondition describes current state of a job.
@@ -27,10 +28,10 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1JobCondition {
   @SerializedName("lastProbeTime")
-  private DateTime lastProbeTime = null;
+  private OffsetDateTime lastProbeTime = null;
 
   @SerializedName("lastTransitionTime")
-  private DateTime lastTransitionTime = null;
+  private OffsetDateTime lastTransitionTime = null;
 
   @SerializedName("message")
   private String message = null;
@@ -44,7 +45,7 @@ public class KruiseAppsV1alpha1JobCondition {
   @SerializedName("type")
   private String type = null;
 
-  public KruiseAppsV1alpha1JobCondition lastProbeTime(DateTime lastProbeTime) {
+  public KruiseAppsV1alpha1JobCondition lastProbeTime(OffsetDateTime lastProbeTime) {
     this.lastProbeTime = lastProbeTime;
     return this;
   }
@@ -54,15 +55,15 @@ public class KruiseAppsV1alpha1JobCondition {
    * @return lastProbeTime
   **/
   @ApiModelProperty(value = "Last time the condition was checked.")
-  public DateTime getLastProbeTime() {
+  public OffsetDateTime getLastProbeTime() {
     return lastProbeTime;
   }
 
-  public void setLastProbeTime(DateTime lastProbeTime) {
+  public void setLastProbeTime(OffsetDateTime lastProbeTime) {
     this.lastProbeTime = lastProbeTime;
   }
 
-  public KruiseAppsV1alpha1JobCondition lastTransitionTime(DateTime lastTransitionTime) {
+  public KruiseAppsV1alpha1JobCondition lastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
     return this;
   }
@@ -72,11 +73,11 @@ public class KruiseAppsV1alpha1JobCondition {
    * @return lastTransitionTime
   **/
   @ApiModelProperty(value = "Last time the condition transit from one status to another.")
-  public DateTime getLastTransitionTime() {
+  public OffsetDateTime getLastTransitionTime() {
     return lastTransitionTime;
   }
 
-  public void setLastTransitionTime(DateTime lastTransitionTime) {
+  public void setLastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
   }
 

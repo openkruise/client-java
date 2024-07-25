@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * BroadcastJobStatus defines the observed state of BroadcastJob
@@ -32,7 +33,7 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
   private Integer active = null;
 
   @SerializedName("completionTime")
-  private DateTime completionTime = null;
+  private OffsetDateTime completionTime = null;
 
   @SerializedName("conditions")
   private List<KruiseAppsV1alpha1JobCondition> conditions = null;
@@ -47,7 +48,7 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
   private String phase = null;
 
   @SerializedName("startTime")
-  private DateTime startTime = null;
+  private OffsetDateTime startTime = null;
 
   @SerializedName("succeeded")
   private Integer succeeded = null;
@@ -70,7 +71,7 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
     this.active = active;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobStatus completionTime(DateTime completionTime) {
+  public KruiseAppsV1alpha1BroadcastJobStatus completionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
     return this;
   }
@@ -80,11 +81,11 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
    * @return completionTime
   **/
   @ApiModelProperty(value = "Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getCompletionTime() {
+  public OffsetDateTime getCompletionTime() {
     return completionTime;
   }
 
-  public void setCompletionTime(DateTime completionTime) {
+  public void setCompletionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
   }
 
@@ -168,7 +169,7 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
     this.phase = phase;
   }
 
-  public KruiseAppsV1alpha1BroadcastJobStatus startTime(DateTime startTime) {
+  public KruiseAppsV1alpha1BroadcastJobStatus startTime(OffsetDateTime startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -178,11 +179,11 @@ public class KruiseAppsV1alpha1BroadcastJobStatus {
    * @return startTime
   **/
   @ApiModelProperty(value = "Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getStartTime() {
+  public OffsetDateTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(DateTime startTime) {
+  public void setStartTime(OffsetDateTime startTime) {
     this.startTime = startTime;
   }
 

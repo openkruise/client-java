@@ -17,11 +17,12 @@ import com.google.gson.annotations.SerializedName;
 import io.kubernetes.client.openapi.models.V1ObjectReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * ImageTagSpec defines the pulling spec of an image tag
@@ -30,7 +31,7 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1ImageTagSpec {
   @SerializedName("createdAt")
-  private DateTime createdAt = null;
+  private OffsetDateTime createdAt = null;
 
   @SerializedName("ownerReferences")
   private List<V1ObjectReference> ownerReferences = null;
@@ -44,7 +45,7 @@ public class KruiseAppsV1alpha1ImageTagSpec {
   @SerializedName("version")
   private Long version = null;
 
-  public KruiseAppsV1alpha1ImageTagSpec createdAt(DateTime createdAt) {
+  public KruiseAppsV1alpha1ImageTagSpec createdAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -54,11 +55,11 @@ public class KruiseAppsV1alpha1ImageTagSpec {
    * @return createdAt
   **/
   @ApiModelProperty(value = "Specifies the create time of this tag")
-  public DateTime getCreatedAt() {
+  public OffsetDateTime getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(DateTime createdAt) {
+  public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
 

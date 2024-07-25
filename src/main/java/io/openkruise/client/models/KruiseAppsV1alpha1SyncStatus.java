@@ -16,9 +16,10 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * The first of all job has finished on this node. When a node is added to the cluster, we want to know the time when the node&#39;s image pulling is completed, and use it to trigger the operation of the upper system.
@@ -33,7 +34,7 @@ public class KruiseAppsV1alpha1SyncStatus {
   private String status = null;
 
   @SerializedName("syncAt")
-  private DateTime syncAt = null;
+  private OffsetDateTime syncAt = null;
 
   public KruiseAppsV1alpha1SyncStatus message(String message) {
     this.message = message;
@@ -71,7 +72,7 @@ public class KruiseAppsV1alpha1SyncStatus {
     this.status = status;
   }
 
-  public KruiseAppsV1alpha1SyncStatus syncAt(DateTime syncAt) {
+  public KruiseAppsV1alpha1SyncStatus syncAt(OffsetDateTime syncAt) {
     this.syncAt = syncAt;
     return this;
   }
@@ -81,11 +82,11 @@ public class KruiseAppsV1alpha1SyncStatus {
    * @return syncAt
   **/
   @ApiModelProperty(value = "")
-  public DateTime getSyncAt() {
+  public OffsetDateTime getSyncAt() {
     return syncAt;
   }
 
-  public void setSyncAt(DateTime syncAt) {
+  public void setSyncAt(OffsetDateTime syncAt) {
     this.syncAt = syncAt;
   }
 

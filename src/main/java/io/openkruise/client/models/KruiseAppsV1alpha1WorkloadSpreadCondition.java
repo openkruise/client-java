@@ -15,9 +15,10 @@ package io.openkruise.client.models;
 
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * KruiseAppsV1alpha1WorkloadSpreadStatusConditions
@@ -25,7 +26,7 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1WorkloadSpreadCondition {
   @SerializedName("lastTransitionTime")
-  private DateTime lastTransitionTime = null;
+  private OffsetDateTime lastTransitionTime = null;
 
   @SerializedName("message")
   private String message = null;
@@ -39,7 +40,7 @@ public class KruiseAppsV1alpha1WorkloadSpreadCondition {
   @SerializedName("type")
   private String type = null;
 
-  public KruiseAppsV1alpha1WorkloadSpreadCondition lastTransitionTime(DateTime lastTransitionTime) {
+  public KruiseAppsV1alpha1WorkloadSpreadCondition lastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
     return this;
   }
@@ -49,11 +50,11 @@ public class KruiseAppsV1alpha1WorkloadSpreadCondition {
    * @return lastTransitionTime
   **/
   @ApiModelProperty(value = "Last time the condition transitioned from one status to another.")
-  public DateTime getLastTransitionTime() {
+  public OffsetDateTime getLastTransitionTime() {
     return lastTransitionTime;
   }
 
-  public void setLastTransitionTime(DateTime lastTransitionTime) {
+  public void setLastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
   }
 

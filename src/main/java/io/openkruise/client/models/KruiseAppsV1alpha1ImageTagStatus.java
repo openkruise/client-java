@@ -16,9 +16,10 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * ImageTagStatus defines the pulling status of an image tag
@@ -27,7 +28,7 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1ImageTagStatus {
   @SerializedName("completionTime")
-  private DateTime completionTime = null;
+  private OffsetDateTime completionTime = null;
 
   @SerializedName("imageID")
   private String imageID = null;
@@ -42,7 +43,7 @@ public class KruiseAppsV1alpha1ImageTagStatus {
   private Integer progress = null;
 
   @SerializedName("startTime")
-  private DateTime startTime = null;
+  private OffsetDateTime startTime = null;
 
   @SerializedName("tag")
   private String tag = null;
@@ -50,7 +51,7 @@ public class KruiseAppsV1alpha1ImageTagStatus {
   @SerializedName("version")
   private Long version = null;
 
-  public KruiseAppsV1alpha1ImageTagStatus completionTime(DateTime completionTime) {
+  public KruiseAppsV1alpha1ImageTagStatus completionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
     return this;
   }
@@ -60,11 +61,11 @@ public class KruiseAppsV1alpha1ImageTagStatus {
    * @return completionTime
   **/
   @ApiModelProperty(value = "Represents time when the pulling task was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getCompletionTime() {
+  public OffsetDateTime getCompletionTime() {
     return completionTime;
   }
 
-  public void setCompletionTime(DateTime completionTime) {
+  public void setCompletionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
   }
 
@@ -140,7 +141,7 @@ public class KruiseAppsV1alpha1ImageTagStatus {
     this.progress = progress;
   }
 
-  public KruiseAppsV1alpha1ImageTagStatus startTime(DateTime startTime) {
+  public KruiseAppsV1alpha1ImageTagStatus startTime(OffsetDateTime startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -150,11 +151,11 @@ public class KruiseAppsV1alpha1ImageTagStatus {
    * @return startTime
   **/
   @ApiModelProperty(value = "Represents time when the pulling task was acknowledged by the image puller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getStartTime() {
+  public OffsetDateTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(DateTime startTime) {
+  public void setStartTime(OffsetDateTime startTime) {
     this.startTime = startTime;
   }
 

@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * ResourceDistributionCondition allows a row to be marked with additional information.
@@ -32,7 +33,7 @@ public class KruiseAppsV1alpha1ResourceDistributionCondition {
   private List<String> failedNamespace = null;
 
   @SerializedName("lastTransitionTime")
-  private DateTime lastTransitionTime = null;
+  private OffsetDateTime lastTransitionTime = null;
 
   @SerializedName("reason")
   private String reason = null;
@@ -69,7 +70,7 @@ public class KruiseAppsV1alpha1ResourceDistributionCondition {
     this.failedNamespace = failedNamespace;
   }
 
-  public KruiseAppsV1alpha1ResourceDistributionCondition lastTransitionTime(DateTime lastTransitionTime) {
+  public KruiseAppsV1alpha1ResourceDistributionCondition lastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
     return this;
   }
@@ -79,11 +80,11 @@ public class KruiseAppsV1alpha1ResourceDistributionCondition {
    * @return lastTransitionTime
   **/
   @ApiModelProperty(value = "LastTransitionTime is the last time the condition transitioned from one status to another.")
-  public DateTime getLastTransitionTime() {
+  public OffsetDateTime getLastTransitionTime() {
     return lastTransitionTime;
   }
 
-  public void setLastTransitionTime(DateTime lastTransitionTime) {
+  public void setLastTransitionTime(OffsetDateTime lastTransitionTime) {
     this.lastTransitionTime = lastTransitionTime;
   }
 

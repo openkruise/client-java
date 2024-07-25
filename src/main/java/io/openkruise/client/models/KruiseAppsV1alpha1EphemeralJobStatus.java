@@ -16,11 +16,12 @@ package io.openkruise.client.models;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import org.joda.time.DateTime;
 
 /**
  * EphemeralJobStatus defines the observed state of EphemeralJob
@@ -29,7 +30,7 @@ import org.joda.time.DateTime;
 @Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-07-21T15:55:09.049+08:00")
 public class KruiseAppsV1alpha1EphemeralJobStatus {
   @SerializedName("completionTime")
-  private DateTime completionTime = null;
+  private OffsetDateTime completionTime = null;
 
   @SerializedName("conditions")
   private List<KruiseAppsV1alpha1JobCondition> conditions = null;
@@ -47,7 +48,7 @@ public class KruiseAppsV1alpha1EphemeralJobStatus {
   private Integer running = null;
 
   @SerializedName("startTime")
-  private DateTime startTime = null;
+  private OffsetDateTime startTime = null;
 
   @SerializedName("succeeded")
   private Integer succeeded = null;
@@ -55,7 +56,7 @@ public class KruiseAppsV1alpha1EphemeralJobStatus {
   @SerializedName("waiting")
   private Integer waiting = null;
 
-  public KruiseAppsV1alpha1EphemeralJobStatus completionTime(DateTime completionTime) {
+  public KruiseAppsV1alpha1EphemeralJobStatus completionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
     return this;
   }
@@ -65,11 +66,11 @@ public class KruiseAppsV1alpha1EphemeralJobStatus {
    * @return completionTime
   **/
   @ApiModelProperty(value = "Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getCompletionTime() {
+  public OffsetDateTime getCompletionTime() {
     return completionTime;
   }
 
-  public void setCompletionTime(DateTime completionTime) {
+  public void setCompletionTime(OffsetDateTime completionTime) {
     this.completionTime = completionTime;
   }
 
@@ -171,7 +172,7 @@ public class KruiseAppsV1alpha1EphemeralJobStatus {
     this.running = running;
   }
 
-  public KruiseAppsV1alpha1EphemeralJobStatus startTime(DateTime startTime) {
+  public KruiseAppsV1alpha1EphemeralJobStatus startTime(OffsetDateTime startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -181,11 +182,11 @@ public class KruiseAppsV1alpha1EphemeralJobStatus {
    * @return startTime
   **/
   @ApiModelProperty(value = "Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.")
-  public DateTime getStartTime() {
+  public OffsetDateTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(DateTime startTime) {
+  public void setStartTime(OffsetDateTime startTime) {
     this.startTime = startTime;
   }
 
